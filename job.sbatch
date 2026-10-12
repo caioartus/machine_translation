@@ -29,4 +29,4 @@ conda activate "$CONDA_ENV"
 set -u
 
 nvidia-smi
-python train.py "$@"
+python scripts/simple_train.py "$@"
