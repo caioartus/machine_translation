@@ -2,5 +2,8 @@ __pycache__/
 .mypy_cache/
 outputs/
 logs/
-# Data is rebuilt by the scripts in scripts/, never committed.
-data/
+# Generated data is rebuilt by the scripts in scripts/ and never committed.
+# Exception: data/raw/ holds the original input files (Canvas test sets, pinned
+# Tatoeba Challenge downloads), committed so every machine has the same inputs.
+data/*
+!data/raw/
