@@ -1,3 +1,6 @@
 __pycache__/
+.mypy_cache/
 outputs/
 logs/
+# Data is rebuilt by the scripts in scripts/, never committed.
+data/

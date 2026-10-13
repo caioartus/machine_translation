@@ -36,7 +36,9 @@ def collate(rows):
     batch = tokenizer(
         [r["translation"]["zh"] for r in rows],
         text_target=[r["translation"]["en"] for r in rows],  # becomes batch["labels"]
-        max_length=128, truncation=True, padding=True, return_tensors="pt",
+        # 256 covers every cleaned ALMA pair (prepare_alma.py drops the 8 longer ones),
+        # so truncation never cuts a target sentence short.
+        max_length=256, truncation=True, padding=True, return_tensors="pt",
     )
     # Padding positions must not count towards the loss: -100 is ignored by the loss.
     batch["labels"][batch["labels"] == tokenizer.pad_token_id] = -100

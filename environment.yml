@@ -5,7 +5,14 @@ dependencies:
   - python=3.11
   - pip
   - pip:
-      - torch
-      - transformers
-      - sentencepiece
-      - datasets
+      # Versions are pinned so that the cluster and local machines tokenize text
+      # identically (difficulty features depend on the M2M-100 tokenizer).
+      - torch==2.14.1
+      - transformers==5.19.0
+      - tokenizers==0.23.3
+      - sentencepiece==0.2.2
+      - datasets==5.1.0
+      # Data preparation and evaluation
+      - sacrebleu==2.6.0
+      - pandas==3.0.6
+      - matplotlib==3.11.2
