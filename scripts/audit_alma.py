@@ -1,7 +1,7 @@
 """Step 1 of data preparation: look at ALMA-Human-Parallel zh-en before changing anything.
 
 This script does NOT modify the data. It measures it and flags possible problems,
-so that the cleaning rules in prepare_alma.py are based on evidence, not guesses.
+so that the cleaning rules in prepare_alma.py are based on evidence.
 
 Outputs (in data/audit/):
     audit_report.txt   - every number printed below, saved for later reference
@@ -11,12 +11,14 @@ Outputs (in data/audit/):
 Run from the repository root:
     python scripts/audit_alma.py
 """
+
 import re
 import sys
 from collections import Counter
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")  # draw to files, no window needed (also works on the cluster)
 import matplotlib.pyplot as plt
 import numpy as np
@@ -56,8 +58,10 @@ def cjk_fraction(text):
 def percentiles(values):
     """Compact summary of a list of numbers."""
     p = np.percentile(values, [0, 5, 25, 50, 75, 95, 99, 100])
-    return ("min {:.0f} | p5 {:.0f} | p25 {:.0f} | median {:.0f} | p75 {:.0f} | "
-            "p95 {:.0f} | p99 {:.0f} | max {:.0f} | mean {:.1f}").format(*p, np.mean(values))
+    return (
+        "min {:.0f} | p5 {:.0f} | p25 {:.0f} | median {:.0f} | p75 {:.0f} | "
+        "p95 {:.0f} | p99 {:.0f} | max {:.0f} | mean {:.1f}"
+    ).format(*p, np.mean(values))
 
 
 def show_examples(title, rows, k=5):
@@ -73,8 +77,10 @@ data = load_dataset("haoranxu/ALMA-Human-Parallel", "zh-en")
 tokenizer = M2M100Tokenizer.from_pretrained(MODEL_NAME)
 
 # Pull the pairs out of the nested {"translation": {"zh":..., "en":...}} format.
-splits = {name: [(r["translation"]["zh"], r["translation"]["en"]) for r in data[name]]
-          for name in data}
+splits = {
+    name: [(r["translation"]["zh"], r["translation"]["en"]) for r in data[name]]
+    for name in data
+}
 
 lengths = {}  # kept for the plots at the end
 
@@ -110,14 +116,27 @@ for name, pairs in splits.items():
         if flagged:
             show_examples(title, flagged)
 
-    check("empty or whitespace-only side", [not a.strip() or not b.strip() for a, b in pairs])
-    check("leading/trailing whitespace", [a != a.strip() or b != b.strip() for a, b in pairs])
-    check("internal newline/tab", [bool(re.search(r"[\n\t\r]", a + b)) for a, b in pairs])
+    check(
+        "empty or whitespace-only side",
+        [not a.strip() or not b.strip() for a, b in pairs],
+    )
+    check(
+        "leading/trailing whitespace",
+        [a != a.strip() or b != b.strip() for a, b in pairs],
+    )
+    check(
+        "internal newline/tab", [bool(re.search(r"[\n\t\r]", a + b)) for a, b in pairs]
+    )
     check("control characters", [bool(CONTROL.search(a + b)) for a, b in pairs])
     check("source identical to target", [a.strip() == b.strip() for a, b in pairs])
     check("zh side has NO Chinese characters", [not CJK.search(a) for a, _ in pairs])
-    check("zh side mostly non-Chinese (<30% CJK)", [0 < cjk_fraction(a) < 0.3 for a, _ in pairs])
-    check("en side contains Chinese characters", [bool(CJK.search(b)) for _, b in pairs])
+    check(
+        "zh side mostly non-Chinese (<30% CJK)",
+        [0 < cjk_fraction(a) < 0.3 for a, _ in pairs],
+    )
+    check(
+        "en side contains Chinese characters", [bool(CJK.search(b)) for _, b in pairs]
+    )
     check("en side has no Latin letters", [not LATIN.search(b) for _, b in pairs])
 
     # Length ratio: a translation is usually of comparable length to its source.
@@ -131,10 +150,18 @@ for name, pairs in splits.items():
     log("\n[Duplicates]")
     pair_counts = Counter(pairs)
     zh_counts = Counter(zh)
-    log(f"  exact duplicate pairs (extra copies): {sum(c - 1 for c in pair_counts.values())}")
-    log(f"  duplicate zh sources  (extra copies): {sum(c - 1 for c in zh_counts.values())}")
+    log(
+        f"  exact duplicate pairs (extra copies): {sum(c - 1 for c in pair_counts.values())}"
+    )
+    log(
+        f"  duplicate zh sources  (extra copies): {sum(c - 1 for c in zh_counts.values())}"
+    )
     # Same source, different targets: not wrong (several valid translations), but worth knowing.
-    multi = [s for s, c in zh_counts.items() if c > 1 and len({e for z, e in pairs if z == s}) > 1]
+    multi = [
+        s
+        for s, c in zh_counts.items()
+        if c > 1 and len({e for z, e in pairs if z == s}) > 1
+    ]
     log(f"  zh sources with >1 different translation: {len(multi)}")
     for s in multi[:3]:
         log(f"      zh: {s[:80]!r}")
@@ -146,14 +173,23 @@ for name, pairs in splits.items():
 log("=" * 80)
 train_zh = {z.strip() for z, _ in splits["train"]}
 dev_zh = [z.strip() for z, _ in splits["validation"]]
-log(f"dev sources also in train (exact match): {sum(z in train_zh for z in dev_zh)} / {len(dev_zh)}")
+log(
+    f"dev sources also in train (exact match): {sum(z in train_zh for z in dev_zh)} / {len(dev_zh)}"
+)
 
 # --- Plots ---------------------------------------------------------------------
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
 for ax, side, idx in [(axes[0], "zh (source)", 0), (axes[1], "en (target)", 1)]:
     bins = np.arange(0, 160, 4)
     for name, (color) in [("train", "tab:blue"), ("validation", "tab:orange")]:
-        ax.hist(lengths[name][idx], bins=bins, density=True, alpha=0.5, color=color, label=name)
+        ax.hist(
+            lengths[name][idx],
+            bins=bins,
+            density=True,
+            alpha=0.5,
+            color=color,
+            label=name,
+        )
     ax.set_xlabel("M2M-100 subword tokens")
     ax.set_ylabel("share of sentences")
     ax.set_title(f"{side} length")

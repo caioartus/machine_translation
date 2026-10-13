@@ -9,7 +9,7 @@ The common file format is JSON Lines (one JSON object per line):
   - id     : unique and stable. The number is the row's index in the ORIGINAL
              dataset (before cleaning), so any row can be traced back.
   - source : which corpus the pair comes from (lets us filter or join sources).
-Test sets may add extra columns (e.g. "script" for Tatoeba).
+Test sets may add extra columns (e.g. "domain" for WMT22).
 """
 import json
 import unicodedata
@@ -65,3 +65,44 @@ def read_jsonl(path):
     """Read a .jsonl file back into a list of dicts."""
     with open(path, encoding="utf-8") as f:
         return [json.loads(line) for line in f]
+
+
+# --- Difficulty groups ("bins") ------------------------------------------------
+# Used by BOTH the training sampler and the evaluation breakdowns, so that e.g.
+# "short" means exactly the same thing everywhere. The edges are fixed numbers
+# chosen once on the full ALMA training pool (see make_bins.py for the rationale);
+# they do not change with the training-set size.
+#
+# Length = number of source subword tokens (feature "src_len"), upper bounds inclusive:
+#   short <= 15 < mid_short <= 30 < mid_long <= 60 < long
+LENGTH_EDGES = [15, 30, 60]
+LENGTH_LABELS = ["short", "mid_short", "mid_long", "long"]
+# Rarity = average rarity per source subword (feature "rarity_mean", in nats):
+#   typical <= 7.9 < rare      (7.9 is about the 90th percentile of ALMA train)
+RARITY_EDGES = [7.9]
+RARITY_LABELS = ["typical", "rare"]
+
+
+def assign_bins(features):
+    """Add length_bin, rarity_bin and cell columns to a features DataFrame.
+
+    `features` is a DataFrame read from data/features/<split>.csv. A "cell" is one
+    combination of length bin and rarity bin, e.g. "short/rare" (4 x 2 = 8 cells).
+    Returns a new DataFrame; the input is not modified.
+    """
+    import pandas as pd  # imported here so the rest of this module works without pandas
+
+    out = features.copy()
+    inf = float("inf")
+    # pd.cut with right=True: a value equal to an edge goes into the LOWER bin (<= edge).
+    out["length_bin"] = pd.cut(out["src_len"], [-inf, *LENGTH_EDGES, inf],
+                               labels=LENGTH_LABELS, right=True).astype(str)
+    out["rarity_bin"] = pd.cut(out["rarity_mean"], [-inf, *RARITY_EDGES, inf],
+                               labels=RARITY_LABELS, right=True).astype(str)
+    out["cell"] = out["length_bin"] + "/" + out["rarity_bin"]
+    return out
+
+
+def all_cells():
+    """The 8 cell names in a fixed order (length-major), e.g. for tables."""
+    return [f"{l}/{r}" for l in LENGTH_LABELS for r in RARITY_LABELS]

@@ -1,6 +1,123 @@
 # machine_translation
 In this project we aim to build a fast and efficient machine translation system to translate from chinese to english. This project was done in the scope of the Introduction to Large Language Models class (CS4248) at NUS. 
 
+## 🚧 Temporary: handoff from data preparation to model training
+
+> Temporary section (2026-10-13). Remove once training code exists and this is folded into the docs.
+> Everything below is ready to use, except the items under "Not ready yet".
+
+### 1. Build the data (once per machine, a few minutes on CPU)
+
+```bash
+git pull
+conda env update -n mt -f environment.yml      # adds pandas / matplotlib / sacrebleu, pinned
+python scripts/prepare_alma.py
+python scripts/prepare_test_sets.py
+python scripts/compute_difficulty.py
+python scripts/make_bins.py
+python scripts/make_subsets.py
+```
+
+### 2. What you need, and nothing else
+
+| What | File(s) | Use it for |
+|---|---|---|
+| Training pairs | `data/processed/alma_train.jsonl` | Text (`zh`, `en`), joined on `id` |
+| Training subsets | `data/subsets/seed{S}_n{N}.txt`, N ∈ {1000, 2000, 5000, full}, S ∈ {0, 1, 2} | Which ids to train on. **Run seed S on the subsets of seed S.** |
+| Difficulty features | `data/features/alma_train.csv` | Pass through `assign_bins()` to get `length_bin` and `cell` |
+| Dev set | `data/processed/alma_dev.jsonl` (1,002 pairs) | Checkpoint selection and any tuning |
+| Test sets | `data/processed/{wmt22,tatoeba}_test.jsonl` | **Final evaluation only. Never for selection or tuning.** |
+
+Every `.jsonl` line looks like `{"id": "alma-train-000042", "source": "alma", "zh": "...", "en": "..."}`.
+
+### 3. Load one training subset with its groups
+
+```python
+import pandas as pd
+from data_utils import assign_bins, read_jsonl      # works for scripts in scripts/, run from the repo root
+
+seed, size = 0, 1000                                 # size: 1000 | 2000 | 5000 | "full"
+ids = open(f"data/subsets/seed{seed}_n{size}.txt").read().split()
+text = pd.DataFrame(read_jsonl("data/processed/alma_train.jsonl"))
+feats = assign_bins(pd.read_csv("data/features/alma_train.csv"))
+train = text.merge(feats, on="id").set_index("id").loc[ids].reset_index()
+# columns: id, zh, en, src_len, rarity_mean, ..., length_bin, rarity_bin, cell
+dev = read_jsonl("data/processed/alma_dev.jsonl")
+```
+
+### 4. The conditions are only a change of sampling weights
+
+The model, loss, optimizer and number of steps stay identical across conditions. Only the
+weights given to `WeightedRandomSampler` change:
+
+```python
+import torch
+from torch.utils.data import WeightedRandomSampler
+
+def balanced_weights(groups, cap=3.0):
+    """Per-example weight relative to uniform sampling: every group gets the same total
+    probability, but no example is drawn more than `cap` times as often as under uniform."""
+    n_groups = groups.nunique()
+    group_size = groups.map(groups.value_counts())
+    ratio = (len(groups) / n_groups) / group_size
+    return ratio.clip(upper=cap)
+
+if condition == "uniform":
+    weights = pd.Series(1.0, index=train.index)
+elif condition == "length":                          # 4 groups
+    weights = balanced_weights(train["length_bin"])
+elif condition == "joint":                           # 8 groups (length x rarity)
+    weights = balanced_weights(train["cell"])
+
+sampler = WeightedRandomSampler(torch.tensor(weights.values, dtype=torch.double),
+                                num_samples=num_steps * batch_size, replacement=True,
+                                generator=torch.Generator().manual_seed(seed))
+loader = DataLoader(train_dataset, batch_size=batch_size, sampler=sampler, collate_fn=collate)
+```
+
+What this does on `seed0_n1000` (share of training draws, %):
+
+| Group | Natural | Length-balanced | | Cell | Natural | Joint |
+|---|---|---|---|---|---|---|
+| short | 8.9 | 25.0 | | short/rare | 1.1 | 4.0 (capped at 3×) |
+| mid_short | 35.1 | 25.0 | | long/rare | 1.7 | 6.2 (capped at 3×) |
+| mid_long | 46.4 | 25.0 | | mid_long/typical | 41.6 | 15.3 |
+| long | 9.6 | 25.0 | | … | | |
+
+### 5. Rules that keep the comparison fair
+
+- **Matched budget:** for a given training size, every condition runs the **same number of
+  optimizer steps with the same batch size** (that is why the sampler draws `num_steps * batch_size`
+  examples with replacement, instead of looping over "epochs").
+- **Checkpoint selection on `alma_dev` only**, the same way for every condition (e.g. lowest
+  dev loss or best dev BLEU, evaluated every k steps).
+- **`max_length=256`** for source and target (`simple_train.py` already does this). The cleaning
+  removed every pair longer than that, so nothing is truncated.
+- **Seeds:** seed S picks the subset *and* seeds the training run (sampler, dropout, init of anything new).
+- Translate with `forced_bos_token_id=tokenizer.get_lang_id("en")` and `tokenizer.src_lang = "zh"`.
+- Save, for every run: condition, size, seed, steps, the selected checkpoint, and the dev curve.
+
+### 6. Not ready yet / still to decide
+
+- **Loss-based condition:** needs per-example loss under the pretrained model (step 7, a short
+  GPU job, not written yet). Its weights will come from a new column in `alma_train.csv`.
+- **Sampling policy details (owner: Xingxia):** `cap=3.0` and "equal share per group" above are a
+  working default to agree on, not a final decision.
+- **Design note for the joint condition:** balancing over the 8 cells also changes the length mix
+  (e.g. short goes from 8.9% to 19.3%, not to the 25% of the length condition). So "joint minus
+  length" is not purely the effect of rarity. Options: add a rarity-only condition
+  (`balanced_weights(train["rarity_bin"])`), or report it as a limitation.
+
+### 7. For evaluation afterwards (Jake)
+
+- Official numbers: WMT22 against Annotator A (`en`), and Tatoeba; BLEU (sacreBLEU, 13a) and
+  COMET `Unbabel/wmt22-comet-da`, as in the course guidelines. chrF is an extra.
+- Breakdowns: `assign_bins(pd.read_csv("data/features/wmt22_test.csv"))` gives each test sentence
+  the same groups as training. WMT22 also has `domain`.
+- `tatoeba_challenge_test.jsonl` (4,758 pairs) is supplementary: use it to check whether
+  differences between conditions on short sentences are significant (`sacrebleu --paired-bs`),
+  never as a headline number.
+
 ## Setup
 
 ```bash
@@ -33,7 +150,19 @@ python scripts/audit_alma.py          # optional: statistics and plots -> data/a
 python scripts/prepare_alma.py        # clean ALMA -> data/processed/alma_{train,dev}.jsonl
 python scripts/prepare_test_sets.py   # test sets  -> data/processed/<name>_test.jsonl
 python scripts/compute_difficulty.py  # length / rarity features -> data/features/<split>.csv
+python scripts/make_bins.py           # difficulty groups report + heatmap -> data/features/
+python scripts/make_subsets.py        # nested training subsets -> data/subsets/seed{S}_n{N}.txt
 ```
+
+**Difficulty groups.** Bins are defined once in `scripts/data_utils.py` and assigned with
+`assign_bins()`, used by both training and evaluation: length (source subword tokens)
+short ≤ 15 < mid_short ≤ 30 < mid_long ≤ 60 < long, and rarity (`rarity_mean`) typical ≤ 7.9 < rare,
+giving 8 cells such as `short/rare`. Rationale and the distribution of every split over the cells:
+`data/features/bins_report.md` and `bins_heatmap.png`.
+
+**Training subsets.** For each seed (0, 1, 2) the training ids are shuffled once and a subset of
+size n (1000, 2000, 5000, full) is the first n ids, so subsets are nested. Run seed s on the subsets
+of seed s. Cell counts per subset: `data/subsets/subsets_report.md`.
 
 Every processed file uses the same JSON Lines format, one pair per line:
 `{"id": "alma-train-000042", "source": "alma", "zh": "...", "en": "..."}`.

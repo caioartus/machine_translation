@@ -10,7 +10,8 @@ Features (one row per example, keyed by "id"):
     rarity_sum   sum over source subwords of -log p(subword)     (Platanios et al., 2019, eq. 3)
     rarity_mean  rarity_sum / src_len: average rarity PER subword (roughly independent of length)
     rarity_max   rarity of the single rarest subword in the source
-    n_unseen     number of source subwords never seen in ALMA train
+    n_unseen     number of source subwords never seen in ALMA train (for a training sentence:
+                 never seen in the REST of ALMA train, see leave-one-out below)
 
 Where p(subword) comes from (Platanios et al., eq. 2, with subwords instead of words):
     - counts are taken from the Chinese side of the cleaned ALMA TRAINING set only, and
@@ -19,6 +20,13 @@ Where p(subword) comes from (Platanios et al., eq. 2, with subwords instead of w
       subword tokens in ALMA train and V = size of the M2M-100 vocabulary. This gives subwords
       never seen in training a small non-zero probability instead of p = 0 (-log 0 = infinity).
     - logs are natural logs, so rarities are in "nats".
+    - leave-one-out for training sentences: when scoring a sentence that is itself part of
+      ALMA train, its own subwords are first subtracted from the counts. Otherwise a name that
+      occurs only in that sentence would count as "seen once" there, but as "never seen" in a
+      dev/test sentence, and held-out text would systematically look rarer than training text.
+      With leave-one-out, every sentence is scored as if it were unseen, so values are
+      comparable across splits. (Measured effect: ALMA train's share of "rare" sentences,
+      rarity_mean > 7.9, goes from 10.4% to 11.6%.)
 
 Outputs (in data/features/):
     alma_train.csv, alma_dev.csv, wmt22_test.csv, tatoeba_test.csv, tatoeba_challenge_test.csv
@@ -58,9 +66,15 @@ def main():
     counts, N = subword_frequencies(r["zh"] for r in data["alma_train"])
     V = len(tokenizer)  # vocabulary size of M2M-100 (all subwords it can produce)
 
-    def neg_log_p(piece):
-        """Rarity of one subword: -log of its smoothed probability. Higher = rarer."""
-        return -math.log((counts[piece] + 1) / (N + V))
+    def neg_log_p(piece, own=None):
+        """Rarity of one subword: -log of its smoothed probability. Higher = rarer.
+
+        `own` (optional) = subword counts of the sentence being scored, removed from the
+        totals for leave-one-out scoring of training sentences."""
+        own = own or Counter()
+        count = counts[piece] - own[piece]
+        total = N - sum(own.values())
+        return -math.log((count + 1) / (total + V))
 
     print(f"ALMA train: {N} source subword tokens, {len(counts)} distinct subwords "
           f"(vocabulary size V = {V})")
@@ -78,7 +92,9 @@ def main():
         records = []
         for r in rows:
             pieces = tokenizer.tokenize(r["zh"])
-            rarities = [neg_log_p(p) for p in pieces]
+            # Leave-one-out only for ALMA train: other splits do not contribute to the counts.
+            own = Counter(pieces) if split == "alma_train" else Counter()
+            rarities = [neg_log_p(p, own) for p in pieces]
             records.append({
                 "id": r["id"],
                 "src_len": len(pieces),
@@ -86,7 +102,7 @@ def main():
                 "rarity_sum": sum(rarities),
                 "rarity_mean": sum(rarities) / max(len(pieces), 1),
                 "rarity_max": max(rarities, default=0.0),
-                "n_unseen": sum(counts[p] == 0 for p in pieces),
+                "n_unseen": sum(counts[p] - own[p] == 0 for p in pieces),
             })
         df = pd.DataFrame(records)
         df.to_csv(OUT_DIR / f"{split}.csv", index=False, float_format="%.4f")
