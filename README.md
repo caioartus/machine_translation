@@ -6,6 +6,18 @@ In this project we aim to build a fast and efficient machine translation system 
 Training runs on the cluster through Slurm. Run everything from the repository root.
 Arguments after the `.sbatch` file are forwarded to `scripts/train.py`.
 
+Firstly, run the data preperation scripts
+
+```bash
+git pull
+conda env update -n mt -f environment.yml      # adds pandas / matplotlib / sacrebleu, pinned
+python scripts/prepare_alma.py
+python scripts/prepare_test_sets.py
+python scripts/compute_difficulty.py
+python scripts/make_bins.py
+python scripts/make_subsets.py
+```
+
 ### Submit a run
 
 ```bash
