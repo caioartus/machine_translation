@@ -1,6 +1,80 @@
 # machine_translation
 In this project we aim to build a fast and efficient machine translation system to translate from chinese to english. This project was done in the scope of the Introduction to Large Language Models class (CS4248) at NUS. 
 
+## Training
+
+Training runs on the cluster through Slurm. Run everything from the repository root.
+Arguments after the `.sbatch` file are forwarded to `scripts/train.py`.
+
+### Submit a run
+
+```bash
+# one run: sampling condition, training-set size, seed
+sbatch jobs/train1.sbatch --condition joint --size 1000 --seed 0
+
+# longer time limit (default is 30 minutes), set on the command line
+sbatch --time=02:00:00 jobs/train1.sbatch --condition uniform --size 5000 --seed 0
+
+# change hyperparameters; use a separate --out_dir per setting so runs don't overwrite each other
+sbatch jobs/train1.sbatch --condition uniform --size 1000 --seed 0 --lr 3e-6 --eval_every 25 --out_dir runs_lr/lr3e-6
+
+# no arguments: quick smoke test (20 steps, output in runs_test/)
+sbatch jobs/train1.sbatch
+```
+
+### Arguments
+
+| Argument | Default | Meaning |
+|---|---|---|
+| `--condition` | required | Sampling condition: `uniform`, `length` or `joint` |
+| `--size` | `1000` | Training subset: `1000`, `2000`, `5000` or `full` |
+| `--seed` | `0` | Picks the subset (`seed{S}_n{N}.txt`) and seeds sampler, dropout and init |
+| `--steps` | `1000` | Optimizer steps. Must be identical across conditions for a given size |
+| `--batch_size` | `16` | Examples per step. Must be identical across conditions |
+| `--lr` | `3e-5` | Peak learning rate (linear warm-up, then linear decay to 0) |
+| `--warmup_steps` | `50` | Steps of linear warm-up |
+| `--weight_decay` | `0.01` | AdamW weight decay |
+| `--eval_every` | `100` | Compute dev loss (and consider saving a checkpoint) every k steps |
+| `--cap` | `3.0` | Maximum sampling weight relative to uniform (see "The conditions" above) |
+| `--out_dir` | `runs` | Parent folder for results |
+
+The defaults for `steps`, `batch_size`, `lr` and `cap` are working placeholders, not final
+decisions. Every condition must use the same values at a given size.
+
+### Monitor a job
+
+```bash
+squeue --me                                  # your queued and running jobs (and their job ids)
+tail -f logs/slurm/mt-train-<job_id>.out     # follow the log live (Ctrl-C stops following, not the job)
+scancel <job_id>                             # cancel a job
+```
+
+The log shows the dev loss at step 0 (the pretrained model), then train and dev loss at every
+`--eval_every` steps, and finally the best step and greedy dev BLEU.
+
+### Results
+
+Each run writes to `<out_dir>/<condition>_n<size>_seed<seed>/`:
+
+| File | Content |
+|---|---|
+| `best/` | Checkpoint with the lowest dev loss (model and tokenizer) |
+| `dev_curve.csv` | `step`, `train_loss` (mean since the last eval), `dev_loss`. Step 0 is the pretrained model |
+| `run_info.json` | All settings, `best_step`, `best_dev_loss`, `dev_bleu_greedy` |
+
+Checkpoints are about 1.9 GB each, so check your disk quota before running many jobs.
+
+### Baseline (no fine-tuning)
+
+To compare a run against the unchanged pretrained model on `alma_dev`:
+
+```bash
+sbatch jobs/eval_baseline.sbatch                                          # -> baselines/pretrained.json
+sbatch jobs/eval_baseline.sbatch --model runs/joint_n1000_seed0/best      # score a trained checkpoint
+```
+
+It reports `dev_loss` and `dev_bleu_greedy`, computed the same way as in `run_info.json`.
+
 ## 🚧 Temporary: handoff from data preparation to model training
 
 > Temporary section (2026-10-13). Remove once training code exists and this is folded into the docs.
