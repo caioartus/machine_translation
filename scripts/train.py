@@ -1,7 +1,7 @@
 """Fine-tune M2M-100 (418M) for zh->en on one ALMA training subset, under one sampling condition.
 
-The ONLY thing that differs between conditions is the sampling weights (see README, section 4).
-Model, loss, optimizer and number of steps are identical, so the comparison is fair.
+The only thing that differs between conditions is the sampling weights
+Model, loss, optimizer and number of steps are identical
 
 What happens, in order:
   1. Load the subset (ids from data/subsets/), its text, and its difficulty groups.
@@ -46,7 +46,7 @@ def parse_args():
     p.add_argument("--condition", choices=["uniform", "length", "joint"], required=True)
     p.add_argument("--size", default="1000", help="1000 | 2000 | 5000 | full")
     p.add_argument("--seed", type=int, default=0)
-    # Budget: must be the SAME for all conditions at a given size (team decision, placeholders here).
+    # Budget: must be the same for all conditions at a given size (team decision, placeholders here).
     p.add_argument("--steps", type=int, default=1000)
     p.add_argument("--batch_size", type=int, default=16)
     p.add_argument("--lr", type=float, default=3e-5)
@@ -58,7 +58,7 @@ def parse_args():
     return p.parse_args()
 
 
-# --- Sampling weights (from the README) -----------------------------------------
+# --- Sampling weights -----------------------------------------
 def balanced_weights(groups, cap=3.0):
     """Every group gets the same total probability, but no example is drawn more than
     `cap` times as often as under uniform sampling."""
