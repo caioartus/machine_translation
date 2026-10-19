@@ -6,16 +6,14 @@ In this project we aim to build a fast and efficient machine translation system 
 Training runs on the cluster through Slurm. Run everything from the repository root.
 Arguments after the `.sbatch` file are forwarded to `scripts/train.py`.
 
-Firstly, run the data preperation scripts
+First, prepare the data. This runs every data preparation step in order. Run it on the login
+node, since it downloads ALMA and the tokenizer and compute nodes may have no internet access.
 
 ```bash
 git pull
-conda env update -n mt -f environment.yml      # adds pandas / matplotlib / sacrebleu, pinned
-python scripts/prepare_alma.py
-python scripts/prepare_test_sets.py
-python scripts/compute_difficulty.py
-python scripts/make_bins.py
-python scripts/make_subsets.py
+conda env update -n mt -f environment.yml --prune   # adds pandas / matplotlib / sacrebleu, pinned
+conda activate mt
+bash scripts/prepare_data.sh
 ```
 
 ### Submit a run
@@ -96,12 +94,9 @@ It reports `dev_loss` and `dev_bleu_greedy`, computed the same way as in `run_in
 
 ```bash
 git pull
-conda env update -n mt -f environment.yml      # adds pandas / matplotlib / sacrebleu, pinned
-python scripts/prepare_alma.py
-python scripts/prepare_test_sets.py
-python scripts/compute_difficulty.py
-python scripts/make_bins.py
-python scripts/make_subsets.py
+conda env update -n mt -f environment.yml --prune   # adds pandas / matplotlib / sacrebleu, pinned
+conda activate mt
+bash scripts/prepare_data.sh
 ```
 
 ### 2. What you need, and nothing else
