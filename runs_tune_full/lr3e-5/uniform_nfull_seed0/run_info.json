@@ -1,0 +1,17 @@
+{
+  "condition": "uniform",
+  "size": "full",
+  "seed": 0,
+  "steps": 2900,
+  "batch_size": 16,
+  "lr": 3e-05,
+  "warmup_steps": 290,
+  "weight_decay": 0.01,
+  "eval_every": 100,
+  "cap": 3.0,
+  "out_dir": "runs_tune_full/lr3e-5",
+  "n_train": 15362,
+  "best_step": 2900,
+  "best_dev_loss": 2.1607068055738057,
+  "dev_bleu_greedy": 15.90255040754724
+}
