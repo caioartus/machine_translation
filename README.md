@@ -87,17 +87,23 @@ It reports `dev_loss` and `dev_bleu_greedy`, computed the same way as in `run_in
 
 ### Hyperparameter tuning
 
-We tune only the learning rate, on the dev set, with the same grid for all three conditions
-(size 1000, seed 0). Batch size, warm-up, weight decay and cap stay fixed.
-Run with `sbatch jobs/tune.sbatch`, look at the results in `notebooks/tuning.ipynb`.
+We tune only the learning rate (and, at full size, the step budget), on the dev set, seed 0.
+Batch size 16, weight decay, dropout and cap stay fixed; warm-up is 10% of the steps.
+At size 1000 all three conditions are tuned with the same grid; they agreed, so larger
+sizes are tuned with uniform only and the result is used for every condition.
+Look at any round's results in `notebooks/tuning.ipynb` (set `TUNE_DIR` to its folder).
 
-| Round | Learning rates | Steps | Eval every | Results | Outcome |
-|---|---|---|---|---|---|
-| 1 | 1e-5, 3e-5, 1e-4 | 1000 | 100 | `runs_tune/` | 3e-5 and 1e-4 overfit at once; 1e-5 best for all conditions, at step 100 |
-| 2 | 3e-6, 5e-6, 1e-5 | 300 | 10 | `runs_tune2/` | 3e-6 lowest dev loss for all conditions; best step 130-160 |
+**Log of every tuning run** (each job file is edited in place between rounds; git history keeps the old versions):
 
-Round 1 showed the best point is within the first 100 steps and that the best learning rate was
-the lowest one tried, so round 2 tries lower rates and evaluates more often.
+| Round | Job | Size | Conditions | Learning rates | Steps | Warm-up | Eval every | Results | Outcome |
+|---|---|---|---|---|---|---|---|---|---|
+| 1000-1 | `jobs/tune.sbatch` | 1000 | all 3 | 1e-5, 3e-5, 1e-4 | 1000 | 50 | 100 | `runs_tune/` | 3e-5 and 1e-4 overfit at once; 1e-5 best for all conditions, at step 100 |
+| 1000-2 | `jobs/tune.sbatch` | 1000 | all 3 | 3e-6, 5e-6, 1e-5 | 300 | 30 | 10 | `runs_tune2/` | 3e-6 lowest dev loss for all conditions; best step 130-160 |
+| full-1 | `jobs/tune_full.sbatch` | full | uniform | 3e-6, 1e-5, 3e-5 | 2900 (~3 epochs) | 290 | 100 | `runs_tune_full/` | 1e-5 best; best step = last step (2900) |
+| full-2 | `jobs/tune_full.sbatch` | full | uniform | 3e-6, 1e-5 | 4800 (~5 epochs) | 480 | 100 | `runs_tune_full2/` | no real gain from more steps (1e-5: 2.110, worse; 3e-6: 2.099, below the 0.01 threshold); keep 2900 |
+
+Round 1000-1 showed the best point is within the first 100 steps and that the best learning rate was
+the lowest one tried, so round 1000-2 tries lower rates and evaluates more often.
 
 Round 2, best dev loss / dev BLEU (greedy) per run:
 
@@ -113,6 +119,37 @@ Pretrained model (step 0): dev loss 2.315, BLEU 14.1.
 and its dev loss stays flat up to step 300 instead of rising. BLEU differences between
 learning rates are at most 0.3, within seed noise, so at this size the learning rate matters
 little once it is 1e-5 or below.
+
+Round full-1, uniform, best dev loss / dev BLEU (greedy) / best step:
+
+| lr | uniform |
+|---|---|
+| 3e-6 | 2.110 / 15.71 / 2600 |
+| 1e-5 | **2.106** / **16.33** / 2900 |
+| 3e-5 | 2.161 / 15.90 / 2900 |
+
+1e-5 is best on both dev loss and BLEU, and sits in the middle of the grid. 3e-5 is too high:
+dev loss jumps after step 100 and only slowly recovers. So the best learning rate depends on
+size (3e-6 at 1000, 1e-5 at full), and size 5000 will be tuned too.
+
+The best 1e-5 checkpoint is the last step, but the curve is nearly flat by then (2.116 at step
+2000, 2.106 at 2900) and the learning rate decays to 0, so this does not prove the budget is too
+short. Round full-2 checks it with ~5 epochs. **Decision rule, fixed before the results:** use
+4800 steps at full only if lr 1e-5 beats 2.106 dev loss by about 0.01 or more; otherwise keep 2900.
+
+Round full-2, uniform, 4800 steps, best dev loss / dev BLEU (greedy) / best step:
+
+| lr | uniform |
+|---|---|
+| 3e-6 | 2.099 / 16.06 / 4600 |
+| 1e-5 | 2.110 / 16.06 / 3300 |
+
+With more steps, lr 1e-5 got slightly worse (2.110 vs 2.106), so the rule says keep 2900. 3e-6 gets
+the lowest dev loss, but only by 0.007, below the threshold, and with 0.27 lower BLEU. Dev loss is
+flat after about step 3000 in both runs, so the extra steps buy nothing.
+
+**Decision for full size: lr 1e-5, 2900 steps.** The full-1 run with these settings
+(`runs_tune_full/lr1e-5/uniform_nfull_seed0`) is also the final uniform seed-0 run.
 
 
 
