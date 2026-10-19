@@ -5,12 +5,18 @@
 # one per (learning rate, condition) pair:
 #
 #                  uniform   length   joint
-#     lr = 1e-5       0         1        2
-#     lr = 3e-5       3         4        5
-#     lr = 1e-4       6         7        8
+#     lr = 3e-6       0         1        2
+#     lr = 5e-6       3         4        5
+#     lr = 1e-5       6         7        8
 #
-# Every other setting (steps, batch size, warm-up, weight decay, cap) is left at the
-# train.py default, so the only things that vary are the learning rate and the condition.
+# Round 2. Round 1 (lr 1e-5 / 3e-5 / 1e-4, 1000 steps, eval every 100, in runs_tune/)
+# showed that 3e-5 and 1e-4 overfit at once and that the best dev loss is reached within
+# the first 100 steps. So this round tries lower learning rates, trains for fewer steps
+# and evaluates much more often. 1e-5 is repeated so the two rounds can be compared.
+#
+# Steps, eval frequency and warm-up are set below and are the same for every task.
+# Everything else (batch size, weight decay, cap) is left at the train.py default,
+# so the only things that vary are the learning rate and the condition.
 #
 # Run from the repository root:
 #     sbatch jobs/tune.sbatch
@@ -20,7 +26,7 @@
 # The rest wait in the queue and start automatically.
 #
 # Outputs (one folder per learning rate, so runs never overwrite each other):
-#     runs_tune/lr<LR>/<condition>_n1000_seed0/{dev_curve.csv, run_info.json}
+#     runs_tune2/lr<LR>/<condition>_n1000_seed0/{dev_curve.csv, run_info.json}
 # Logs:
 #     logs/slurm/mt-tune-<array job id>_<task id>.out
 #
@@ -37,11 +43,16 @@
 set -euo pipefail
 
 # --- What to tune ----------------------------------------------------------------
-LEARNING_RATES=(1e-5 3e-5 1e-4)
+LEARNING_RATES=(3e-6 5e-6 1e-5)
 CONDITIONS=(uniform length joint)
 SIZE=1000
 SEED=0
-OUT_ROOT=runs_tune
+OUT_ROOT=runs_tune2   # round 1 is in runs_tune/; a new folder keeps it untouched
+
+# Same for every task in this round.
+STEPS=300             # round 1: best dev loss was always within the first 100 steps
+EVAL_EVERY=10         # fine enough to see where that best point is
+WARMUP_STEPS=30       # 10% of the steps
 
 # The saved checkpoint (~2 GB) is only needed to compute dev BLEU, which train.py
 # already does before it exits. Set to 1 to keep the checkpoints anyway.
@@ -85,6 +96,9 @@ python -u scripts/train.py \
     --size "$SIZE" \
     --seed "$SEED" \
     --lr "$LR" \
+    --steps "$STEPS" \
+    --eval_every "$EVAL_EVERY" \
+    --warmup_steps "$WARMUP_STEPS" \
     --out_dir "$OUT_DIR"
 
 # --- Clean up --------------------------------------------------------------------

@@ -85,6 +85,24 @@ sbatch jobs/eval_baseline.sbatch --model runs/joint_n1000_seed0/best      # scor
 
 It reports `dev_loss` and `dev_bleu_greedy`, computed the same way as in `run_info.json`.
 
+### Hyperparameter tuning
+
+We tune only the learning rate, on the dev set, with the same grid for all three conditions
+(size 1000, seed 0). Batch size, warm-up, weight decay and cap stay fixed.
+Run with `sbatch jobs/tune.sbatch`, look at the results in `notebooks/tuning.ipynb`.
+
+| Round | Learning rates | Steps | Eval every | Results | Outcome |
+|---|---|---|---|---|---|
+| 1 | 1e-5, 3e-5, 1e-4 | 1000 | 100 | `runs_tune/` | 3e-5 and 1e-4 overfit at once; 1e-5 best for all conditions, at step 100 |
+| 2 | 3e-6, 5e-6, 1e-5 | 300 | 10 | `runs_tune2/` | pending |
+
+Round 1 showed the best point is within the first 100 steps and that the best learning rate was
+the lowest one tried, so round 2 tries lower rates and evaluates more often.
+
+Next: if all conditions agree on the best learning rate at size 1000, tune the larger sizes
+(5000, full) with `uniform` only, then use one learning rate and step budget per size for all
+conditions.
+
 ## 🚧 Temporary: handoff from data preparation to model training
 
 > Temporary section (2026-10-13). Remove once training code exists and this is folded into the docs.
