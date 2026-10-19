@@ -1,0 +1,17 @@
+{
+  "condition": "length",
+  "size": "1000",
+  "seed": 0,
+  "steps": 300,
+  "batch_size": 16,
+  "lr": 5e-06,
+  "warmup_steps": 30,
+  "weight_decay": 0.01,
+  "eval_every": 10,
+  "cap": 3.0,
+  "out_dir": "runs_tune2/lr5e-6",
+  "n_train": 1000,
+  "best_step": 70,
+  "best_dev_loss": 2.1838031695805196,
+  "dev_bleu_greedy": 14.743162175140897
+}
