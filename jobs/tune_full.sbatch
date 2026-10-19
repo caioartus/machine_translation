@@ -1,45 +1,51 @@
 #!/bin/bash
 # Learning-rate tuning at the full training size (15,362 examples), uniform sampling only, seed 0.
 #
-# This is a Slurm *job array*: one submission starts 3 independent tasks, one per learning rate:
+# This is a Slurm *job array*: one submission starts one task per learning rate:
 #
-#     task 0: lr = 3e-6     (the best value at size 1000)
+#     task 0: lr = 3e-6
 #     task 1: lr = 1e-5
-#     task 2: lr = 3e-5
+#
+# Round 2: longer budget. Round 1 (lr 3e-6 / 1e-5 / 3e-5, 2900 steps, in runs_tune_full/)
+# picked lr 1e-5 (dev loss 2.106, BLEU 16.3), but its best checkpoint was the last step.
+# That can come from the learning rate decaying to 0 rather than from too few steps, so
+# this round trains for ~5 epochs to check. 3e-6 is repeated because a longer budget can
+# favour a smaller learning rate. 3e-5 is dropped: it was clearly worse.
+#
+# Decision rule, fixed before the results: use 4800 steps for full only if the lr 1e-5
+# run beats 2.106 dev loss by about 0.01 or more. Otherwise keep 2900 steps.
 #
 # Why uniform only: at size 1000 (runs_tune2/) all three conditions chose the same
 # learning rate, so tuning one condition is enough. The chosen learning rate is then
 # used for every condition at this size.
 #
-# Why these learning rates: at size 1000 the problem was overfitting, which favours
-# small learning rates. With 15x more data the risk is undertraining instead, so the
-# grid goes upward from 3e-6. If full also picks 3e-6, the same value is used for
-# 2000 and 5000 without tuning them; if it picks a larger one, 5000 is tuned too.
+# Round 1 also showed that the best learning rate depends on size (3e-6 at 1000,
+# 1e-5 at full), so size 5000 gets tuned too.
 #
-# Budget, fixed in advance (not read off the dev curve): 2900 steps x batch 16
-# = about 3 epochs of the full data. Warm-up is 10% of the steps.
+# Budget: 4800 steps x batch 16 = about 5 epochs of the full data (round 1: 2900 steps,
+# about 3 epochs). Warm-up is 10% of the steps.
 #
-# The run with the chosen learning rate also counts as the final uniform seed-0 run,
-# so checkpoints are kept: the winner's is needed later for test evaluation. Delete
-# the other two once the choice is made (each is ~2 GB).
+# The run with the chosen learning rate and budget also counts as the final uniform
+# seed-0 run, so checkpoints are kept: the winner's is needed later for test evaluation.
+# Delete the others once the choice is made (each is ~2 GB).
 #
 # Run from the repository root:
 #     sbatch jobs/tune_full.sbatch
 # Re-run only some tasks (e.g. after a failure):
 #     sbatch --array=1 jobs/tune_full.sbatch
-# The tasks run 2 at a time, because the cluster allows 2 GPUs per user (QOSMaxGRESPerUser).
+# Both tasks run at once: the cluster allows 2 GPUs per user (QOSMaxGRESPerUser).
 #
 # Outputs (one folder per learning rate, so runs never overwrite each other):
-#     runs_tune_full/lr<LR>/uniform_nfull_seed0/{best/, dev_curve.csv, run_info.json}
+#     runs_tune_full2/lr<LR>/uniform_nfull_seed0/{best/, dev_curve.csv, run_info.json}
 # Logs:
 #     logs/slurm/mt-tune-full-<array job id>_<task id>.out
 #
 # Based on job_template.sbatch from the Unofficial SoC Cluster Guide.
 
 #SBATCH --job-name=mt-tune-full
-#SBATCH --array=0-2%2          # %2: at most 2 tasks run at once (our GPU limit per user)
+#SBATCH --array=0-1           # 2 tasks, so both run at once on our 2 GPUs
 #SBATCH --partition=gpu-long
-#SBATCH --time=04:00:00        # generous: ~10x the steps of round 2, plus more evaluations
+#SBATCH --time=08:00:00        # generous: round 1 fit in 4 h, this is 1.7x the steps
 #SBATCH --gpus=h100-47:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=8000
@@ -47,16 +53,16 @@
 set -euo pipefail
 
 # --- What to tune ----------------------------------------------------------------
-LEARNING_RATES=(3e-6 1e-5 3e-5)
+LEARNING_RATES=(3e-6 1e-5)
 CONDITION=uniform
 SIZE=full
 SEED=0
-OUT_ROOT=runs_tune_full
+OUT_ROOT=runs_tune_full2   # round 1 is in runs_tune_full/; a new folder keeps it untouched
 
 # Same for every task.
-STEPS=2900            # about 3 epochs of 15,362 examples at batch size 16
-EVAL_EVERY=100        # 29 evaluations along the run
-WARMUP_STEPS=290      # 10% of the steps
+STEPS=4800            # about 5 epochs of 15,362 examples at batch size 16
+EVAL_EVERY=100        # 48 evaluations along the run
+WARMUP_STEPS=480      # 10% of the steps
 
 # --- Environment -----------------------------------------------------------------
 CONDA_BASE="${CONDA_BASE:-$HOME/miniconda3}"
