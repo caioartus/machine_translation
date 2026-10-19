@@ -101,6 +101,7 @@ Look at any round's results in `notebooks/tuning.ipynb` (set `TUNE_DIR` to its f
 | 1000-2 | `jobs/tune.sbatch` | 1000 | all 3 | 3e-6, 5e-6, 1e-5 | 300 | 30 | 10 | `runs_tune2/` | 3e-6 lowest dev loss for all conditions; best step 130-160 |
 | full-1 | `jobs/tune_full.sbatch` | full | uniform | 3e-6, 1e-5, 3e-5 | 2900 (~3 epochs) | 290 | 100 | `runs_tune_full/` | 1e-5 best; best step = last step (2900) |
 | full-2 | `jobs/tune_full.sbatch` | full | uniform | 3e-6, 1e-5 | 4800 (~5 epochs) | 480 | 100 | `runs_tune_full2/` | no real gain from more steps (1e-5: 2.110, worse; 3e-6: 2.099, below the 0.01 threshold); keep 2900 |
+| 5000-1 | `jobs/tune_5000.sbatch` | 5000 | uniform | 3e-6, 1e-5 | 940 (~3 epochs) | 94 | 20 | `runs_tune_5000/` | running |
 
 Round 1000-1 showed the best point is within the first 100 steps and that the best learning rate was
 the lowest one tried, so round 1000-2 tries lower rates and evaluates more often.
