@@ -94,14 +94,27 @@ Run with `sbatch jobs/tune.sbatch`, look at the results in `notebooks/tuning.ipy
 | Round | Learning rates | Steps | Eval every | Results | Outcome |
 |---|---|---|---|---|---|
 | 1 | 1e-5, 3e-5, 1e-4 | 1000 | 100 | `runs_tune/` | 3e-5 and 1e-4 overfit at once; 1e-5 best for all conditions, at step 100 |
-| 2 | 3e-6, 5e-6, 1e-5 | 300 | 10 | `runs_tune2/` | pending |
+| 2 | 3e-6, 5e-6, 1e-5 | 300 | 10 | `runs_tune2/` | 3e-6 lowest dev loss for all conditions; best step 130-160 |
 
 Round 1 showed the best point is within the first 100 steps and that the best learning rate was
 the lowest one tried, so round 2 tries lower rates and evaluates more often.
 
-Next: if all conditions agree on the best learning rate at size 1000, tune the larger sizes
-(5000, full) with `uniform` only, then use one learning rate and step budget per size for all
-conditions.
+Round 2, best dev loss / dev BLEU (greedy) per run:
+
+| lr | uniform | length | joint |
+|---|---|---|---|
+| 3e-6 | **2.174** / 14.98 | **2.181** / 14.87 | **2.186** / 14.95 |
+| 5e-6 | 2.176 / 15.08 | 2.184 / 14.74 | 2.187 / 14.80 |
+| 1e-5 | 2.188 / 14.90 | 2.189 / 14.64 | 2.198 / 14.72 |
+
+Pretrained model (step 0): dev loss 2.315, BLEU 14.1.
+
+**Decision for size 1000: lr 3e-6, 300 steps.** It has the lowest dev loss for every condition,
+and its dev loss stays flat up to step 300 instead of rising. BLEU differences between
+learning rates are at most 0.3, within seed noise, so at this size the learning rate matters
+little once it is 1e-5 or below.
+
+
 
 ## 🚧 Temporary: handoff from data preparation to model training
 
