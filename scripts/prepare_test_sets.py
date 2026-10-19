@@ -34,6 +34,7 @@ Outputs (in data/processed/):
 Run from the repository root (after prepare_alma.py):
     python scripts/prepare_test_sets.py
 """
+
 import re
 import sys
 import urllib.request
@@ -43,7 +44,14 @@ from pathlib import Path
 import numpy as np
 from sacrebleu.dataset import DATASETS
 
-from data_utils import MAX_LEN, SPECIAL_TOKENS, n_tokens, normalize, read_jsonl, write_jsonl
+from data_utils import (
+    MAX_LEN,
+    SPECIAL_TOKENS,
+    n_tokens,
+    normalize,
+    read_jsonl,
+    write_jsonl,
+)
 
 OUT_DIR = "data/processed"
 CANVAS_DIR = Path("data/raw/canvas")
@@ -51,15 +59,19 @@ CANVAS_FILES = ["wmttest2022.zh", "wmttest2022.AnnA.en", "tatoeba.zh", "tatoeba.
 
 # Supplementary Tatoeba Challenge test set (pinned versions).
 TATOEBA_COMMIT = "6faf2dab0b7b01a0e08a114dbacbb7deac54988d"  # "updated dev and test data (v2023-09-26)"
-TATOEBA_URL = ("https://raw.githubusercontent.com/Helsinki-NLP/Tatoeba-Challenge/"
-               f"{TATOEBA_COMMIT}/data/test/eng-zho/test.txt")
+TATOEBA_URL = (
+    "https://raw.githubusercontent.com/Helsinki-NLP/Tatoeba-Challenge/"
+    f"{TATOEBA_COMMIT}/data/test/eng-zho/test.txt"
+)
 TATOEBA_RAW = Path("data/raw/tatoeba/eng-zho_test_v2023-09-26.txt")
 # The 2020 version of the same file (unchanged until the v2021-08-07 update). The 2023 file
 # contains every 2020 pair plus newer ones.
 TATOEBA_2020_COMMIT = "17a1b96"
 TATOEBA_2020_URL = TATOEBA_URL.replace(TATOEBA_COMMIT, TATOEBA_2020_COMMIT)
 TATOEBA_2020_RAW = Path("data/raw/tatoeba/eng-zho_test_v2020.txt")
-TATOEBA_VARIETY = "cmn_Hans"  # Mandarin, Simplified script (same as the official Tatoeba set)
+TATOEBA_VARIETY = (
+    "cmn_Hans"  # Mandarin, Simplified script (same as the official Tatoeba set)
+)
 
 
 def read_lines(path):
@@ -71,8 +83,10 @@ def check_canvas_files():
     """Stop with a helpful message if the official files have not been put in place."""
     missing = [f for f in CANVAS_FILES if not (CANVAS_DIR / f).exists()]
     if missing:
-        sys.exit(f"Missing official test files in {CANVAS_DIR}/: {', '.join(missing)}\n"
-                 "Download them from the CS4248 Canvas Project folder (see README).")
+        sys.exit(
+            f"Missing official test files in {CANVAS_DIR}/: {', '.join(missing)}\n"
+            "Download them from the CS4248 Canvas Project folder (see README)."
+        )
 
 
 def load_wmt22():
@@ -81,22 +95,34 @@ def load_wmt22():
     en_lines = read_lines(CANVAS_DIR / "wmttest2022.AnnA.en")
 
     dataset = DATASETS["wmt22"]
-    dataset.process_to_text("zh-en")  # downloads and extracts on first use (cached afterwards)
+    dataset.process_to_text(
+        "zh-en"
+    )  # downloads and extracts on first use (cached afterwards)
     # sacreBLEU stores one text file per field (src, ref:A, ...), one segment per line.
     files = dict(zip(dataset.fieldnames("zh-en"), dataset.get_files("zh-en")))
-    meta = {name: read_lines(files[name]) for name in ["src", "ref:B", "domain", "docid"]}
+    meta = {
+        name: read_lines(files[name]) for name in ["src", "ref:B", "domain", "docid"]
+    }
 
     # The join below is by line number, so make sure both files are in the same order.
     assert len(zh_lines) == len(en_lines) == len(meta["src"])
-    assert all(normalize(a) == normalize(b) for a, b in zip(zh_lines, meta["src"])), \
+    assert all(normalize(a) == normalize(b) for a, b in zip(zh_lines, meta["src"])), (
         "Canvas WMT22 sources do not match the public release line by line"
+    )
 
     return [
-        {"id": f"wmt22-test-{i:06d}", "source": "wmt22",
-         "zh": normalize(zh), "en": normalize(en), "en_ref_b": normalize(ref_b),
-         "domain": domain, "docid": docid}
-        for i, (zh, en, ref_b, domain, docid)
-        in enumerate(zip(zh_lines, en_lines, meta["ref:B"], meta["domain"], meta["docid"]))
+        {
+            "id": f"wmt22-test-{i:06d}",
+            "source": "wmt22",
+            "zh": normalize(zh),
+            "en": normalize(en),
+            "en_ref_b": normalize(ref_b),
+            "domain": domain,
+            "docid": docid,
+        }
+        for i, (zh, en, ref_b, domain, docid) in enumerate(
+            zip(zh_lines, en_lines, meta["ref:B"], meta["domain"], meta["docid"])
+        )
     ]
 
 
@@ -105,9 +131,15 @@ def load_tatoeba_official():
     zh_lines = read_lines(CANVAS_DIR / "tatoeba.zh")
     en_lines = read_lines(CANVAS_DIR / "tatoeba.en")
     assert len(zh_lines) == len(en_lines)
-    return [{"id": f"tatoeba-test-{i:06d}", "source": "tatoeba",
-             "zh": normalize(zh), "en": normalize(en)}
-            for i, (zh, en) in enumerate(zip(zh_lines, en_lines))]
+    return [
+        {
+            "id": f"tatoeba-test-{i:06d}",
+            "source": "tatoeba",
+            "zh": normalize(zh),
+            "en": normalize(en),
+        }
+        for i, (zh, en) in enumerate(zip(zh_lines, en_lines))
+    ]
 
 
 def read_tatoeba_challenge_file(url, path):
@@ -124,9 +156,13 @@ def read_tatoeba_challenge_file(url, path):
 def load_tatoeba_challenge(official):
     """Supplementary set: Simplified Mandarin rows of the pinned 2023 Challenge test file,
     excluding sources that also appear in the official Tatoeba set."""
-    pairs_2020 = {(normalize(zh), normalize(en))
-                  for _, variety, en, zh in read_tatoeba_challenge_file(TATOEBA_2020_URL, TATOEBA_2020_RAW)
-                  if variety == TATOEBA_VARIETY}
+    pairs_2020 = {
+        (normalize(zh), normalize(en))
+        for _, variety, en, zh in read_tatoeba_challenge_file(
+            TATOEBA_2020_URL, TATOEBA_2020_RAW
+        )
+        if variety == TATOEBA_VARIETY
+    }
     official_keys = {loose(r["zh"]) for r in official}
 
     rows, n_excluded = [], 0
@@ -137,8 +173,15 @@ def load_tatoeba_challenge(official):
         if loose(zh) in official_keys:
             n_excluded += 1
             continue
-        rows.append({"id": f"tatoeba_challenge-test-{i:06d}", "source": "tatoeba_challenge",
-                     "zh": zh, "en": en, "in_v2020": (zh, en) in pairs_2020})
+        rows.append(
+            {
+                "id": f"tatoeba_challenge-test-{i:06d}",
+                "source": "tatoeba_challenge",
+                "zh": zh,
+                "en": en,
+                "in_v2020": (zh, en) in pairs_2020,
+            }
+        )
     return rows, n_excluded
 
 
@@ -159,15 +202,21 @@ def length_summary(rows):
 def main():
     check_canvas_files()
     test_sets = {"wmt22": load_wmt22(), "tatoeba": load_tatoeba_official()}
-    test_sets["tatoeba_challenge"], n_excluded = load_tatoeba_challenge(test_sets["tatoeba"])
+    test_sets["tatoeba_challenge"], n_excluded = load_tatoeba_challenge(
+        test_sets["tatoeba"]
+    )
     for name, rows in test_sets.items():
         write_jsonl(rows, f"{OUT_DIR}/{name}_test.jsonl")
         print(f"{name}: {len(rows)} pairs")
 
     # --- Overlap with ALMA (train + dev) ------------------------------------------
-    alma = {split: read_jsonl(f"{OUT_DIR}/alma_{split}.jsonl") for split in ["train", "dev"]}
+    alma = {
+        split: read_jsonl(f"{OUT_DIR}/alma_{split}.jsonl") for split in ["train", "dev"]
+    }
     exact = {split: {r["zh"]: r["id"] for r in rows} for split, rows in alma.items()}
-    near = {split: {loose(r["zh"]): r["id"] for r in rows} for split, rows in alma.items()}
+    near = {
+        split: {loose(r["zh"]): r["id"] for r in rows} for split, rows in alma.items()
+    }
 
     overlaps, overlap_counts = [], {}
     for name, rows in test_sets.items():
@@ -176,18 +225,36 @@ def main():
             for r in rows:
                 if r["zh"] in exact[split]:
                     n_exact += 1
-                    overlaps.append({"test_id": r["id"], "alma_id": exact[split][r["zh"]],
-                                     "match": "exact", "zh": r["zh"]})
+                    overlaps.append(
+                        {
+                            "test_id": r["id"],
+                            "alma_id": exact[split][r["zh"]],
+                            "match": "exact",
+                            "zh": r["zh"],
+                        }
+                    )
                 elif loose(r["zh"]) and loose(r["zh"]) in near[split]:
                     n_loose += 1
-                    overlaps.append({"test_id": r["id"], "alma_id": near[split][loose(r["zh"])],
-                                     "match": "loose", "zh": r["zh"]})
+                    overlaps.append(
+                        {
+                            "test_id": r["id"],
+                            "alma_id": near[split][loose(r["zh"])],
+                            "match": "loose",
+                            "zh": r["zh"],
+                        }
+                    )
             overlap_counts[(name, split)] = (n_exact, n_loose)
-            print(f"overlap {name} vs ALMA {split}: {n_exact} exact, {n_loose} loose-only")
+            print(
+                f"overlap {name} vs ALMA {split}: {n_exact} exact, {n_loose} loose-only"
+            )
     write_jsonl(overlaps, f"{OUT_DIR}/test_overlap.jsonl")
 
     # --- Report ----------------------------------------------------------------
-    wmt, tat, chal = test_sets["wmt22"], test_sets["tatoeba"], test_sets["tatoeba_challenge"]
+    wmt, tat, chal = (
+        test_sets["wmt22"],
+        test_sets["tatoeba"],
+        test_sets["tatoeba_challenge"],
+    )
     lines = [
         "# Test sets",
         "",
@@ -204,7 +271,8 @@ def main():
         "all sources identical; 4 references differ only by a double space that sacreBLEU's "
         "extraction collapses (no effect on BLEU with the 13a tokenizer). Metadata added from "
         "the public release: `en_ref_b` (Annotator B; optional extra analysis only), `domain` "
-        "(" + ", ".join(f"{d} {c}" for d, c in Counter(r['domain'] for r in wmt).items())
+        "("
+        + ", ".join(f"{d} {c}" for d, c in Counter(r["domain"] for r in wmt).items())
         + ") and `docid`.",
         f"- **Tatoeba** (Tiedemann, 2020; Tatoeba corpus, CC-BY 2.0 FR): `tatoeba.zh` + "
         f"`tatoeba.en`, {len(tat)} pairs, Simplified Chinese. A sample chosen by the course: "
