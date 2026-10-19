@@ -219,8 +219,11 @@ The size-1000 tuning checkpoints were deleted, so uniform seed 0 at 1000 is run 
   `alma_dev`, seed 0. The test sets are never used.
 - **Same grid for all conditions at size 1000.** All three conditions chose the same learning rate,
   so larger sizes are tuned with uniform only and the result is used for every condition.
-- **The best learning rate depends on size**: 3e-6 at 1000 and 5000 (small data overfits fast),
-  1e-5 at full.
+- **The best learning rate depends on size**: 3e-6 at 1000 and 5000, 1e-5 at full. With little
+  data, a larger learning rate moves the model away from its pretrained weights faster than the
+  data justifies: its best checkpoint is worse, not just earlier (size 1000: 2.188 at step 90 for
+  1e-5 vs 2.174 at step 160 for 3e-6), so checkpoint selection cannot fix it. With the full data,
+  larger steps pay off. The differences are small at every size (at most about 0.015 dev loss).
 - **Step budgets are fixed in advance** (about 3 epochs), not read off the dev curves.
 - **Decision rule:** lowest best dev loss; differences below about 0.01 count as a tie, and the
   rule for each round is written down before its results.
