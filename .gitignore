@@ -8,3 +8,7 @@ logs/
 # Tatoeba Challenge downloads), committed so every machine has the same inputs.
 data/*
 !data/raw/
+# Run outputs: the small result files (run_info.json, dev_curve.csv) are committed so the
+# whole team can see them; model checkpoints (~2 GB each) and smoke tests are not.
+runs*/**/best/
+runs_test/

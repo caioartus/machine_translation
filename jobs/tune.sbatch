@@ -16,6 +16,8 @@
 #     sbatch jobs/tune.sbatch
 # Re-run only some tasks (e.g. after a failure):
 #     sbatch --array=4,7 jobs/tune.sbatch
+# The tasks run 2 at a time, because the cluster allows 2 GPUs per user (QOSMaxGRESPerUser).
+# The rest wait in the queue and start automatically.
 #
 # Outputs (one folder per learning rate, so runs never overwrite each other):
 #     runs_tune/lr<LR>/<condition>_n1000_seed0/{dev_curve.csv, run_info.json}
@@ -25,7 +27,7 @@
 # Based on job_template.sbatch from the Unofficial SoC Cluster Guide.
 
 #SBATCH --job-name=mt-tune
-#SBATCH --array=0-8
+#SBATCH --array=0-8%2          # %2: at most 2 tasks run at once (our GPU limit per user)
 #SBATCH --partition=gpu-long
 #SBATCH --time=01:00:00
 #SBATCH --gpus=h100-47:1
