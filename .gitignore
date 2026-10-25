@@ -14,3 +14,4 @@ runs*/**/best/
 runs_test/
 # Default Slurm output files (our jobs write their real logs to logs/slurm/).
 slurm-*.out
+runs*/**/best/

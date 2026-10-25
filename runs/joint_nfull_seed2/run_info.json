@@ -1,0 +1,17 @@
+{
+  "condition": "joint",
+  "size": "full",
+  "seed": 2,
+  "steps": 2900,
+  "batch_size": 16,
+  "lr": 1e-05,
+  "warmup_steps": 290,
+  "weight_decay": 0.01,
+  "eval_every": 100,
+  "cap": 3.0,
+  "out_dir": "runs",
+  "n_train": 15362,
+  "best_step": 1500,
+  "best_dev_loss": 2.139205189063935,
+  "dev_bleu_greedy": 15.749622678309569
+}
