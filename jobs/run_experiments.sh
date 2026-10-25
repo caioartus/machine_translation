@@ -7,6 +7,10 @@
 #   SIZES="1000 2000" bash jobs/run_experiments.sh  # a subset (also CONDITIONS=..., SEEDS=...)
 #
 # Safe to re-run: a run whose <out_dir>/<name>/run_info.json exists is skipped.
+# FORCE=1 reruns the selected runs even if done: it deletes their old run_info.json and
+# dev_curve.csv (so a half-finished rerun can't be mistaken for the old result) and the job
+# then overwrites best/. Always combine with SIZES/CONDITIONS/SEEDS and preview with DRY_RUN=1:
+#   DRY_RUN=1 FORCE=1 SIZES="1000" SEEDS="0" bash jobs/run_experiments.sh
 # Each run is its own Slurm job (jobs/train1.sbatch), so runs are independent and a failure
 # only affects that run. Settings per size are the "Final settings" table in the README.
 
@@ -19,6 +23,7 @@ SIZES="${SIZES:-1000 2000 5000 full}"
 SEEDS="${SEEDS:-0 1 2}"
 OUT_DIR="${OUT_DIR:-runs}"
 DRY_RUN="${DRY_RUN:-0}"
+FORCE="${FORCE:-0}"
 
 # size -> "lr steps warmup eval_every time_limit"  (identical for every condition and seed)
 # Time limits are generous guesses, adjust them to the durations in your tuning logs.
@@ -42,7 +47,12 @@ for size in $SIZES; do
             target="$OUT_DIR/$name"
 
             if [ -f "$target/run_info.json" ]; then
-                echo "skip   $name (already done)"; n_skipped=$((n_skipped + 1)); continue
+                if [ "$FORCE" = "1" ]; then
+                    echo "force  $name (old results will be overwritten)"
+                    [ "$DRY_RUN" = "1" ] || rm -f "$target/run_info.json" "$target/dev_curve.csv"
+                else
+                    echo "skip   $name (already done)"; n_skipped=$((n_skipped + 1)); continue
+                fi
             fi
 
             cmd=(sbatch --parsable --job-name="mt-$cond-n$size-s$seed" --time="$time_limit"
