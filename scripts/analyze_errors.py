@@ -10,6 +10,8 @@ and writes, to analysis/report/<test_set>/:
     disagreements.csv      the k sentences where each system differs most from the baseline
     annotation_sample.csv  a stratified random sample, same sentences for every system, with empty
                            error_type / severity / notes columns for manual annotation
+    annotation_pairs.csv   one row per sampled sentence and exact run, with independent labels;
+                           annotate this file, then run compare_annotations.py
     report.md              the tables above in readable form
 
 A system can be given as a glob over seeds, e.g. "uniform_n5000_seed*". Per-sentence scores are
@@ -42,6 +44,12 @@ def load_system(spec, test_set, scored_dir):
     if not paths:
         raise SystemExit(f"no scored files match {scored_dir}/{spec}/{test_set}.csv")
     runs = [pd.read_csv(p, keep_default_na=False) for p in paths]
+    for path, run in zip(paths, runs):
+        if run["id"].duplicated().any():
+            raise SystemExit(f"duplicate sentence ids in {path}")
+        for col in ["id", "zh", "ref", "src_len", "tgt_len", "rarity_mean", "length_bin", "rarity_bin", "cell"]:
+            if run[col].tolist() != runs[0][col].tolist():
+                raise SystemExit(f"mismatched {col} across runs matching {spec}")
     df = runs[0].copy()
     numeric = [c for c in SCORES + ["len_ratio", "missing_nums"] if c in df]
     for col in numeric:
@@ -105,6 +113,37 @@ def deltas(systems, baseline, n_boot, seed):
                             "n": len(rows), "delta_chrf": diff.mean(), "ci_low": lo, "ci_high": hi,
                             "excludes_zero": bool(lo > 0 or hi < 0)})
     return pd.DataFrame(records)
+
+
+def write_annotation_pairs(systems, picked_ids, test_set, scored_dir, path):
+    """Keep labels attached to exact outputs, never to averaged seed scores."""
+    rows, seen = [], set()
+    for spec in systems:
+        for source in sorted(Path(scored_dir).glob(f"{spec}/{test_set}.csv")):
+            if source in seen:
+                continue
+            seen.add(source)
+            run = pd.read_csv(source, keep_default_na=False)
+            for row in run[run["id"].isin(picked_ids)].to_dict("records"):
+                rows.append({**{k: row[k] for k in ["id", "zh", "ref", "hyp", "length_bin", "rarity_bin", "cell"]},
+                             "system": source.parent.name, "error_type": "", "severity": "", "notes": ""})
+    fresh = pd.DataFrame(rows)
+    if path.exists():
+        old = pd.read_csv(path, keep_default_na=False, dtype=str)
+        keys = ["id", "system"]
+        if old.duplicated(keys).any():
+            raise SystemExit(f"Duplicate labels in {path}; resolve them before regenerating")
+        existing = fresh.set_index(keys)
+        for row in old.to_dict("records"):
+            key = (row["id"], row["system"])
+            if not any(str(row.get(c, "")).strip() for c in ["error_type", "severity", "notes"]):
+                continue
+            if key not in existing.index or any(str(existing.loc[key, c]) != str(row[c]) for c in ["zh", "ref", "hyp", "length_bin", "rarity_bin", "cell"]):
+                raise SystemExit(f"Annotated output changed or left the sample: {key}. Use a different --out_dir to preserve {path}")
+            for c in ["error_type", "severity", "notes"]:
+                existing.loc[key, c] = row.get(c, "")
+        fresh = existing.reset_index()
+    fresh.to_csv(path, index=False)
 
 
 def md_table(df, floatfmt="{:.2f}"):
@@ -182,7 +221,12 @@ def main():
         sample[f"hyp[{name}]"] = df.loc[sample.index, "hyp"]
     for col in ["error_type", "severity", "notes"]:
         sample[col] = ""
-    sample.to_csv(out / "annotation_sample.csv", index=False)
+    # Keep the old wide sheet for compatibility; never overwrite existing manual work.
+    legacy_path = out / "annotation_sample.csv"
+    if not legacy_path.exists():
+        sample.to_csv(legacy_path, index=False)
+    write_annotation_pairs(systems, sample["id"].tolist(), args.test_set, args.scored_dir,
+                           out / "annotation_pairs.csv")
 
     # Readable report.
     lines = [f"# Error analysis: {args.test_set}", "",
@@ -201,8 +245,15 @@ def main():
               f"too_short: output under {SHORT_RATIO} of the reference length in words; too_long: over {LONG_RATIO}.", "",
               md_table(overall[["system", "n", "too_short", "too_long", "empty", "has_cjk", "repeated", "missing_nums"]],
                        floatfmt="{:.3f}"), ""]
+    lines += ["## Paired human error analysis", "",
+              "Annotate `annotation_pairs.csv`: each exact run has its own row and labels. "
+              "Use OK or ALT with severity 0, or error codes with severity 1–3. "
+              "Then run `scripts/compare_annotations.py` with an exact baseline run and comparison runs.", "",
+              "Blank annotations are excluded, not counted as correct. "
+              "The sample is balanced across difficulty cells; its overall counts are not population error rates. "
+              "Do not use the lowest-scoring examples to estimate error rates.", ""]
     (out / "report.md").write_text("\n".join(lines), encoding="utf-8")
-    print(f"wrote {out}/ (groups, deltas, worst, disagreements, annotation_sample, report.md)")
+    print(f"wrote {out}/ (groups, deltas, worst, disagreements, annotation_sample, annotation_pairs, report.md)")
 
 
 if __name__ == "__main__":
