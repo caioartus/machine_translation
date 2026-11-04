@@ -32,6 +32,22 @@ Original input files are committed in `data/raw/`; everything else in `data/` is
 | `make_bins.py` | Difficulty groups report and heatmap -> `data/features/` |
 | `make_subsets.py` | Nested training subsets -> `data/subsets/seed{S}_n{N}.txt` |
 
+### Optional News Commentary extension
+
+`scripts/prepare_news_commentary.py` creates a reproducible 15,000-pair News Commentary v16
+extension without committing the generated data. Run the normal preparation first so the ALMA dev
+and test JSONL files exist, then point the script at the shared OPUS archive:
+
+```bash
+python scripts/prepare_news_commentary.py
+```
+
+The shared input path is fixed at
+`/mnt/scratch/e/e1504054/mt_external_data/raw/en-zh.tsv.gz` in the script. It writes
+`data/processed/news_commentary_train.jsonl`, a rejected-row audit, and a Markdown report. The
+report records the raw file checksum, cleaning counts, fixed seed, and protected dev/test splits.
+The processed files remain ignored by Git; commit the script and README only.
+
 **Raw inputs.** `data/raw/canvas/` holds the files from the CS4248 Canvas Project folder, unchanged.
 The course guidelines define the official test sets as these files: `wmttest2022.zh` +
 `wmttest2022.AnnA.en` (WMT22) and `tatoeba.zh` + `tatoeba.en` (Tatoeba). Canvas also provides
