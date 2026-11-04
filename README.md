@@ -43,7 +43,7 @@ python scripts/prepare_news_commentary.py
 ```
 
 The shared input path is fixed at
-`/mnt/scratch/e/e1504054/mt_external_data/raw/en-zh.tsv.gz` in the script. It writes
+`/mnt/scratch/e/e1504054/mt_external_data/raw/news-commentary-v16.en-zh.tsv.gz` in the script. It writes
 `data/processed/news_commentary_train.jsonl`, a rejected-row audit, and a Markdown report. The
 report records the raw file checksum, cleaning counts, fixed seed, and protected dev/test splits.
 The processed files remain ignored by Git; commit the script and README only.

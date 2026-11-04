@@ -1,7 +1,7 @@
 """Clean and deterministically sample News Commentary v16 for zh->en training.
 
-The input is the OPUS ``en-zh.tsv.gz`` file (English in column 1, Chinese in
-column 2).  The script applies the same light normalisation and M2M-100 length
+The input is the OPUS ``news-commentary-v16.en-zh.tsv.gz`` file (English in
+column 1, Chinese in column 2).  The script applies the same light normalisation and M2M-100 length
 measurement as the rest of this repository, removes duplicate/noisy pairs and
 protects the ALMA dev and evaluation sets from train/evaluation overlap.
 
@@ -25,7 +25,10 @@ from pathlib import Path
 from data_utils import MAX_LEN, SPECIAL_TOKENS, n_tokens, normalize, read_jsonl, write_jsonl
 
 
-INPUT_PATH = Path("/mnt/scratch/e/e1504054/mt_external_data/raw/en-zh.tsv.gz")
+INPUT_PATH = Path(
+    "/mnt/scratch/e/e1504054/mt_external_data/raw/"
+    "news-commentary-v16.en-zh.tsv.gz"
+)
 OUTPUT_DIR = Path("data/processed")
 PROTECTED_PATHS = [
     Path("data/processed/alma_dev.jsonl"),
