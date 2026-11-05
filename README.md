@@ -42,11 +42,21 @@ and test JSONL files exist, then point the script at the shared OPUS archive:
 python scripts/prepare_news_commentary.py
 ```
 
-The shared input path is fixed at
-`/mnt/scratch/e/e1504054/mt_external_data/raw/news-commentary-v16.en-zh.tsv.gz` in the script. It writes
-`data/processed/news_commentary_train.jsonl`, a rejected-row audit, and a Markdown report. The
-report records the raw file checksum, cleaning counts, fixed seed, and protected dev/test splits.
-The processed files remain ignored by Git; commit the script and README only.
+Place or link the OPUS archive at the repository-relative path
+`data/external/news_commentary/news-commentary-v16.en-zh.tsv.gz`. The `data/external/` directory is
+ignored by Git, so the large corpus is never committed. The script resolves all paths from its own
+location and writes `data/processed/news_commentary_train.jsonl`, a rejected-row audit, and a
+Markdown report. The report records the raw file checksum, cleaning counts, fixed seed, and
+protected dev/test splits.
+
+Before merging ALMA and News, audit cross-corpus duplication without changing either file:
+
+```bash
+python scripts/audit_news_alma_overlap.py
+```
+
+The script resolves repository-relative paths from its own location and writes
+`data/audit/news_alma_overlap.jsonl` plus `news_alma_overlap_report.md`.
 
 **Raw inputs.** `data/raw/canvas/` holds the files from the CS4248 Canvas Project folder, unchanged.
 The course guidelines define the official test sets as these files: `wmttest2022.zh` +

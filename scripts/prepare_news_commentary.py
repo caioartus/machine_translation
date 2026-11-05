@@ -25,16 +25,17 @@ from pathlib import Path
 from data_utils import MAX_LEN, SPECIAL_TOKENS, n_tokens, normalize, read_jsonl, write_jsonl
 
 
-INPUT_PATH = Path(
-    "/mnt/scratch/e/e1504054/mt_external_data/raw/"
-    "news-commentary-v16.en-zh.tsv.gz"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+INPUT_PATH = (
+    REPO_ROOT
+    / "data/external/news_commentary/news-commentary-v16.en-zh.tsv.gz"
 )
-OUTPUT_DIR = Path("data/processed")
+OUTPUT_DIR = REPO_ROOT / "data/processed"
 PROTECTED_PATHS = [
-    Path("data/processed/alma_dev.jsonl"),
-    Path("data/processed/wmt22_test.jsonl"),
-    Path("data/processed/tatoeba_test.jsonl"),
-    Path("data/processed/tatoeba_challenge_test.jsonl"),
+    OUTPUT_DIR / "alma_dev.jsonl",
+    OUTPUT_DIR / "wmt22_test.jsonl",
+    OUTPUT_DIR / "tatoeba_test.jsonl",
+    OUTPUT_DIR / "tatoeba_challenge_test.jsonl",
 ]
 SAMPLE_SIZE = 15_000
 SEED = 0
@@ -177,6 +178,11 @@ def clean(path, protected_exact, protected_near):
 
 def write_report(path, input_path, input_sha256, protected_counts, total, candidates,
                  selected, removed_counts, sample_size, seed):
+    input_display = input_path.relative_to(REPO_ROOT)
+    protected_display = {
+        str(Path(name).relative_to(REPO_ROOT)): count
+        for name, count in protected_counts.items()
+    }
     lines = [
         "# News Commentary v16 cleaning report",
         "",
@@ -184,7 +190,7 @@ def write_report(path, input_path, input_sha256, protected_counts, total, candid
         "",
         "## Provenance and reproducibility",
         "",
-        f"- Input: `{input_path}` (OPUS `en-zh.tsv.gz`; English column 1, Chinese column 2)",
+        f"- Input: `{input_display}` (OPUS `en-zh.tsv.gz`; English column 1, Chinese column 2)",
         f"- Input SHA-256: `{input_sha256}`",
         f"- Requested sample size: {sample_size:,}",
         f"- Sampling seed: {seed}",
@@ -197,7 +203,7 @@ def write_report(path, input_path, input_sha256, protected_counts, total, candid
         "Chinese-source exact and loose matches are excluded from training:",
         "",
     ]
-    lines.extend(f"- `{name}`: {count:,} rows" for name, count in protected_counts.items())
+    lines.extend(f"- `{name}`: {count:,} rows" for name, count in protected_display.items())
     lines += [
         "",
         "Loose matching lowercases text and removes punctuation, underscores and whitespace.",
