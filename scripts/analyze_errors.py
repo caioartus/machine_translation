@@ -30,6 +30,8 @@ import numpy as np
 import pandas as pd
 
 from data_utils import all_cells, LENGTH_LABELS, RARITY_LABELS
+from error_analysis_utils import align_to, paired_interval
+from quantitative_errors import write_quantitative
 
 SCORES = ["chrf", "bleu", "comet"]
 FLAGS = ["empty", "has_cjk", "repeated"]
@@ -44,6 +46,7 @@ def load_system(spec, test_set, scored_dir):
     if not paths:
         raise SystemExit(f"no scored files match {scored_dir}/{spec}/{test_set}.csv")
     runs = [pd.read_csv(p, keep_default_na=False) for p in paths]
+    runs = [align_to(r, runs[0]["id"].tolist(), str(path)) for r, path in zip(runs, paths)]
     for path, run in zip(paths, runs):
         if run["id"].duplicated().any():
             raise SystemExit(f"duplicate sentence ids in {path}")
@@ -57,6 +60,8 @@ def load_system(spec, test_set, scored_dir):
     for col in FLAGS:  # share of the runs in which the flag was raised
         df[col] = np.mean([r[col].astype(str).eq("True") for r in runs], axis=0)
     df.attrs["n_runs"] = len(runs)
+    df.attrs["representative_run"] = paths[0].parent.name
+    df.attrs["representative_data"] = runs[0]
     return df
 
 
@@ -92,9 +97,7 @@ def summarise(systems):
 
 def bootstrap_ci(diff, n_boot, rng):
     """95% interval of the mean of `diff` (paired differences), resampling sentences."""
-    idx = rng.integers(0, len(diff), size=(n_boot, len(diff)))
-    means = diff[idx].mean(axis=1)
-    return np.percentile(means, [2.5, 97.5])
+    return paired_interval(diff, n_boot, int(rng.integers(0, 2**31)))
 
 
 def deltas(systems, baseline, n_boot, seed):
@@ -166,9 +169,13 @@ def main():
     parser.add_argument("--sample_per_cell", type=int, default=8, help="annotation sample size per cell")
     parser.add_argument("--n_boot", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--comparison", choices=["sampling", "decoding"], default="sampling",
+                        help="sampling matches seeds/size/beams; decoding matches seeds/size/condition")
     args = parser.parse_args()
     if args.baseline not in args.systems:
         raise SystemExit("--baseline must also be listed in --systems")
+    if args.n_boot < 1 or args.sample_per_cell < 1 or args.k < 1:
+        parser.error("n_boot, sample_per_cell and k must be positive")
 
     systems = {spec: load_system(spec, args.test_set, args.scored_dir) for spec in args.systems}
     first = next(iter(systems.values()))
@@ -178,6 +185,8 @@ def main():
 
     out = Path(args.out_dir) / args.test_set
     out.mkdir(parents=True, exist_ok=True)
+    quantitative = write_quantitative(args.systems, args.baseline, args.test_set,
+                                     args.scored_dir, out, args.n_boot, args.seed, args.comparison)
 
     table = summarise(systems)
     table.to_csv(out / "groups.csv", index=False, float_format="%.4f")
@@ -187,20 +196,27 @@ def main():
     # Lowest-chrF sentences per system.
     worst = []
     for name, df in systems.items():
-        low = df.nsmallest(args.k, "chrf")[TEXT_COLS[:4] + ["cell", "chrf", "len_ratio"]].copy()
-        low.insert(0, "system", name)
+        actual = df.attrs["representative_data"]
+        low = actual.nsmallest(args.k, "chrf")[TEXT_COLS[:4] + ["cell", "chrf", "len_ratio"]].copy()
+        low.insert(0, "system", df.attrs["representative_run"])
+        low.insert(0, "system_spec", name)
         worst.append(low)
     pd.concat(worst).to_csv(out / "worst.csv", index=False, float_format="%.4f")
 
     # Largest differences from the baseline, in either direction.
     base = systems[args.baseline]
+    base_run = base.attrs["representative_run"]
+    base = base.attrs["representative_data"]
     disagree = []
     for name, df in systems.items():
         if name == args.baseline:
             continue
+        actual_name = df.attrs["representative_run"]
+        df = df.attrs["representative_data"]
         gap = df["chrf"] - base["chrf"]
         top = df.loc[gap.abs().nlargest(args.k).index, TEXT_COLS[:4] + ["cell"]].copy()
-        top.insert(0, "system", name)
+        top.insert(0, "system", actual_name)
+        top.insert(0, "baseline_run", base_run)
         top = top.rename(columns={"hyp": "hyp_system"})
         top["hyp_baseline"] = base.loc[top.index, "hyp"]
         top["chrf_system"] = df.loc[top.index, "chrf"]
@@ -218,7 +234,7 @@ def main():
         picked.extend(rng.choice(ids, size=min(args.sample_per_cell, len(ids)), replace=False))
     sample = first.loc[sorted(picked), ["id", "cell", "zh", "ref"]].copy()
     for name, df in systems.items():
-        sample[f"hyp[{name}]"] = df.loc[sample.index, "hyp"]
+        sample[f"hyp[{df.attrs['representative_run']}]"] = df.attrs["representative_data"].loc[sample.index, "hyp"]
     for col in ["error_type", "severity", "notes"]:
         sample[col] = ""
     # Keep the old wide sheet for compatibility; never overwrite existing manual work.
@@ -227,12 +243,39 @@ def main():
         sample.to_csv(legacy_path, index=False)
     write_annotation_pairs(systems, sample["id"].tolist(), args.test_set, args.scored_dir,
                            out / "annotation_pairs.csv")
+    blind_path = out / "annotation_blind.csv"
+    if not blind_path.exists():
+        pairs = pd.read_csv(out / "annotation_pairs.csv", keep_default_na=False)
+        names = sorted(pairs.system.unique())
+        shuffled = np.random.default_rng(args.seed).permutation(names)
+        mapping = {name: f"S{i+1:02d}" for i, name in enumerate(shuffled)}
+        keys = pairs[["id", "system"]].copy()
+        keys["sample_id"] = [f"A{i+1:05d}" for i in range(len(keys))]
+        keys["system_code"] = pairs.system.map(mapping)
+        keys.to_csv(out / "annotation_key.csv", index=False)
+        pairs["sample_id"] = keys.sample_id
+        pairs["system_code"] = keys.system_code
+        pairs = pairs.drop(columns="system").sort_values(["id", "system_code"])
+        pairs.to_csv(blind_path, index=False)
 
     # Readable report.
     lines = [f"# Error analysis: {args.test_set}", "",
              f"Baseline for differences: `{args.baseline}`. Runs per system: "
              + ", ".join(f"`{n}` {d.attrs['n_runs']}" for n, d in systems.items()) + ".", "",
-             "## Mean sentence chrF by group", ""]
+             "## Quantitative results", "",
+             "`groups_by_run.csv` recomputes corpus BLEU/chrF within each exact run and group. "
+             "`groups_across_seeds.csv` reports means and sample SD across runs. "
+             "`paired_changes_by_run.csv` reports matched sentence-score changes and win/loss/tie shares. "
+             "`coverage_score_correlations.csv` describes associations within length groups. "
+             "`paired_examples_by_run.csv` keeps actual text and exact scores together.", "",
+             "Bootstrap intervals are exploratory, unadjusted and sentence-only: they do not model "
+             "seed or document dependence and are not declarations of significance. "
+             "Corpus differences and coverage correlations do not establish causality.", "",
+             ""]
+    overall_corpus = quantitative[quantitative.group_type == "overall"]
+    lines += ["## Corpus metrics across seeds (mean and sample SD)", "",
+              md_table(overall_corpus[["system_spec", "n_runs", "n_sentences", "corpus_bleu_mean", "corpus_bleu_std", "corpus_chrf_mean", "corpus_chrf_std"]]), ""]
+    lines += ["## Mean sentence chrF by group (not corpus chrF)", ""]
     pivot = table.pivot_table(index=["group_type", "group", "n"], columns="system", values="chrf", sort=False)
     lines += [md_table(pivot[list(systems)].reset_index()), "",
               "## Difference from baseline (chrF, 95% paired bootstrap over sentences)", ""]
@@ -241,7 +284,7 @@ def main():
                             sig=lambda d: d["excludes_zero"].map({True: "yes", False: ""}))
         lines += [md_table(show[["system", "group_type", "group", "n", "delta_chrf", "ci", "sig"]]), ""]
     overall = table[table["group_type"] == "overall"]
-    lines += ["## Error flags (share of sentences)", "",
+    lines += ["## Candidate error flags (not human-confirmed errors)", "",
               f"too_short: output under {SHORT_RATIO} of the reference length in words; too_long: over {LONG_RATIO}.", "",
               md_table(overall[["system", "n", "too_short", "too_long", "empty", "has_cjk", "repeated", "missing_nums"]],
                        floatfmt="{:.3f}"), ""]
@@ -252,8 +295,14 @@ def main():
               "Blank annotations are excluded, not counted as correct. "
               "The sample is balanced across difficulty cells; its overall counts are not population error rates. "
               "Do not use the lowest-scoring examples to estimate error rates.", ""]
+    lines += ["Use `annotation_blind.csv` for anonymous annotation and keep `annotation_key.csv` "
+              "separate from annotators. compare_annotations.py --key restores run identities. "
+              "Existing annotation sheets/mappings are never silently replaced. "
+              "Legacy worst/disagreements show a named representative run, not averaged seed scores; "
+              "prefer paired_examples_by_run.csv for matched-seed examples.", ""]
     (out / "report.md").write_text("\n".join(lines), encoding="utf-8")
-    print(f"wrote {out}/ (groups, deltas, worst, disagreements, annotation_sample, annotation_pairs, report.md)")
+    print(quantitative[quantitative.group_type == "overall"].to_string(index=False))
+    print(f"wrote {out}/ (corpus metrics, paired changes, coverage associations, annotations and legacy reports)")
 
 
 if __name__ == "__main__":

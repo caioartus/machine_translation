@@ -1,4 +1,6 @@
 # machine_translation
+
+Quantitative error-analysis instructions: [analysis/QUANTITATIVE_WORKFLOW.md](analysis/QUANTITATIVE_WORKFLOW.md).
 In this project we aim to build a fast and efficient machine translation system to translate from chinese to english. This project was done in the scope of the Introduction to Large Language Models class (CS4248) at NUS. 
 
 We fine-tune M2M-100 (418M) on Chinese→English ALMA data and compare three ways of sampling the
