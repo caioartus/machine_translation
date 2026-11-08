@@ -12,14 +12,26 @@ import argparse
 from pathlib import Path
 
 import pandas as pd
+from data_utils import assign_bins
+from error_analysis_utils import unique_ids
 
 ERROR_CODES = ['REP', 'OMIT', 'ADD', 'SENSE', 'NE', 'TERM', 'NUM', 'FLU', 'UNTR']
 ACCEPTABLE = {'OK', 'ALT'}
 GROUPS = [('overall', None), ('length', 'length_bin'), ('rarity', 'rarity_bin'), ('cell', 'cell')]
 
 
-def read_annotations(path):
+def read_annotations(path, key_path=None):
     df = pd.read_csv(path, keep_default_na=False, dtype=str)
+    if key_path:
+        key = pd.read_csv(key_path, keep_default_na=False, dtype=str)
+        join = ['sample_id', 'id', 'system_code']
+        if 'system' in df or not set(join).issubset(df) or not set(join + ['system']).issubset(key):
+            raise ValueError('Anonymous sheet/key require sample_id, id, system_code; sheet must omit system')
+        if key.sample_id.duplicated().any() or df.sample_id.duplicated().any():
+            raise ValueError('Anonymous sample ids must be unique')
+        df = df.merge(key[join + ['system']], on=join, how='left', validate='one_to_one')
+        if df.system.isna().any():
+            raise ValueError('Anonymous sheet contains rows absent from the key')
     required = {'id', 'system', 'zh', 'ref', 'hyp', 'length_bin', 'rarity_bin', 'cell',
                 'error_type', 'severity', 'notes'}
     missing = required - set(df)
@@ -107,6 +119,9 @@ def compare(df, baseline, systems):
                 rec['severity_lower'] = sum(r['severity_after'] < r['severity_before'] for r in rows)
                 rec['severity_higher'] = sum(r['severity_after'] > r['severity_before'] for r in rows)
                 rec['severity_same'] = sum(r['severity_after'] == r['severity_before'] for r in rows)
+                rec['error_share_before'] = rec['errors_before'] / len(rows) if rows else None
+                rec['error_share_after'] = rec['errors_after'] / len(rows) if rows else None
+                rec['rate_scope'] = 'completed_paired_stratified_sample_not_population'
                 summaries.append(rec)
                 for code in ERROR_CODES:
                     old = [code in r['errors_before'].split(';') for r in rows]
@@ -116,21 +131,64 @@ def compare(df, baseline, systems):
                                   'removed': sum(a and not b for a, b in zip(old, new)),
                                   'introduced': sum(b and not a for a, b in zip(old, new)),
                                   'persistent': sum(a and b for a, b in zip(old, new))})
+                    types[-1]['before_share'] = sum(old) / len(rows) if rows else None
+                    types[-1]['after_share'] = sum(new) / len(rows) if rows else None
     detail_columns = ['id', 'baseline', 'system', 'length_bin', 'rarity_bin', 'cell', 'zh', 'ref',
                       'hyp_before', 'hyp_after', 'notes_before', 'notes_after', 'errors_before', 'errors_after', 'severity_before',
                       'severity_after', 'transition', 'removed_types', 'added_types']
     return pd.DataFrame(details, columns=detail_columns), pd.DataFrame(summaries), pd.DataFrame(types)
 
 
+def population_rates(details, summary, features):
+    """Poststratify only fully judged pairs with every population cell represented.
+
+    Assumes the sheet is the original within-cell random sample (not worst cases).
+    No estimate is produced if annotation coverage is incomplete in any cell.
+    """
+    unique_ids(features, "population features")
+    if not set(details.id).issubset(set(features.id)):
+        raise ValueError("annotation ids are absent from population features")
+    binned = assign_bins(features)
+    expected_cells = binned.set_index("id")["cell"]
+    if not details.cell.eq(details.id.map(expected_cells)).all():
+        raise ValueError("annotation cells disagree with population features for the same ids")
+    population = binned["cell"].value_counts()
+    records = []
+    for (baseline, system), block in summary.groupby(["baseline", "system"], sort=False):
+        cells = block[block.group_type == "cell"].set_index("group")
+        complete = all(c in cells.index and cells.loc[c, "n_paired"] > 0 and
+                       cells.loc[c, "n_paired"] == cells.loc[c, "n_sampled"] for c in population.index)
+        pairs = details[(details.baseline == baseline) & (details.system == system)]
+        if not set(cells.index).issubset(set(population.index)):
+            raise ValueError("annotation cells are absent from population features")
+        for code in ["ANY"] + ERROR_CODES:
+            record = {"baseline": baseline, "system": system, "error_type": code,
+                      "population_n": int(population.sum()), "sample_n": len(pairs),
+                      "status": "estimated" if complete else "not_estimated_incomplete_cell_annotations"}
+            if complete:
+                for side in ["before", "after"]:
+                    estimate = 0.
+                    for cell, count in population.items():
+                        values = pairs[pairs.cell == cell][f"errors_{side}"]
+                        flag = values.ne("") if code == "ANY" else values.map(lambda v: code in v.split(";"))
+                        estimate += count / population.sum() * flag.mean()
+                    record[f"weighted_error_share_{side}"] = estimate
+                record["weighted_delta"] = record["weighted_error_share_after"] - record["weighted_error_share_before"]
+            records.append(record)
+    return pd.DataFrame(records)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--annotations', required=True)
+    parser.add_argument('--key', help='annotation_key.csv when reading an anonymous sheet')
+    parser.add_argument('--population_features', help='optional matching full-test feature CSV for poststratification; random sample only')
     parser.add_argument('--baseline', required=True, help='exact run name, not a seed glob')
     parser.add_argument('--systems', nargs='+', required=True, help='exact run names after the method')
     parser.add_argument('--out_dir', help='default: <annotation folder>/comparison_<baseline>')
     args = parser.parse_args()
     try:
-        details, summary, types = compare(read_annotations(args.annotations), args.baseline, args.systems)
+        details, summary, types = compare(read_annotations(args.annotations, args.key), args.baseline, args.systems)
     except ValueError as error:
         parser.error(str(error))
     out = Path(args.out_dir) if args.out_dir else Path(args.annotations).parent / f'comparison_{args.baseline}'
@@ -138,6 +196,9 @@ def main():
     details.to_csv(out / 'paired_errors.csv', index=False)
     summary.to_csv(out / 'error_transitions.csv', index=False)
     types.to_csv(out / 'error_types.csv', index=False)
+    if args.population_features:
+        population_rates(details, summary, pd.read_csv(args.population_features)).to_csv(
+            out / 'population_error_estimates.csv', index=False)
     print(summary[summary.group_type == 'overall'].to_string(index=False))
     print('Only completed pairs count. Stratified sample counts are not full-test error rates.')
     print(f'Saved paired_errors.csv, error_transitions.csv and error_types.csv in {out}')

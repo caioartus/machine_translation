@@ -105,3 +105,11 @@ training set grows. For each system pair, count by bin:
 
 ## Agreement (optional, cheap)
 Have two people annotate the same 30 sentences and report Cohen's kappa on the main code. If agreement is low, tighten the definitions above.
+
+## Quantitative workflow
+
+See [QUANTITATIVE_WORKFLOW.md](QUANTITATIVE_WORKFLOW.md) for corpus profiles,
+exact-run corpus metrics, seed-matched comparisons, coverage/score associations,
+anonymous annotation sheets and optional population-weighted error estimates.
+Automatic flags are screening candidates. They must not be counted as confirmed
+OMIT/NUM/REP errors without inspecting the source and the actual translation.

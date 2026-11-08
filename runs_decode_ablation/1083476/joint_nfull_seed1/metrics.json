@@ -1,0 +1,32 @@
+[
+  {
+    "run": "runs_my_full/joint_nfull_seed1",
+    "num_beams": 1,
+    "n_dev": 1002,
+    "bleu": 15.782886201630697,
+    "chrf": 45.86842738516467,
+    "generation_seconds": 61.38029569387436,
+    "bleu_signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.6.0",
+    "chrf_signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.6.0",
+    "batch_size": 16,
+    "length_penalty": 1.0,
+    "early_stopping": false,
+    "torch_version": "2.14.1+cu130",
+    "gpu": "NVIDIA H100 NVL"
+  },
+  {
+    "run": "runs_my_full/joint_nfull_seed1",
+    "num_beams": 4,
+    "n_dev": 1002,
+    "bleu": 16.438225997738233,
+    "chrf": 46.66906863199386,
+    "generation_seconds": 187.92133519798517,
+    "bleu_signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.6.0",
+    "chrf_signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.6.0",
+    "batch_size": 16,
+    "length_penalty": 1.0,
+    "early_stopping": false,
+    "torch_version": "2.14.1+cu130",
+    "gpu": "NVIDIA H100 NVL"
+  }
+]
