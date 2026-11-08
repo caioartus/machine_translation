@@ -1,4 +1,4 @@
-"""Fine-tune M2M-100 (418M) for zh->en on one ALMA training subset, under one sampling condition.
+"""Fine-tune M2M-100 (418M) for zh->en under one sampling condition.
 
 The only thing that differs between conditions is the sampling weights
 Model, loss, optimizer and number of steps are identical
@@ -48,6 +48,12 @@ from data_utils import MAX_LEN, MODEL_NAME, assign_bins, get_tokenizer, read_jso
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--condition", choices=["uniform", "length", "joint"], required=True)
+    p.add_argument(
+        "--dataset",
+        choices=["alma", "alma_news"],
+        default="alma",
+        help="training pool; alma_news currently supports --size full only",
+    )
     p.add_argument("--size", default="1000", help="1000 | 2000 | 5000 | full")
     p.add_argument("--seed", type=int, default=0)
     # Budget: must be the same for all conditions at a given size (team decision, placeholders here).
@@ -87,16 +93,39 @@ def make_weights(train, condition, cap):
 
 
 # --- Data -----------------------------------------------------------------------
-def load_train(size):
+def load_train(dataset, size, seed):
     """Training subset as a DataFrame with columns id, zh, en, ..., length_bin, rarity_bin, cell."""
-    ids = (
-        open(f"data/subsets/seed{{seed}}_n{size}.txt".format(seed=ARGS.seed))
-        .read()
-        .split()
-    )
-    text = pd.DataFrame(read_jsonl("data/processed/alma_train.jsonl"))
-    feats = assign_bins(pd.read_csv("data/features/alma_train.csv"))
-    return text.merge(feats, on="id").set_index("id").loc[ids].reset_index()
+    stem = "alma_train" if dataset == "alma" else "alma_news_train"
+    text_path = Path("data/processed") / f"{stem}.jsonl"
+    feature_path = Path("data/features") / f"{stem}.csv"
+    missing = [path for path in (text_path, feature_path) if not path.is_file()]
+    if missing:
+        raise SystemExit("Missing training input(s):\n  " + "\n  ".join(map(str, missing)))
+
+    text = pd.DataFrame(read_jsonl(text_path))
+    feats = assign_bins(pd.read_csv(feature_path))
+    if text["id"].duplicated().any() or feats["id"].duplicated().any():
+        raise SystemExit(f"Duplicate IDs found in {dataset} text or feature data")
+    train = text.merge(feats, on="id", validate="one_to_one")
+    if len(train) != len(text) or len(train) != len(feats):
+        raise SystemExit(
+            f"Text/features ID mismatch for {dataset}: "
+            f"{len(text)} text rows, {len(feats)} feature rows, {len(train)} matched"
+        )
+
+    if dataset == "alma_news":
+        if size != "full":
+            raise SystemExit("--dataset alma_news currently requires --size full")
+        return train
+
+    subset_path = Path("data/subsets") / f"seed{seed}_n{size}.txt"
+    if not subset_path.is_file():
+        raise SystemExit(f"Missing ALMA subset file: {subset_path}")
+    ids = subset_path.read_text(encoding="utf-8").split()
+    try:
+        return train.set_index("id").loc[ids].reset_index()
+    except KeyError as error:
+        raise SystemExit(f"ALMA subset contains IDs absent from text/features: {error}") from error
 
 
 def make_collate(tokenizer):
@@ -172,7 +201,10 @@ def main():
         autocast = contextlib.nullcontext
     print(f"device: {device}")
 
-    run_dir = Path(args.out_dir) / f"{args.condition}_n{args.size}_seed{args.seed}"
+    run_name = f"{args.condition}_n{args.size}_seed{args.seed}"
+    if args.dataset != "alma":
+        run_name = f"{args.dataset}_{run_name}"
+    run_dir = Path(args.out_dir) / run_name
     run_dir.mkdir(parents=True, exist_ok=True)
 
     # Tokenizer: Chinese in, English out.
@@ -181,7 +213,7 @@ def main():
     collate = make_collate(tokenizer)
 
     # Data and sampler.
-    train = load_train(args.size)
+    train = load_train(args.dataset, args.size, args.seed)
     dev = read_jsonl("data/processed/alma_dev.jsonl")
     weights = make_weights(train, args.condition, args.cap)
     print(
