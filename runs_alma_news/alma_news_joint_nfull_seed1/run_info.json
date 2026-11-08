@@ -1,0 +1,18 @@
+{
+  "condition": "joint",
+  "dataset": "alma_news",
+  "size": "full",
+  "seed": 1,
+  "steps": 2900,
+  "batch_size": 16,
+  "lr": 1e-05,
+  "warmup_steps": 290,
+  "weight_decay": 0.01,
+  "eval_every": 100,
+  "cap": 3.0,
+  "out_dir": "runs_alma_news",
+  "n_train": 30362,
+  "best_step": 2300,
+  "best_dev_loss": 2.112154772392604,
+  "dev_bleu_greedy": 15.979672343218706
+}
