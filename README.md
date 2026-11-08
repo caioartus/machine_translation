@@ -58,6 +58,32 @@ python scripts/audit_news_alma_overlap.py
 The script resolves repository-relative paths from its own location and writes
 `data/audit/news_alma_overlap.jsonl` plus `news_alma_overlap_report.md`.
 
+Once no overlap remains, merge the two cleaned training files:
+
+```bash
+python scripts/merge_alma_news.py
+```
+
+This checks cross-corpus overlap and unique IDs, then writes
+`data/processed/alma_news_train.jsonl` and `alma_news_merge_report.md`.
+It preserves the original files and source labels. The expected total for 15,362 ALMA
+and 15,000 News rows is 30,362. Then compute the merged pool's sampling features:
+
+```bash
+python scripts/compute_alma_news_difficulty.py
+```
+
+Rarity continues to use ALMA train as its reference corpus, so the original fixed rarity and
+length bins remain comparable. To smoke-test the complete merged-data training path on the cluster:
+
+```bash
+sbatch jobs/train1.sbatch --dataset alma_news --condition joint --size full \
+  --seed 0 --steps 20 --warmup_steps 2 --eval_every 10 --out_dir runs_test
+```
+
+The expected run directory is `runs_test/alma_news_joint_nfull_seed0/`. This smoke test starts
+from the original M2M-100 model and continues to use `alma_dev.jsonl` for validation.
+
 **Raw inputs.** `data/raw/canvas/` holds the files from the CS4248 Canvas Project folder, unchanged.
 The course guidelines define the official test sets as these files: `wmttest2022.zh` +
 `wmttest2022.AnnA.en` (WMT22) and `tatoeba.zh` + `tatoeba.en` (Tatoeba). Canvas also provides
