@@ -81,6 +81,13 @@ LENGTH_LABELS = ["short", "mid_short", "mid_long", "long"]
 #   typical <= 7.9 < rare      (7.9 is about the 90th percentile of ALMA train)
 RARITY_EDGES = [7.9]
 RARITY_LABELS = ["typical", "rare"]
+# Loss = per-token loss of the pretrained M2M-100 on the pair (feature "loss_mean", in nats,
+# from compute_loss.py). Used only by the "loss" training condition:
+#   other <= 2.95 < hard <= 4.16 < other
+# 2.95 / 4.16 are the 90th / 99th percentiles of ALMA train. The top 1% is mostly misaligned
+# pairs, so it is NOT upsampled (it stays in the pool, in "other").
+LOSS_HARD_MIN = 2.95
+LOSS_HARD_MAX = 4.16
 
 
 def assign_bins(features):

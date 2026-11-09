@@ -2,8 +2,8 @@
 
 In this project we aim to build a fast and efficient machine translation system to translate from chinese to english. This project was done in the scope of the Introduction to Large Language Models class (CS4248) at NUS. 
 
-We fine-tune M2M-100 (418M) on Chinese→English ALMA data and compare three ways of sampling the
-training data (uniform, length-balanced, joint length × rarity), at several training-set sizes.
+We fine-tune M2M-100 (418M) on Chinese→English ALMA data and compare four ways of sampling the
+training data (uniform, length-balanced, joint length × rarity, loss-based), at several training-set sizes.
 
 ## Setup
 
@@ -32,6 +32,10 @@ Original input files are committed in `data/raw/`; everything else in `data/` is
 | `compute_difficulty.py` | Length / rarity features -> `data/features/<split>.csv` |
 | `make_bins.py` | Difficulty groups report and heatmap -> `data/features/` |
 | `make_subsets.py` | Nested training subsets -> `data/subsets/seed{S}_n{N}.txt` |
+
+Not part of `prepare_data.sh` (needs a GPU): `compute_loss.py` scores every training pair with the
+pretrained M2M-100 -> `data/features/<stem>_loss.csv` (`sbatch jobs/compute_loss.sbatch`). These
+files are the one exception to "data/ is not committed". Analysis: `notebooks/loss_difficulty.ipynb`.
 
 ### Optional News Commentary extension
 
@@ -112,7 +116,9 @@ and `data/processed/test_sets_report.md`.
 `assign_bins()`, used by both training and evaluation: length (source subword tokens)
 short ≤ 15 < mid_short ≤ 30 < mid_long ≤ 60 < long, and rarity (`rarity_mean`) typical ≤ 7.9 < rare,
 giving 8 cells such as `short/rare`. Rationale and the distribution of every split over the cells:
-`data/features/bins_report.md` and `bins_heatmap.png`.
+`data/features/bins_report.md` and `bins_heatmap.png`. Separately, for the `loss` condition only:
+`loss_mean` (per-token loss of the pretrained model) is hard if 2.95 < loss ≤ 4.16 (p90 to p99 of
+ALMA train), otherwise other.
 
 **Training subsets.** For each seed (0, 1, 2) the training ids are shuffled once and a subset of
 size n (1000, 2000, 5000, full) is the first n ids, so subsets are nested. Run seed s on the subsets
@@ -147,6 +153,10 @@ identical across conditions; only the weights given to `WeightedRandomSampler` c
 - `uniform`: every example has weight 1.
 - `length`: each of the 4 length bins gets the same total probability.
 - `joint`: each of the 8 length × rarity cells gets the same total probability.
+- `loss`: the `hard` and `other` loss groups each get the same total probability (hard: about 9% of
+  pairs, about 35% of draws at cap 3). The top 1% by loss is mostly misaligned pairs, so it is
+  kept in the pool but not upsampled. `loss_mean` barely correlates with rarity (Spearman 0.11)
+  or length (0.03), so this is a separate difficulty signal.
 
 No example is drawn more than `cap` = 3× as often as under uniform. Effect on `seed0_n1000`
 (share of training draws, %):
@@ -198,7 +208,7 @@ sbatch jobs/train1.sbatch
 
 | Argument | Default | Meaning |
 |---|---|---|
-| `--condition` | required | Sampling condition: `uniform`, `length` or `joint` |
+| `--condition` | required | Sampling condition: `uniform`, `length`, `joint` or `loss` |
 | `--size` | `1000` | Training subset: `1000`, `2000`, `5000` or `full` |
 | `--seed` | `0` | Picks the subset (`seed{S}_n{N}.txt`) and seeds sampler and dropout |
 | `--steps` | `1000` | Optimizer steps |
