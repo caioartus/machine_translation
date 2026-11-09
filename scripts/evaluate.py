@@ -2,9 +2,15 @@
 
 Uses the existing train.translate function for matching generation settings.
 Defaults to development data. See EVALUATION.md for Slurm and COMET usage.
+
+--save_nbest also writes nbest.jsonl.gz (gzipped to keep it small enough for git; pandas reads
+it directly with pd.read_json(path, lines=True)): for every sentence, all `num_beams` final beam candidates
+(best first), each with its model log-probability. Greedy runs store their single output the same
+way, so greedy and beam outputs of one checkpoint can be compared on the same scale.
 """
 import argparse
 import contextlib
+import gzip
 import hashlib
 import importlib.metadata
 import json
@@ -50,6 +56,53 @@ def prediction_records(rows, predictions):
             for row, p in zip(rows, predictions)]
 
 
+def nbest(model, tokenizer, sources, device, autocast, batch_size, num_beams, max_length):
+    """All final beam candidates per source, best first, with the same generation settings as
+    train.translate. Per candidate:
+      text      decoded translation
+      logprob   sum of log p(token) over the generated tokens (incl. </s>; the forced
+                language tag counts 0); comparable between greedy and beam outputs
+      n_tokens  number of those tokens
+      score     what beam search ranks by: logprob / n_tokens ** length_penalty (HF); for
+                greedy (no ranking) simply logprob / n_tokens
+    """
+    import torch
+
+    model.eval()
+    pad = tokenizer.pad_token_id
+    results = []
+    for i in range(0, len(sources), batch_size):
+        enc = tokenizer(sources[i : i + batch_size], max_length=max_length, truncation=True,
+                        padding=True, return_tensors="pt").to(device)
+        with torch.no_grad(), autocast():
+            out = model.generate(
+                **enc, forced_bos_token_id=tokenizer.get_lang_id("en"), num_beams=num_beams,
+                max_length=max_length, num_return_sequences=num_beams,
+                output_scores=True, return_dict_in_generate=True,
+            )
+            # Beam search already stores log-softmax scores; greedy stores logits.
+            token_lp = model.compute_transition_scores(
+                out.sequences, out.scores, getattr(out, "beam_indices", None),
+                normalize_logits=num_beams == 1,
+            ).float()
+        generated = out.sequences[:, 1:]                 # position 0 is the decoder start token
+        mask = generated[:, -token_lp.shape[1]:] != pad  # padding after </s> does not count
+        logprob = (token_lp * mask).sum(1)
+        n_tokens = mask.sum(1)
+        if num_beams > 1:
+            score = out.sequences_scores.float()
+        else:
+            score = logprob / n_tokens
+        texts = tokenizer.batch_decode(out.sequences, skip_special_tokens=True)
+        for j in range(0, len(texts), num_beams):
+            results.append([
+                {"text": texts[k], "logprob": round(logprob[k].item(), 4),
+                 "n_tokens": int(n_tokens[k]), "score": round(score[k].item(), 4)}
+                for k in range(j, j + num_beams)
+            ])
+    return results
+
+
 def write_json(path, value):
     Path(path).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -73,6 +126,10 @@ def main():
     parser.add_argument("--batch_size", type=positive_int, default=32)
     parser.add_argument("--num_beams", type=positive_int, default=1)
     parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto")
+    parser.add_argument("--save_nbest", action="store_true",
+                        help="Also write nbest.jsonl.gz: all beam candidates with log-probabilities")
+    parser.add_argument("--nbest_batch_size", type=positive_int, default=8,
+                        help="Smaller than --batch_size: storing scores needs more memory")
     args = parser.parse_args()
     rows, total_rows = load_examples(args.data, args.limit)
     if args.out_dir.exists():
@@ -127,6 +184,22 @@ def main():
         "chrf": {"score": chrf_score.score, "signature": str(chrf.get_signature())},
     }
     write_json(args.out_dir / "metrics.json", metrics)
+
+    if args.save_nbest:
+        # Separate pass, so predictions.jsonl and the metrics above come from the unchanged
+        # train.translate. The best candidate should equal the prediction; the share that does
+        # is recorded in metadata.json (bf16 batching can very rarely break a tie differently).
+        print("Saving n-best lists", flush=True)
+        candidates = nbest(model, tokenizer, [r["zh"] for r in rows], device, autocast,
+                           args.nbest_batch_size, args.num_beams, MAX_LEN)
+        with gzip.open(args.out_dir / "nbest.jsonl.gz", "wt", encoding="utf-8") as stream:
+            for row, pred, cands in zip(rows, predictions, candidates):
+                stream.write(json.dumps({"id": row["id"], "prediction": pred, "candidates": cands},
+                                        ensure_ascii=False) + "\n")
+        same = sum(c[0]["text"] == p for c, p in zip(candidates, predictions))
+        metadata["nbest_saved"] = True
+        metadata["nbest_top1_matches_prediction"] = same / len(rows)
+        print(f"n-best top candidate equals the prediction for {same}/{len(rows)} sentences", flush=True)
     metadata["status"] = "complete"
     write_json(args.out_dir / "metadata.json", metadata)
     print(json.dumps(metrics, indent=2), flush=True)

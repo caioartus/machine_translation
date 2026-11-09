@@ -1,7 +1,13 @@
 __pycache__/
 .DS_Store
 .mypy_cache/
-outputs/
+# outputs/ is scratch space, except the final test-set evaluations (translations, metrics,
+# COMET, n-best lists), which are committed so nobody has to re-run them.
+outputs/*
+!outputs/eval/
+outputs/eval/*
+!outputs/eval/final/
+outputs/eval/final/**/*.incomplete-*/
 logs/
 # Generated data is rebuilt by the scripts in scripts/ and never committed.
 # Exception: data/raw/ holds the original input files (Canvas test sets, pinned
