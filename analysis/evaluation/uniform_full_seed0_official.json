@@ -1,0 +1,103 @@
+{
+  "condition": "uniform",
+  "train_size": "full",
+  "seed": 0,
+  "evaluation_code_commit": "befbc7c",
+  "scope": "Single-run official-test results; no sampling or significance conclusion.",
+  "results": {
+    "wmt22": {
+      "n_evaluated": 1875,
+      "bleu": {
+        "score": 18.533390407133094,
+        "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.6.0"
+      },
+      "chrf": {
+        "score": 49.11413438717823,
+        "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.6.0"
+      },
+      "comet": {
+        "score": 0.742790156062444,
+        "model": "Unbabel/wmt22-comet-da",
+        "package_version": "2.2.7",
+        "predictions_sha256": "52908278e9cc455d44724e64a9c70c975b2c1e18aa3afb7dfef98eca05af6f6f"
+      },
+      "metadata": {
+        "status": "complete",
+        "created_utc": "2026-11-09T07:46:52.581988+00:00",
+        "model": "/mnt/scratch/s/simonwim/shared/runs/uniform_nfull_seed0/best",
+        "data": "data/processed/wmt22_test.jsonl",
+        "data_sha256": "4b4a95502b9d38b29bfff02acc2896ac92e5dffda17204c9dd45a4ae8580df2c",
+        "n_total": 1875,
+        "n_evaluated": 1875,
+        "limit": null,
+        "partial_dataset": false,
+        "reference_field": "en",
+        "batch_size": 16,
+        "num_beams": 4,
+        "do_sample": false,
+        "num_return_sequences": 1,
+        "length_penalty": 1.0,
+        "early_stopping": false,
+        "max_length": 256,
+        "source_truncation_count": 0,
+        "device": "cuda",
+        "autocast": "bfloat16",
+        "packages": {
+          "torch": "2.14.1",
+          "transformers": "5.19.0",
+          "tokenizers": "0.23.3",
+          "sentencepiece": "0.2.2",
+          "sacrebleu": "2.6.0"
+        }
+      },
+      "shared_output_directory": "/mnt/scratch/t/teng/shared/mt-evaluation/official-tests/uniform-full-seed0-wmt22-beam4-20261109-154013"
+    },
+    "tatoeba": {
+      "n_evaluated": 469,
+      "bleu": {
+        "score": 31.4972003039005,
+        "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.6.0"
+      },
+      "chrf": {
+        "score": 50.675565422601174,
+        "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.6.0"
+      },
+      "comet": {
+        "score": 0.8522529292589566,
+        "model": "Unbabel/wmt22-comet-da",
+        "package_version": "2.2.7",
+        "predictions_sha256": "1e362e97c17f8456d71cce11000c603ab5af466c8d3c819ecb145b8d606973d5"
+      },
+      "metadata": {
+        "status": "complete",
+        "created_utc": "2026-11-09T08:13:03.742992+00:00",
+        "model": "/mnt/scratch/s/simonwim/shared/runs/uniform_nfull_seed0/best",
+        "data": "data/processed/tatoeba_test.jsonl",
+        "data_sha256": "15de1db6b604b64cef3af1aaa017f4e3637d37050d3338709da3811dc7306f91",
+        "n_total": 469,
+        "n_evaluated": 469,
+        "limit": null,
+        "partial_dataset": false,
+        "reference_field": "en",
+        "batch_size": 16,
+        "num_beams": 4,
+        "do_sample": false,
+        "num_return_sequences": 1,
+        "length_penalty": 1.0,
+        "early_stopping": false,
+        "max_length": 256,
+        "source_truncation_count": 0,
+        "device": "cuda",
+        "autocast": "bfloat16",
+        "packages": {
+          "torch": "2.14.1",
+          "transformers": "5.19.0",
+          "tokenizers": "0.23.3",
+          "sentencepiece": "0.2.2",
+          "sacrebleu": "2.6.0"
+        }
+      },
+      "shared_output_directory": "/mnt/scratch/t/teng/shared/mt-evaluation/official-tests/uniform-full-seed0-tatoeba-beam4-20261109-161043"
+    }
+  }
+}
