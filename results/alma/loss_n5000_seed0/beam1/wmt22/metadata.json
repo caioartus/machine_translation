@@ -1,0 +1,29 @@
+{
+  "status": "complete",
+  "created_utc": "2026-11-10T20:27:22.734626+00:00",
+  "model": "/mnt/scratch/c/caioart/shared/runs/loss_n5000_seed0/best",
+  "data": "data/processed/wmt22_test.jsonl",
+  "data_sha256": "4b4a95502b9d38b29bfff02acc2896ac92e5dffda17204c9dd45a4ae8580df2c",
+  "n_total": 1875,
+  "n_evaluated": 1875,
+  "limit": null,
+  "partial_dataset": false,
+  "reference_field": "en",
+  "batch_size": 16,
+  "num_beams": 1,
+  "do_sample": false,
+  "num_return_sequences": 1,
+  "length_penalty": 1.0,
+  "early_stopping": false,
+  "max_length": 256,
+  "source_truncation_count": 0,
+  "device": "cuda",
+  "autocast": "bfloat16",
+  "packages": {
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.3",
+    "sentencepiece": "0.2.2",
+    "sacrebleu": "2.6.0"
+  }
+}

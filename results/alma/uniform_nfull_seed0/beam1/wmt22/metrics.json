@@ -1,0 +1,12 @@
+{
+  "n_evaluated": 1875,
+  "partial_dataset": false,
+  "bleu": {
+    "score": 18.51876077956108,
+    "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.6.0"
+  },
+  "chrf": {
+    "score": 48.686178996810035,
+    "signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.6.0"
+  }
+}

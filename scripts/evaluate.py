@@ -94,6 +94,12 @@ def main():
     tokenizer.src_lang, tokenizer.tgt_lang = "zh", "en"
     model = M2M100ForConditionalGeneration.from_pretrained(args.model).to(device)
 
+    # Match the development decoding comparison explicitly.
+    model.generation_config.do_sample = False
+    model.generation_config.num_return_sequences = 1
+    model.generation_config.length_penalty = 1.0
+    model.generation_config.early_stopping = False
+
     # Report input truncation without filtering or reordering any test examples.
     too_long = sum(len(tokenizer(r["zh"], truncation=False)["input_ids"]) > MAX_LEN for r in rows)
     args.out_dir.mkdir(parents=True, exist_ok=False)
@@ -104,6 +110,10 @@ def main():
         "n_total": total_rows, "n_evaluated": len(rows), "limit": args.limit,
         "partial_dataset": len(rows) < total_rows, "reference_field": "en",
         "batch_size": args.batch_size, "num_beams": args.num_beams,
+        "do_sample": model.generation_config.do_sample,
+        "num_return_sequences": model.generation_config.num_return_sequences,
+        "length_penalty": model.generation_config.length_penalty,
+        "early_stopping": model.generation_config.early_stopping,
         "max_length": MAX_LEN, "source_truncation_count": too_long,
         "device": device, "autocast": "bfloat16" if bf16 else "disabled",
         "packages": versions(),
