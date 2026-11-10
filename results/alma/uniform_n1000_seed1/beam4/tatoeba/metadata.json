@@ -1,0 +1,29 @@
+{
+  "status": "complete",
+  "created_utc": "2026-11-10T12:01:14.270325+00:00",
+  "model": "/mnt/scratch/s/simonwim/shared/runs/uniform_n1000_seed1/best",
+  "data": "data/processed/tatoeba_test.jsonl",
+  "data_sha256": "15de1db6b604b64cef3af1aaa017f4e3637d37050d3338709da3811dc7306f91",
+  "n_total": 469,
+  "n_evaluated": 469,
+  "limit": null,
+  "partial_dataset": false,
+  "reference_field": "en",
+  "batch_size": 16,
+  "num_beams": 4,
+  "do_sample": false,
+  "num_return_sequences": 1,
+  "length_penalty": 1.0,
+  "early_stopping": false,
+  "max_length": 256,
+  "source_truncation_count": 0,
+  "device": "cuda",
+  "autocast": "bfloat16",
+  "packages": {
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.3",
+    "sentencepiece": "0.2.2",
+    "sacrebleu": "2.6.0"
+  }
+}

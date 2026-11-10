@@ -1,0 +1,1888 @@
+{
+  "model": "Unbabel/wmt22-comet-da",
+  "package_version": "2.2.7",
+  "predictions": "/home/t/teng/machine_translation/results/alma/loss_nfull_seed1/beam1/tatoeba/predictions.jsonl",
+  "predictions_sha256": "f375a337373639e7b4d76b58d2e6aa39f49dba1e305dbe0806c670f81ca537b7",
+  "n_evaluated": 469,
+  "batch_size": 8,
+  "gpus": 1,
+  "system_score": 0.8407736705945753,
+  "sentence_scores": [
+    {
+      "id": "tatoeba-test-000000",
+      "score": 0.7825824618339539
+    },
+    {
+      "id": "tatoeba-test-000001",
+      "score": 0.8487905859947205
+    },
+    {
+      "id": "tatoeba-test-000002",
+      "score": 0.9311167597770691
+    },
+    {
+      "id": "tatoeba-test-000003",
+      "score": 0.9547350406646729
+    },
+    {
+      "id": "tatoeba-test-000004",
+      "score": 0.8574819564819336
+    },
+    {
+      "id": "tatoeba-test-000005",
+      "score": 0.9167497754096985
+    },
+    {
+      "id": "tatoeba-test-000006",
+      "score": 0.9394968748092651
+    },
+    {
+      "id": "tatoeba-test-000007",
+      "score": 0.8583049178123474
+    },
+    {
+      "id": "tatoeba-test-000008",
+      "score": 0.8884696960449219
+    },
+    {
+      "id": "tatoeba-test-000009",
+      "score": 0.7373934984207153
+    },
+    {
+      "id": "tatoeba-test-000010",
+      "score": 0.7748773097991943
+    },
+    {
+      "id": "tatoeba-test-000011",
+      "score": 0.9281594753265381
+    },
+    {
+      "id": "tatoeba-test-000012",
+      "score": 0.681847333908081
+    },
+    {
+      "id": "tatoeba-test-000013",
+      "score": 0.686989426612854
+    },
+    {
+      "id": "tatoeba-test-000014",
+      "score": 0.8249139189720154
+    },
+    {
+      "id": "tatoeba-test-000015",
+      "score": 0.9296159148216248
+    },
+    {
+      "id": "tatoeba-test-000016",
+      "score": 0.8876574635505676
+    },
+    {
+      "id": "tatoeba-test-000017",
+      "score": 0.7346801161766052
+    },
+    {
+      "id": "tatoeba-test-000018",
+      "score": 0.5057658553123474
+    },
+    {
+      "id": "tatoeba-test-000019",
+      "score": 0.7173762321472168
+    },
+    {
+      "id": "tatoeba-test-000020",
+      "score": 0.8748385906219482
+    },
+    {
+      "id": "tatoeba-test-000021",
+      "score": 0.8974996209144592
+    },
+    {
+      "id": "tatoeba-test-000022",
+      "score": 0.9574634432792664
+    },
+    {
+      "id": "tatoeba-test-000023",
+      "score": 0.8099455237388611
+    },
+    {
+      "id": "tatoeba-test-000024",
+      "score": 0.72421795129776
+    },
+    {
+      "id": "tatoeba-test-000025",
+      "score": 0.8676813244819641
+    },
+    {
+      "id": "tatoeba-test-000026",
+      "score": 0.7858926057815552
+    },
+    {
+      "id": "tatoeba-test-000027",
+      "score": 0.9524708390235901
+    },
+    {
+      "id": "tatoeba-test-000028",
+      "score": 0.9423820376396179
+    },
+    {
+      "id": "tatoeba-test-000029",
+      "score": 0.6981354355812073
+    },
+    {
+      "id": "tatoeba-test-000030",
+      "score": 0.9436923861503601
+    },
+    {
+      "id": "tatoeba-test-000031",
+      "score": 0.7229901552200317
+    },
+    {
+      "id": "tatoeba-test-000032",
+      "score": 0.943033754825592
+    },
+    {
+      "id": "tatoeba-test-000033",
+      "score": 0.9367321133613586
+    },
+    {
+      "id": "tatoeba-test-000034",
+      "score": 0.8712075352668762
+    },
+    {
+      "id": "tatoeba-test-000035",
+      "score": 0.8948638439178467
+    },
+    {
+      "id": "tatoeba-test-000036",
+      "score": 0.8701148629188538
+    },
+    {
+      "id": "tatoeba-test-000037",
+      "score": 0.9747781753540039
+    },
+    {
+      "id": "tatoeba-test-000038",
+      "score": 0.42432451248168945
+    },
+    {
+      "id": "tatoeba-test-000039",
+      "score": 0.6722163558006287
+    },
+    {
+      "id": "tatoeba-test-000040",
+      "score": 0.8666916489601135
+    },
+    {
+      "id": "tatoeba-test-000041",
+      "score": 0.9320901036262512
+    },
+    {
+      "id": "tatoeba-test-000042",
+      "score": 0.8151084184646606
+    },
+    {
+      "id": "tatoeba-test-000043",
+      "score": 0.7058096528053284
+    },
+    {
+      "id": "tatoeba-test-000044",
+      "score": 0.8654753565788269
+    },
+    {
+      "id": "tatoeba-test-000045",
+      "score": 0.9193384051322937
+    },
+    {
+      "id": "tatoeba-test-000046",
+      "score": 0.9418120384216309
+    },
+    {
+      "id": "tatoeba-test-000047",
+      "score": 0.9108902812004089
+    },
+    {
+      "id": "tatoeba-test-000048",
+      "score": 0.7963404059410095
+    },
+    {
+      "id": "tatoeba-test-000049",
+      "score": 0.8937416076660156
+    },
+    {
+      "id": "tatoeba-test-000050",
+      "score": 0.9531908631324768
+    },
+    {
+      "id": "tatoeba-test-000051",
+      "score": 0.6317358613014221
+    },
+    {
+      "id": "tatoeba-test-000052",
+      "score": 0.9316384196281433
+    },
+    {
+      "id": "tatoeba-test-000053",
+      "score": 0.7695701718330383
+    },
+    {
+      "id": "tatoeba-test-000054",
+      "score": 0.5765125155448914
+    },
+    {
+      "id": "tatoeba-test-000055",
+      "score": 0.9347847104072571
+    },
+    {
+      "id": "tatoeba-test-000056",
+      "score": 0.9336641430854797
+    },
+    {
+      "id": "tatoeba-test-000057",
+      "score": 0.9110254645347595
+    },
+    {
+      "id": "tatoeba-test-000058",
+      "score": 0.9245930314064026
+    },
+    {
+      "id": "tatoeba-test-000059",
+      "score": 0.7229172587394714
+    },
+    {
+      "id": "tatoeba-test-000060",
+      "score": 0.7434603571891785
+    },
+    {
+      "id": "tatoeba-test-000061",
+      "score": 0.9422737956047058
+    },
+    {
+      "id": "tatoeba-test-000062",
+      "score": 0.7288432121276855
+    },
+    {
+      "id": "tatoeba-test-000063",
+      "score": 0.9162918925285339
+    },
+    {
+      "id": "tatoeba-test-000064",
+      "score": 0.9822531938552856
+    },
+    {
+      "id": "tatoeba-test-000065",
+      "score": 0.8798428773880005
+    },
+    {
+      "id": "tatoeba-test-000066",
+      "score": 0.6841587424278259
+    },
+    {
+      "id": "tatoeba-test-000067",
+      "score": 0.862001359462738
+    },
+    {
+      "id": "tatoeba-test-000068",
+      "score": 0.909034788608551
+    },
+    {
+      "id": "tatoeba-test-000069",
+      "score": 0.8180238604545593
+    },
+    {
+      "id": "tatoeba-test-000070",
+      "score": 0.9760615229606628
+    },
+    {
+      "id": "tatoeba-test-000071",
+      "score": 0.8520916104316711
+    },
+    {
+      "id": "tatoeba-test-000072",
+      "score": 0.7982346415519714
+    },
+    {
+      "id": "tatoeba-test-000073",
+      "score": 0.9556483626365662
+    },
+    {
+      "id": "tatoeba-test-000074",
+      "score": 0.9632624387741089
+    },
+    {
+      "id": "tatoeba-test-000075",
+      "score": 0.7947960495948792
+    },
+    {
+      "id": "tatoeba-test-000076",
+      "score": 0.9296143054962158
+    },
+    {
+      "id": "tatoeba-test-000077",
+      "score": 0.9530646204948425
+    },
+    {
+      "id": "tatoeba-test-000078",
+      "score": 0.8356465697288513
+    },
+    {
+      "id": "tatoeba-test-000079",
+      "score": 0.7945123314857483
+    },
+    {
+      "id": "tatoeba-test-000080",
+      "score": 0.9471484422683716
+    },
+    {
+      "id": "tatoeba-test-000081",
+      "score": 0.6546847224235535
+    },
+    {
+      "id": "tatoeba-test-000082",
+      "score": 0.9560486078262329
+    },
+    {
+      "id": "tatoeba-test-000083",
+      "score": 0.8960019946098328
+    },
+    {
+      "id": "tatoeba-test-000084",
+      "score": 0.7876134514808655
+    },
+    {
+      "id": "tatoeba-test-000085",
+      "score": 0.6629345417022705
+    },
+    {
+      "id": "tatoeba-test-000086",
+      "score": 0.4256684482097626
+    },
+    {
+      "id": "tatoeba-test-000087",
+      "score": 0.9063871502876282
+    },
+    {
+      "id": "tatoeba-test-000088",
+      "score": 0.9309892058372498
+    },
+    {
+      "id": "tatoeba-test-000089",
+      "score": 0.44917088747024536
+    },
+    {
+      "id": "tatoeba-test-000090",
+      "score": 0.9474385976791382
+    },
+    {
+      "id": "tatoeba-test-000091",
+      "score": 0.8382187485694885
+    },
+    {
+      "id": "tatoeba-test-000092",
+      "score": 0.926841676235199
+    },
+    {
+      "id": "tatoeba-test-000093",
+      "score": 0.988002359867096
+    },
+    {
+      "id": "tatoeba-test-000094",
+      "score": 0.9472144246101379
+    },
+    {
+      "id": "tatoeba-test-000095",
+      "score": 0.7956469655036926
+    },
+    {
+      "id": "tatoeba-test-000096",
+      "score": 0.8855411410331726
+    },
+    {
+      "id": "tatoeba-test-000097",
+      "score": 0.9665831923484802
+    },
+    {
+      "id": "tatoeba-test-000098",
+      "score": 0.9192702770233154
+    },
+    {
+      "id": "tatoeba-test-000099",
+      "score": 0.4184570014476776
+    },
+    {
+      "id": "tatoeba-test-000100",
+      "score": 0.8588643074035645
+    },
+    {
+      "id": "tatoeba-test-000101",
+      "score": 0.9402710795402527
+    },
+    {
+      "id": "tatoeba-test-000102",
+      "score": 0.9262303113937378
+    },
+    {
+      "id": "tatoeba-test-000103",
+      "score": 0.9042036533355713
+    },
+    {
+      "id": "tatoeba-test-000104",
+      "score": 0.49030664563179016
+    },
+    {
+      "id": "tatoeba-test-000105",
+      "score": 0.9211086630821228
+    },
+    {
+      "id": "tatoeba-test-000106",
+      "score": 0.8876890540122986
+    },
+    {
+      "id": "tatoeba-test-000107",
+      "score": 0.854249119758606
+    },
+    {
+      "id": "tatoeba-test-000108",
+      "score": 0.9218825101852417
+    },
+    {
+      "id": "tatoeba-test-000109",
+      "score": 0.6600609421730042
+    },
+    {
+      "id": "tatoeba-test-000110",
+      "score": 0.9858675599098206
+    },
+    {
+      "id": "tatoeba-test-000111",
+      "score": 0.9512309432029724
+    },
+    {
+      "id": "tatoeba-test-000112",
+      "score": 0.8125994205474854
+    },
+    {
+      "id": "tatoeba-test-000113",
+      "score": 0.9828574657440186
+    },
+    {
+      "id": "tatoeba-test-000114",
+      "score": 0.8939929604530334
+    },
+    {
+      "id": "tatoeba-test-000115",
+      "score": 0.7857158780097961
+    },
+    {
+      "id": "tatoeba-test-000116",
+      "score": 0.8979519009590149
+    },
+    {
+      "id": "tatoeba-test-000117",
+      "score": 0.7745667099952698
+    },
+    {
+      "id": "tatoeba-test-000118",
+      "score": 0.9074450135231018
+    },
+    {
+      "id": "tatoeba-test-000119",
+      "score": 0.9592916369438171
+    },
+    {
+      "id": "tatoeba-test-000120",
+      "score": 0.9455896019935608
+    },
+    {
+      "id": "tatoeba-test-000121",
+      "score": 0.8805075287818909
+    },
+    {
+      "id": "tatoeba-test-000122",
+      "score": 0.9851245284080505
+    },
+    {
+      "id": "tatoeba-test-000123",
+      "score": 0.8013219237327576
+    },
+    {
+      "id": "tatoeba-test-000124",
+      "score": 0.9624204635620117
+    },
+    {
+      "id": "tatoeba-test-000125",
+      "score": 0.7593963146209717
+    },
+    {
+      "id": "tatoeba-test-000126",
+      "score": 0.8957415819168091
+    },
+    {
+      "id": "tatoeba-test-000127",
+      "score": 0.6668513417243958
+    },
+    {
+      "id": "tatoeba-test-000128",
+      "score": 0.6248522996902466
+    },
+    {
+      "id": "tatoeba-test-000129",
+      "score": 0.9165416359901428
+    },
+    {
+      "id": "tatoeba-test-000130",
+      "score": 0.48725536465644836
+    },
+    {
+      "id": "tatoeba-test-000131",
+      "score": 0.9775048494338989
+    },
+    {
+      "id": "tatoeba-test-000132",
+      "score": 0.7001175284385681
+    },
+    {
+      "id": "tatoeba-test-000133",
+      "score": 0.7548006176948547
+    },
+    {
+      "id": "tatoeba-test-000134",
+      "score": 0.741756021976471
+    },
+    {
+      "id": "tatoeba-test-000135",
+      "score": 0.971228837966919
+    },
+    {
+      "id": "tatoeba-test-000136",
+      "score": 0.9533124566078186
+    },
+    {
+      "id": "tatoeba-test-000137",
+      "score": 0.6580432057380676
+    },
+    {
+      "id": "tatoeba-test-000138",
+      "score": 0.9324930310249329
+    },
+    {
+      "id": "tatoeba-test-000139",
+      "score": 0.9800631403923035
+    },
+    {
+      "id": "tatoeba-test-000140",
+      "score": 0.9509464502334595
+    },
+    {
+      "id": "tatoeba-test-000141",
+      "score": 0.9143794178962708
+    },
+    {
+      "id": "tatoeba-test-000142",
+      "score": 0.6956128478050232
+    },
+    {
+      "id": "tatoeba-test-000143",
+      "score": 0.5857252478599548
+    },
+    {
+      "id": "tatoeba-test-000144",
+      "score": 0.959985613822937
+    },
+    {
+      "id": "tatoeba-test-000145",
+      "score": 0.923036515712738
+    },
+    {
+      "id": "tatoeba-test-000146",
+      "score": 0.49797651171684265
+    },
+    {
+      "id": "tatoeba-test-000147",
+      "score": 0.9867040514945984
+    },
+    {
+      "id": "tatoeba-test-000148",
+      "score": 0.8899919986724854
+    },
+    {
+      "id": "tatoeba-test-000149",
+      "score": 0.8742625117301941
+    },
+    {
+      "id": "tatoeba-test-000150",
+      "score": 0.5156010389328003
+    },
+    {
+      "id": "tatoeba-test-000151",
+      "score": 0.8496067523956299
+    },
+    {
+      "id": "tatoeba-test-000152",
+      "score": 0.8866850733757019
+    },
+    {
+      "id": "tatoeba-test-000153",
+      "score": 0.9652385115623474
+    },
+    {
+      "id": "tatoeba-test-000154",
+      "score": 0.900486171245575
+    },
+    {
+      "id": "tatoeba-test-000155",
+      "score": 0.9641583561897278
+    },
+    {
+      "id": "tatoeba-test-000156",
+      "score": 0.9255619049072266
+    },
+    {
+      "id": "tatoeba-test-000157",
+      "score": 0.7062836289405823
+    },
+    {
+      "id": "tatoeba-test-000158",
+      "score": 0.9087530970573425
+    },
+    {
+      "id": "tatoeba-test-000159",
+      "score": 0.6790808439254761
+    },
+    {
+      "id": "tatoeba-test-000160",
+      "score": 0.9860345721244812
+    },
+    {
+      "id": "tatoeba-test-000161",
+      "score": 0.6269303560256958
+    },
+    {
+      "id": "tatoeba-test-000162",
+      "score": 0.9295971989631653
+    },
+    {
+      "id": "tatoeba-test-000163",
+      "score": 0.9571935534477234
+    },
+    {
+      "id": "tatoeba-test-000164",
+      "score": 0.9016537070274353
+    },
+    {
+      "id": "tatoeba-test-000165",
+      "score": 0.6438900828361511
+    },
+    {
+      "id": "tatoeba-test-000166",
+      "score": 0.9099293947219849
+    },
+    {
+      "id": "tatoeba-test-000167",
+      "score": 0.8962154984474182
+    },
+    {
+      "id": "tatoeba-test-000168",
+      "score": 0.7910314798355103
+    },
+    {
+      "id": "tatoeba-test-000169",
+      "score": 0.7505073547363281
+    },
+    {
+      "id": "tatoeba-test-000170",
+      "score": 0.9748470187187195
+    },
+    {
+      "id": "tatoeba-test-000171",
+      "score": 0.7836061716079712
+    },
+    {
+      "id": "tatoeba-test-000172",
+      "score": 0.9846189618110657
+    },
+    {
+      "id": "tatoeba-test-000173",
+      "score": 0.8868955969810486
+    },
+    {
+      "id": "tatoeba-test-000174",
+      "score": 0.9086647033691406
+    },
+    {
+      "id": "tatoeba-test-000175",
+      "score": 0.8892273306846619
+    },
+    {
+      "id": "tatoeba-test-000176",
+      "score": 0.35702645778656006
+    },
+    {
+      "id": "tatoeba-test-000177",
+      "score": 0.7265115976333618
+    },
+    {
+      "id": "tatoeba-test-000178",
+      "score": 0.8598775863647461
+    },
+    {
+      "id": "tatoeba-test-000179",
+      "score": 0.9176738858222961
+    },
+    {
+      "id": "tatoeba-test-000180",
+      "score": 0.7229064106941223
+    },
+    {
+      "id": "tatoeba-test-000181",
+      "score": 0.9840551614761353
+    },
+    {
+      "id": "tatoeba-test-000182",
+      "score": 0.9253191351890564
+    },
+    {
+      "id": "tatoeba-test-000183",
+      "score": 0.9464322328567505
+    },
+    {
+      "id": "tatoeba-test-000184",
+      "score": 0.9626701474189758
+    },
+    {
+      "id": "tatoeba-test-000185",
+      "score": 0.943776547908783
+    },
+    {
+      "id": "tatoeba-test-000186",
+      "score": 0.983830988407135
+    },
+    {
+      "id": "tatoeba-test-000187",
+      "score": 0.7978741526603699
+    },
+    {
+      "id": "tatoeba-test-000188",
+      "score": 0.7813274264335632
+    },
+    {
+      "id": "tatoeba-test-000189",
+      "score": 0.7494179010391235
+    },
+    {
+      "id": "tatoeba-test-000190",
+      "score": 0.9497118592262268
+    },
+    {
+      "id": "tatoeba-test-000191",
+      "score": 0.8851506114006042
+    },
+    {
+      "id": "tatoeba-test-000192",
+      "score": 0.9582052826881409
+    },
+    {
+      "id": "tatoeba-test-000193",
+      "score": 0.9394857883453369
+    },
+    {
+      "id": "tatoeba-test-000194",
+      "score": 0.7829973101615906
+    },
+    {
+      "id": "tatoeba-test-000195",
+      "score": 0.9178898930549622
+    },
+    {
+      "id": "tatoeba-test-000196",
+      "score": 0.8907501697540283
+    },
+    {
+      "id": "tatoeba-test-000197",
+      "score": 0.9910403490066528
+    },
+    {
+      "id": "tatoeba-test-000198",
+      "score": 0.8824391961097717
+    },
+    {
+      "id": "tatoeba-test-000199",
+      "score": 0.9221010804176331
+    },
+    {
+      "id": "tatoeba-test-000200",
+      "score": 0.47116920351982117
+    },
+    {
+      "id": "tatoeba-test-000201",
+      "score": 0.9285260438919067
+    },
+    {
+      "id": "tatoeba-test-000202",
+      "score": 0.9814271330833435
+    },
+    {
+      "id": "tatoeba-test-000203",
+      "score": 0.7682952284812927
+    },
+    {
+      "id": "tatoeba-test-000204",
+      "score": 0.8418442010879517
+    },
+    {
+      "id": "tatoeba-test-000205",
+      "score": 0.7886652946472168
+    },
+    {
+      "id": "tatoeba-test-000206",
+      "score": 0.8837844729423523
+    },
+    {
+      "id": "tatoeba-test-000207",
+      "score": 0.911895751953125
+    },
+    {
+      "id": "tatoeba-test-000208",
+      "score": 0.9590479731559753
+    },
+    {
+      "id": "tatoeba-test-000209",
+      "score": 0.7509709000587463
+    },
+    {
+      "id": "tatoeba-test-000210",
+      "score": 0.9593418836593628
+    },
+    {
+      "id": "tatoeba-test-000211",
+      "score": 0.9785099625587463
+    },
+    {
+      "id": "tatoeba-test-000212",
+      "score": 0.8893767595291138
+    },
+    {
+      "id": "tatoeba-test-000213",
+      "score": 0.8380146622657776
+    },
+    {
+      "id": "tatoeba-test-000214",
+      "score": 0.8972160816192627
+    },
+    {
+      "id": "tatoeba-test-000215",
+      "score": 0.6547290682792664
+    },
+    {
+      "id": "tatoeba-test-000216",
+      "score": 0.8326775431632996
+    },
+    {
+      "id": "tatoeba-test-000217",
+      "score": 0.9785526394844055
+    },
+    {
+      "id": "tatoeba-test-000218",
+      "score": 0.949188768863678
+    },
+    {
+      "id": "tatoeba-test-000219",
+      "score": 0.9181048274040222
+    },
+    {
+      "id": "tatoeba-test-000220",
+      "score": 0.8387425541877747
+    },
+    {
+      "id": "tatoeba-test-000221",
+      "score": 0.7057449221611023
+    },
+    {
+      "id": "tatoeba-test-000222",
+      "score": 0.5100024342536926
+    },
+    {
+      "id": "tatoeba-test-000223",
+      "score": 0.9465292096138
+    },
+    {
+      "id": "tatoeba-test-000224",
+      "score": 0.5344285368919373
+    },
+    {
+      "id": "tatoeba-test-000225",
+      "score": 0.9351431727409363
+    },
+    {
+      "id": "tatoeba-test-000226",
+      "score": 0.916353166103363
+    },
+    {
+      "id": "tatoeba-test-000227",
+      "score": 0.949863076210022
+    },
+    {
+      "id": "tatoeba-test-000228",
+      "score": 0.7910075187683105
+    },
+    {
+      "id": "tatoeba-test-000229",
+      "score": 0.6609018445014954
+    },
+    {
+      "id": "tatoeba-test-000230",
+      "score": 0.48054495453834534
+    },
+    {
+      "id": "tatoeba-test-000231",
+      "score": 0.9254912734031677
+    },
+    {
+      "id": "tatoeba-test-000232",
+      "score": 0.8556889891624451
+    },
+    {
+      "id": "tatoeba-test-000233",
+      "score": 0.9143587350845337
+    },
+    {
+      "id": "tatoeba-test-000234",
+      "score": 0.9441982507705688
+    },
+    {
+      "id": "tatoeba-test-000235",
+      "score": 0.584452748298645
+    },
+    {
+      "id": "tatoeba-test-000236",
+      "score": 0.8643602728843689
+    },
+    {
+      "id": "tatoeba-test-000237",
+      "score": 0.8087583780288696
+    },
+    {
+      "id": "tatoeba-test-000238",
+      "score": 0.8646827340126038
+    },
+    {
+      "id": "tatoeba-test-000239",
+      "score": 0.9333840012550354
+    },
+    {
+      "id": "tatoeba-test-000240",
+      "score": 0.9883490204811096
+    },
+    {
+      "id": "tatoeba-test-000241",
+      "score": 0.9032461047172546
+    },
+    {
+      "id": "tatoeba-test-000242",
+      "score": 0.9566165208816528
+    },
+    {
+      "id": "tatoeba-test-000243",
+      "score": 0.9522375464439392
+    },
+    {
+      "id": "tatoeba-test-000244",
+      "score": 0.9579840898513794
+    },
+    {
+      "id": "tatoeba-test-000245",
+      "score": 0.9872474074363708
+    },
+    {
+      "id": "tatoeba-test-000246",
+      "score": 0.6298862099647522
+    },
+    {
+      "id": "tatoeba-test-000247",
+      "score": 0.8496419787406921
+    },
+    {
+      "id": "tatoeba-test-000248",
+      "score": 0.4709413945674896
+    },
+    {
+      "id": "tatoeba-test-000249",
+      "score": 0.8291897177696228
+    },
+    {
+      "id": "tatoeba-test-000250",
+      "score": 0.7563454508781433
+    },
+    {
+      "id": "tatoeba-test-000251",
+      "score": 0.890687108039856
+    },
+    {
+      "id": "tatoeba-test-000252",
+      "score": 0.8416531682014465
+    },
+    {
+      "id": "tatoeba-test-000253",
+      "score": 0.8643301129341125
+    },
+    {
+      "id": "tatoeba-test-000254",
+      "score": 0.9321156144142151
+    },
+    {
+      "id": "tatoeba-test-000255",
+      "score": 0.762106716632843
+    },
+    {
+      "id": "tatoeba-test-000256",
+      "score": 0.5915963053703308
+    },
+    {
+      "id": "tatoeba-test-000257",
+      "score": 0.986435055732727
+    },
+    {
+      "id": "tatoeba-test-000258",
+      "score": 0.9329372048377991
+    },
+    {
+      "id": "tatoeba-test-000259",
+      "score": 0.8248265981674194
+    },
+    {
+      "id": "tatoeba-test-000260",
+      "score": 0.8328078985214233
+    },
+    {
+      "id": "tatoeba-test-000261",
+      "score": 0.832958996295929
+    },
+    {
+      "id": "tatoeba-test-000262",
+      "score": 0.8019393086433411
+    },
+    {
+      "id": "tatoeba-test-000263",
+      "score": 0.858759343624115
+    },
+    {
+      "id": "tatoeba-test-000264",
+      "score": 0.7574242949485779
+    },
+    {
+      "id": "tatoeba-test-000265",
+      "score": 0.7738297581672668
+    },
+    {
+      "id": "tatoeba-test-000266",
+      "score": 0.9372060894966125
+    },
+    {
+      "id": "tatoeba-test-000267",
+      "score": 0.6034126877784729
+    },
+    {
+      "id": "tatoeba-test-000268",
+      "score": 0.9399716258049011
+    },
+    {
+      "id": "tatoeba-test-000269",
+      "score": 0.8541051745414734
+    },
+    {
+      "id": "tatoeba-test-000270",
+      "score": 0.8639487624168396
+    },
+    {
+      "id": "tatoeba-test-000271",
+      "score": 0.973583996295929
+    },
+    {
+      "id": "tatoeba-test-000272",
+      "score": 0.7372083067893982
+    },
+    {
+      "id": "tatoeba-test-000273",
+      "score": 0.893745481967926
+    },
+    {
+      "id": "tatoeba-test-000274",
+      "score": 0.9613661170005798
+    },
+    {
+      "id": "tatoeba-test-000275",
+      "score": 0.8624697327613831
+    },
+    {
+      "id": "tatoeba-test-000276",
+      "score": 0.6958132386207581
+    },
+    {
+      "id": "tatoeba-test-000277",
+      "score": 0.9067674875259399
+    },
+    {
+      "id": "tatoeba-test-000278",
+      "score": 0.5932089686393738
+    },
+    {
+      "id": "tatoeba-test-000279",
+      "score": 0.9783863425254822
+    },
+    {
+      "id": "tatoeba-test-000280",
+      "score": 0.8914327025413513
+    },
+    {
+      "id": "tatoeba-test-000281",
+      "score": 0.8664352297782898
+    },
+    {
+      "id": "tatoeba-test-000282",
+      "score": 0.931243360042572
+    },
+    {
+      "id": "tatoeba-test-000283",
+      "score": 0.5600003600120544
+    },
+    {
+      "id": "tatoeba-test-000284",
+      "score": 0.9315515160560608
+    },
+    {
+      "id": "tatoeba-test-000285",
+      "score": 0.9626761078834534
+    },
+    {
+      "id": "tatoeba-test-000286",
+      "score": 0.7401108145713806
+    },
+    {
+      "id": "tatoeba-test-000287",
+      "score": 0.9177581667900085
+    },
+    {
+      "id": "tatoeba-test-000288",
+      "score": 0.6394922137260437
+    },
+    {
+      "id": "tatoeba-test-000289",
+      "score": 0.6282818913459778
+    },
+    {
+      "id": "tatoeba-test-000290",
+      "score": 0.9814029335975647
+    },
+    {
+      "id": "tatoeba-test-000291",
+      "score": 0.9427975416183472
+    },
+    {
+      "id": "tatoeba-test-000292",
+      "score": 0.7201576828956604
+    },
+    {
+      "id": "tatoeba-test-000293",
+      "score": 0.8671116232872009
+    },
+    {
+      "id": "tatoeba-test-000294",
+      "score": 0.8585350513458252
+    },
+    {
+      "id": "tatoeba-test-000295",
+      "score": 0.9807280898094177
+    },
+    {
+      "id": "tatoeba-test-000296",
+      "score": 0.9869303703308105
+    },
+    {
+      "id": "tatoeba-test-000297",
+      "score": 0.92042475938797
+    },
+    {
+      "id": "tatoeba-test-000298",
+      "score": 0.857342541217804
+    },
+    {
+      "id": "tatoeba-test-000299",
+      "score": 0.44968804717063904
+    },
+    {
+      "id": "tatoeba-test-000300",
+      "score": 0.9448251724243164
+    },
+    {
+      "id": "tatoeba-test-000301",
+      "score": 0.9863200783729553
+    },
+    {
+      "id": "tatoeba-test-000302",
+      "score": 0.529693603515625
+    },
+    {
+      "id": "tatoeba-test-000303",
+      "score": 0.9538260698318481
+    },
+    {
+      "id": "tatoeba-test-000304",
+      "score": 0.7662014961242676
+    },
+    {
+      "id": "tatoeba-test-000305",
+      "score": 0.9189250469207764
+    },
+    {
+      "id": "tatoeba-test-000306",
+      "score": 0.8151344656944275
+    },
+    {
+      "id": "tatoeba-test-000307",
+      "score": 0.9450250864028931
+    },
+    {
+      "id": "tatoeba-test-000308",
+      "score": 0.5333938598632812
+    },
+    {
+      "id": "tatoeba-test-000309",
+      "score": 0.9183877110481262
+    },
+    {
+      "id": "tatoeba-test-000310",
+      "score": 0.8703077435493469
+    },
+    {
+      "id": "tatoeba-test-000311",
+      "score": 0.7938169240951538
+    },
+    {
+      "id": "tatoeba-test-000312",
+      "score": 0.5420625805854797
+    },
+    {
+      "id": "tatoeba-test-000313",
+      "score": 0.8927144408226013
+    },
+    {
+      "id": "tatoeba-test-000314",
+      "score": 0.9297931790351868
+    },
+    {
+      "id": "tatoeba-test-000315",
+      "score": 0.6826775670051575
+    },
+    {
+      "id": "tatoeba-test-000316",
+      "score": 0.8678821921348572
+    },
+    {
+      "id": "tatoeba-test-000317",
+      "score": 0.7442952394485474
+    },
+    {
+      "id": "tatoeba-test-000318",
+      "score": 0.9922770261764526
+    },
+    {
+      "id": "tatoeba-test-000319",
+      "score": 0.8733087778091431
+    },
+    {
+      "id": "tatoeba-test-000320",
+      "score": 0.5694933533668518
+    },
+    {
+      "id": "tatoeba-test-000321",
+      "score": 0.8402888178825378
+    },
+    {
+      "id": "tatoeba-test-000322",
+      "score": 0.9430951476097107
+    },
+    {
+      "id": "tatoeba-test-000323",
+      "score": 0.46715787053108215
+    },
+    {
+      "id": "tatoeba-test-000324",
+      "score": 0.9170294404029846
+    },
+    {
+      "id": "tatoeba-test-000325",
+      "score": 0.8988085985183716
+    },
+    {
+      "id": "tatoeba-test-000326",
+      "score": 0.9442383646965027
+    },
+    {
+      "id": "tatoeba-test-000327",
+      "score": 0.9044488072395325
+    },
+    {
+      "id": "tatoeba-test-000328",
+      "score": 0.7173173427581787
+    },
+    {
+      "id": "tatoeba-test-000329",
+      "score": 0.9471513628959656
+    },
+    {
+      "id": "tatoeba-test-000330",
+      "score": 0.5829025506973267
+    },
+    {
+      "id": "tatoeba-test-000331",
+      "score": 0.6782298684120178
+    },
+    {
+      "id": "tatoeba-test-000332",
+      "score": 0.9768567681312561
+    },
+    {
+      "id": "tatoeba-test-000333",
+      "score": 0.977760374546051
+    },
+    {
+      "id": "tatoeba-test-000334",
+      "score": 0.9315734505653381
+    },
+    {
+      "id": "tatoeba-test-000335",
+      "score": 0.9044800400733948
+    },
+    {
+      "id": "tatoeba-test-000336",
+      "score": 0.6229885220527649
+    },
+    {
+      "id": "tatoeba-test-000337",
+      "score": 0.9533621668815613
+    },
+    {
+      "id": "tatoeba-test-000338",
+      "score": 0.991917610168457
+    },
+    {
+      "id": "tatoeba-test-000339",
+      "score": 0.928567111492157
+    },
+    {
+      "id": "tatoeba-test-000340",
+      "score": 0.9353882670402527
+    },
+    {
+      "id": "tatoeba-test-000341",
+      "score": 0.8096188902854919
+    },
+    {
+      "id": "tatoeba-test-000342",
+      "score": 0.5995566248893738
+    },
+    {
+      "id": "tatoeba-test-000343",
+      "score": 0.9330014586448669
+    },
+    {
+      "id": "tatoeba-test-000344",
+      "score": 0.9896982312202454
+    },
+    {
+      "id": "tatoeba-test-000345",
+      "score": 0.940267026424408
+    },
+    {
+      "id": "tatoeba-test-000346",
+      "score": 0.9600095152854919
+    },
+    {
+      "id": "tatoeba-test-000347",
+      "score": 0.9468775391578674
+    },
+    {
+      "id": "tatoeba-test-000348",
+      "score": 0.5719581246376038
+    },
+    {
+      "id": "tatoeba-test-000349",
+      "score": 0.941508948802948
+    },
+    {
+      "id": "tatoeba-test-000350",
+      "score": 0.9593662619590759
+    },
+    {
+      "id": "tatoeba-test-000351",
+      "score": 0.8725162148475647
+    },
+    {
+      "id": "tatoeba-test-000352",
+      "score": 0.9813552498817444
+    },
+    {
+      "id": "tatoeba-test-000353",
+      "score": 0.9423782229423523
+    },
+    {
+      "id": "tatoeba-test-000354",
+      "score": 0.9695897102355957
+    },
+    {
+      "id": "tatoeba-test-000355",
+      "score": 0.9565355181694031
+    },
+    {
+      "id": "tatoeba-test-000356",
+      "score": 0.7878337502479553
+    },
+    {
+      "id": "tatoeba-test-000357",
+      "score": 0.9663279056549072
+    },
+    {
+      "id": "tatoeba-test-000358",
+      "score": 0.922296404838562
+    },
+    {
+      "id": "tatoeba-test-000359",
+      "score": 0.9651643633842468
+    },
+    {
+      "id": "tatoeba-test-000360",
+      "score": 0.9165770411491394
+    },
+    {
+      "id": "tatoeba-test-000361",
+      "score": 0.538253664970398
+    },
+    {
+      "id": "tatoeba-test-000362",
+      "score": 0.8622434139251709
+    },
+    {
+      "id": "tatoeba-test-000363",
+      "score": 0.6436754465103149
+    },
+    {
+      "id": "tatoeba-test-000364",
+      "score": 0.35416528582572937
+    },
+    {
+      "id": "tatoeba-test-000365",
+      "score": 0.7502648830413818
+    },
+    {
+      "id": "tatoeba-test-000366",
+      "score": 0.8534064292907715
+    },
+    {
+      "id": "tatoeba-test-000367",
+      "score": 0.9757553935050964
+    },
+    {
+      "id": "tatoeba-test-000368",
+      "score": 0.9911174178123474
+    },
+    {
+      "id": "tatoeba-test-000369",
+      "score": 0.9569172859191895
+    },
+    {
+      "id": "tatoeba-test-000370",
+      "score": 0.44453707337379456
+    },
+    {
+      "id": "tatoeba-test-000371",
+      "score": 0.8641063570976257
+    },
+    {
+      "id": "tatoeba-test-000372",
+      "score": 0.5937349200248718
+    },
+    {
+      "id": "tatoeba-test-000373",
+      "score": 0.8591668009757996
+    },
+    {
+      "id": "tatoeba-test-000374",
+      "score": 0.8959862589836121
+    },
+    {
+      "id": "tatoeba-test-000375",
+      "score": 0.8379870057106018
+    },
+    {
+      "id": "tatoeba-test-000376",
+      "score": 0.9401695132255554
+    },
+    {
+      "id": "tatoeba-test-000377",
+      "score": 0.8571033477783203
+    },
+    {
+      "id": "tatoeba-test-000378",
+      "score": 0.8937986493110657
+    },
+    {
+      "id": "tatoeba-test-000379",
+      "score": 0.8344115018844604
+    },
+    {
+      "id": "tatoeba-test-000380",
+      "score": 0.8502500057220459
+    },
+    {
+      "id": "tatoeba-test-000381",
+      "score": 0.7393642067909241
+    },
+    {
+      "id": "tatoeba-test-000382",
+      "score": 0.5468001365661621
+    },
+    {
+      "id": "tatoeba-test-000383",
+      "score": 0.7955260276794434
+    },
+    {
+      "id": "tatoeba-test-000384",
+      "score": 0.9597741961479187
+    },
+    {
+      "id": "tatoeba-test-000385",
+      "score": 0.5095954537391663
+    },
+    {
+      "id": "tatoeba-test-000386",
+      "score": 0.9479714035987854
+    },
+    {
+      "id": "tatoeba-test-000387",
+      "score": 0.6903898119926453
+    },
+    {
+      "id": "tatoeba-test-000388",
+      "score": 0.8787629008293152
+    },
+    {
+      "id": "tatoeba-test-000389",
+      "score": 0.9686758518218994
+    },
+    {
+      "id": "tatoeba-test-000390",
+      "score": 0.9006116986274719
+    },
+    {
+      "id": "tatoeba-test-000391",
+      "score": 0.9238314032554626
+    },
+    {
+      "id": "tatoeba-test-000392",
+      "score": 0.9471175074577332
+    },
+    {
+      "id": "tatoeba-test-000393",
+      "score": 0.8184022903442383
+    },
+    {
+      "id": "tatoeba-test-000394",
+      "score": 0.9208257794380188
+    },
+    {
+      "id": "tatoeba-test-000395",
+      "score": 0.9508185982704163
+    },
+    {
+      "id": "tatoeba-test-000396",
+      "score": 0.9261725544929504
+    },
+    {
+      "id": "tatoeba-test-000397",
+      "score": 0.9436179399490356
+    },
+    {
+      "id": "tatoeba-test-000398",
+      "score": 0.9757702946662903
+    },
+    {
+      "id": "tatoeba-test-000399",
+      "score": 0.76910001039505
+    },
+    {
+      "id": "tatoeba-test-000400",
+      "score": 0.8221798539161682
+    },
+    {
+      "id": "tatoeba-test-000401",
+      "score": 0.7905356884002686
+    },
+    {
+      "id": "tatoeba-test-000402",
+      "score": 0.8860284686088562
+    },
+    {
+      "id": "tatoeba-test-000403",
+      "score": 0.8718303442001343
+    },
+    {
+      "id": "tatoeba-test-000404",
+      "score": 0.6310706734657288
+    },
+    {
+      "id": "tatoeba-test-000405",
+      "score": 0.9604835510253906
+    },
+    {
+      "id": "tatoeba-test-000406",
+      "score": 0.9236246943473816
+    },
+    {
+      "id": "tatoeba-test-000407",
+      "score": 0.9575777053833008
+    },
+    {
+      "id": "tatoeba-test-000408",
+      "score": 0.6046180129051208
+    },
+    {
+      "id": "tatoeba-test-000409",
+      "score": 0.8873566389083862
+    },
+    {
+      "id": "tatoeba-test-000410",
+      "score": 0.5930030941963196
+    },
+    {
+      "id": "tatoeba-test-000411",
+      "score": 0.7950513958930969
+    },
+    {
+      "id": "tatoeba-test-000412",
+      "score": 0.6232118010520935
+    },
+    {
+      "id": "tatoeba-test-000413",
+      "score": 0.8852933049201965
+    },
+    {
+      "id": "tatoeba-test-000414",
+      "score": 0.5418025851249695
+    },
+    {
+      "id": "tatoeba-test-000415",
+      "score": 0.8107667565345764
+    },
+    {
+      "id": "tatoeba-test-000416",
+      "score": 0.950373113155365
+    },
+    {
+      "id": "tatoeba-test-000417",
+      "score": 0.9136069416999817
+    },
+    {
+      "id": "tatoeba-test-000418",
+      "score": 0.9015121459960938
+    },
+    {
+      "id": "tatoeba-test-000419",
+      "score": 0.8792044520378113
+    },
+    {
+      "id": "tatoeba-test-000420",
+      "score": 0.853204071521759
+    },
+    {
+      "id": "tatoeba-test-000421",
+      "score": 0.7488498091697693
+    },
+    {
+      "id": "tatoeba-test-000422",
+      "score": 0.8598834872245789
+    },
+    {
+      "id": "tatoeba-test-000423",
+      "score": 0.7636777758598328
+    },
+    {
+      "id": "tatoeba-test-000424",
+      "score": 0.9065921902656555
+    },
+    {
+      "id": "tatoeba-test-000425",
+      "score": 0.9887967705726624
+    },
+    {
+      "id": "tatoeba-test-000426",
+      "score": 0.8668261170387268
+    },
+    {
+      "id": "tatoeba-test-000427",
+      "score": 0.7595052123069763
+    },
+    {
+      "id": "tatoeba-test-000428",
+      "score": 0.9821802973747253
+    },
+    {
+      "id": "tatoeba-test-000429",
+      "score": 0.9451721906661987
+    },
+    {
+      "id": "tatoeba-test-000430",
+      "score": 0.9195553064346313
+    },
+    {
+      "id": "tatoeba-test-000431",
+      "score": 0.959746778011322
+    },
+    {
+      "id": "tatoeba-test-000432",
+      "score": 0.8118802905082703
+    },
+    {
+      "id": "tatoeba-test-000433",
+      "score": 0.9473806023597717
+    },
+    {
+      "id": "tatoeba-test-000434",
+      "score": 0.9413726925849915
+    },
+    {
+      "id": "tatoeba-test-000435",
+      "score": 0.8801906108856201
+    },
+    {
+      "id": "tatoeba-test-000436",
+      "score": 0.7263194918632507
+    },
+    {
+      "id": "tatoeba-test-000437",
+      "score": 0.9012837409973145
+    },
+    {
+      "id": "tatoeba-test-000438",
+      "score": 0.9672946333885193
+    },
+    {
+      "id": "tatoeba-test-000439",
+      "score": 0.8957611322402954
+    },
+    {
+      "id": "tatoeba-test-000440",
+      "score": 0.9820815920829773
+    },
+    {
+      "id": "tatoeba-test-000441",
+      "score": 0.9231324195861816
+    },
+    {
+      "id": "tatoeba-test-000442",
+      "score": 0.8994019627571106
+    },
+    {
+      "id": "tatoeba-test-000443",
+      "score": 0.7866591215133667
+    },
+    {
+      "id": "tatoeba-test-000444",
+      "score": 0.6670197248458862
+    },
+    {
+      "id": "tatoeba-test-000445",
+      "score": 0.9307525753974915
+    },
+    {
+      "id": "tatoeba-test-000446",
+      "score": 0.9129161238670349
+    },
+    {
+      "id": "tatoeba-test-000447",
+      "score": 0.9561946392059326
+    },
+    {
+      "id": "tatoeba-test-000448",
+      "score": 0.410595566034317
+    },
+    {
+      "id": "tatoeba-test-000449",
+      "score": 0.9125427603721619
+    },
+    {
+      "id": "tatoeba-test-000450",
+      "score": 0.6417969465255737
+    },
+    {
+      "id": "tatoeba-test-000451",
+      "score": 0.7810983657836914
+    },
+    {
+      "id": "tatoeba-test-000452",
+      "score": 0.9067907929420471
+    },
+    {
+      "id": "tatoeba-test-000453",
+      "score": 0.9889740347862244
+    },
+    {
+      "id": "tatoeba-test-000454",
+      "score": 0.6775109767913818
+    },
+    {
+      "id": "tatoeba-test-000455",
+      "score": 0.945391058921814
+    },
+    {
+      "id": "tatoeba-test-000456",
+      "score": 0.8284146189689636
+    },
+    {
+      "id": "tatoeba-test-000457",
+      "score": 0.8812606930732727
+    },
+    {
+      "id": "tatoeba-test-000458",
+      "score": 0.7890604138374329
+    },
+    {
+      "id": "tatoeba-test-000459",
+      "score": 0.9922477602958679
+    },
+    {
+      "id": "tatoeba-test-000460",
+      "score": 0.9224599003791809
+    },
+    {
+      "id": "tatoeba-test-000461",
+      "score": 0.7407815456390381
+    },
+    {
+      "id": "tatoeba-test-000462",
+      "score": 0.9618307948112488
+    },
+    {
+      "id": "tatoeba-test-000463",
+      "score": 0.9512223601341248
+    },
+    {
+      "id": "tatoeba-test-000464",
+      "score": 0.7743037939071655
+    },
+    {
+      "id": "tatoeba-test-000465",
+      "score": 0.8845402598381042
+    },
+    {
+      "id": "tatoeba-test-000466",
+      "score": 0.8815974593162537
+    },
+    {
+      "id": "tatoeba-test-000467",
+      "score": 0.5253804326057434
+    },
+    {
+      "id": "tatoeba-test-000468",
+      "score": 0.9402922987937927
+    }
+  ]
+}

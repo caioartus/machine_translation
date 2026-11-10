@@ -1,0 +1,469 @@
+{"id": "tatoeba-test-000000", "zh": "不急。", "en": "There's no rush.", "prediction": "Not to rush."}
+{"id": "tatoeba-test-000001", "zh": "这个苹果怎么样？", "en": "How's the apple?", "prediction": "What about the apple?"}
+{"id": "tatoeba-test-000002", "zh": "给我一条干毛巾。", "en": "Bring me a dry towel.", "prediction": "Give me a dry handwash."}
+{"id": "tatoeba-test-000003", "zh": "我能吃这个吗?", "en": "May I eat this?", "prediction": "Can I eat this?"}
+{"id": "tatoeba-test-000004", "zh": "你不得不制造一些借口。", "en": "You'll have to make up some kind of excuse.", "prediction": "You have to make some excuses."}
+{"id": "tatoeba-test-000005", "zh": "这只是幻想而已。", "en": "That's just my imagination.", "prediction": "It is just fantasy."}
+{"id": "tatoeba-test-000006", "zh": "你欠汤姆多少钱？", "en": "How much money do you owe Tom?", "prediction": "How much do you owe Tom?"}
+{"id": "tatoeba-test-000007", "zh": "我知道他是个能人。", "en": "I see that he is an able man.", "prediction": "I knew he was a capable man."}
+{"id": "tatoeba-test-000008", "zh": "汤姆对登山感兴趣。", "en": "Tom is interested in mountaineering.", "prediction": "Tom is interested in climbing."}
+{"id": "tatoeba-test-000009", "zh": "你怎么这么晚才来看我们？", "en": "How come you call on us so late at night?", "prediction": "Why did you come to see us so late?"}
+{"id": "tatoeba-test-000010", "zh": "到别处去做。", "en": "Do it somewhere else.", "prediction": "Go elsewhere to do it."}
+{"id": "tatoeba-test-000011", "zh": "他是一个优秀的作家。", "en": "He's an excellent author.", "prediction": "He is a great writer."}
+{"id": "tatoeba-test-000012", "zh": "你上次禁食是什么时候？", "en": "When was the last time you fasted?", "prediction": "When did you last fast?"}
+{"id": "tatoeba-test-000013", "zh": "我需要换乘吗?", "en": "Do I need to transfer?", "prediction": "Do I need to change?"}
+{"id": "tatoeba-test-000014", "zh": "天神是什么？", "en": "What is a god?", "prediction": "What is the angel?"}
+{"id": "tatoeba-test-000015", "zh": "我让她把我的房间弄干净。", "en": "I got her to clean my room.", "prediction": "I let her clean my room."}
+{"id": "tatoeba-test-000016", "zh": "我们不卖生啤酒。", "en": "We don't sell draft beer.", "prediction": "We do not sell beer."}
+{"id": "tatoeba-test-000017", "zh": "合上书。", "en": "Close the book.", "prediction": "Combined the book."}
+{"id": "tatoeba-test-000018", "zh": "我爱接骨木果汁。", "en": "I love elderberry juice.", "prediction": "I love to take the fruit juice."}
+{"id": "tatoeba-test-000019", "zh": "我一点也没有要辞职的意思。", "en": "I do not intend to quit at all.", "prediction": "I do not mean to resign at all."}
+{"id": "tatoeba-test-000020", "zh": "「好大！」「对，这是 IMAX！」", "en": "\"It's so huge!\" \"Yes, it's an IMAX screen!\"", "prediction": "“It’s great!” “Yes, it’s IMAX!”"}
+{"id": "tatoeba-test-000021", "zh": "汤姆正在看书。", "en": "Tom is reading a book.", "prediction": "Tom is reading."}
+{"id": "tatoeba-test-000022", "zh": "他是个胆小鬼。", "en": "He's a coward.", "prediction": "He is a coward."}
+{"id": "tatoeba-test-000023", "zh": "去您那儿怎么走最方便？", "en": "What is the most convenient route to your place?", "prediction": "How to get to you the most convenient way?"}
+{"id": "tatoeba-test-000024", "zh": "我没带现金。", "en": "I'm out of cash.", "prediction": "I don't have cash."}
+{"id": "tatoeba-test-000025", "zh": "你会说西班牙语。", "en": "You can speak Spanish.", "prediction": "You will speak Spanish."}
+{"id": "tatoeba-test-000026", "zh": "今晚一定是好天。", "en": "The weather will be good tonight for sure.", "prediction": "It must be a good day tonight."}
+{"id": "tatoeba-test-000027", "zh": "我想和Tom聊聊。", "en": "I would like to talk to Tom.", "prediction": "I want to talk to Tom."}
+{"id": "tatoeba-test-000028", "zh": "你真漂亮！", "en": "How beautiful you are!", "prediction": "You are beautiful!"}
+{"id": "tatoeba-test-000029", "zh": "这本书是谁的？", "en": "Who does the book belong to?", "prediction": "Who is this book?"}
+{"id": "tatoeba-test-000030", "zh": "我只想忘记。", "en": "I only wanted to forget.", "prediction": "I just wanted to forget."}
+{"id": "tatoeba-test-000031", "zh": "噗！真冷！", "en": "Brr! So cold!", "prediction": "Oh! it is cold!"}
+{"id": "tatoeba-test-000032", "zh": "他在读书中度过夜晚.", "en": "He spent the evening reading.", "prediction": "He spent the night in reading."}
+{"id": "tatoeba-test-000033", "zh": "你把我的头发剪得太短了。", "en": "You've cut my hair too short.", "prediction": "You cut my hair too short."}
+{"id": "tatoeba-test-000034", "zh": "这是给你的票", "en": "Here's a ticket for you.", "prediction": "This is your ticket."}
+{"id": "tatoeba-test-000035", "zh": "在民主国家，报刊的独立是很重要的。", "en": "In a democracy, it is important that the press be independent.", "prediction": "In democratic countries, the independence of the newspaper is important."}
+{"id": "tatoeba-test-000036", "zh": "他会开车。", "en": "He can drive.", "prediction": "He will drive."}
+{"id": "tatoeba-test-000037", "zh": "那边有人吗？", "en": "Is someone there?", "prediction": "Is there someone there?"}
+{"id": "tatoeba-test-000038", "zh": "装修还不错。", "en": "The decorating isn't bad.", "prediction": "Repair is good."}
+{"id": "tatoeba-test-000039", "zh": "灯里的油用完了。", "en": "All the oil in the lamp has been used.", "prediction": "The oil in the light is finished."}
+{"id": "tatoeba-test-000040", "zh": "我不知道你的计划。", "en": "I didn't know about your plan.", "prediction": "I don't know your plans."}
+{"id": "tatoeba-test-000041", "zh": "他怀念波士顿。", "en": "He misses Boston.", "prediction": "He missed Boston."}
+{"id": "tatoeba-test-000042", "zh": "她在回家。", "en": "She's going home.", "prediction": "She is home."}
+{"id": "tatoeba-test-000043", "zh": "给时光以生命，而不是给生命以时光。", "en": "Add life to your days and not days to your life.", "prediction": "Give life time, not life time."}
+{"id": "tatoeba-test-000044", "zh": "经济进展得慢。", "en": "The economy progressed slowly.", "prediction": "The economic progress is slow."}
+{"id": "tatoeba-test-000045", "zh": "你最喜欢什么蔬菜？", "en": "What vegetable do you like best?", "prediction": "What vegetables do you prefer?"}
+{"id": "tatoeba-test-000046", "zh": "源代码有没有？", "en": "Do you have the source code?", "prediction": "Is there source code?"}
+{"id": "tatoeba-test-000047", "zh": "要多久？", "en": "How much time does it take?", "prediction": "How long will it take?"}
+{"id": "tatoeba-test-000048", "zh": "到的有我的信吗？", "en": "Have any letters arrived for me?", "prediction": "Have I got my letter?"}
+{"id": "tatoeba-test-000049", "zh": "太阳升出了地平线。", "en": "The sun rose over the horizon.", "prediction": "The sun rises from the horizon."}
+{"id": "tatoeba-test-000050", "zh": "玛丽是一个非常漂亮的姑娘。", "en": "Mary is an exceptionally beautiful girl.", "prediction": "Mary is a very beautiful girl."}
+{"id": "tatoeba-test-000051", "zh": "汤姆在吹嘘。", "en": "Tom is exaggerating.", "prediction": "Tom is screaming."}
+{"id": "tatoeba-test-000052", "zh": "热是一种能量。", "en": "Heat is a form of energy.", "prediction": "Heat is an energy."}
+{"id": "tatoeba-test-000053", "zh": "你是哪国家？", "en": "Where do you come from?", "prediction": "Which country are you?"}
+{"id": "tatoeba-test-000054", "zh": "空号。", "en": "Number unobtainable.", "prediction": "The air number."}
+{"id": "tatoeba-test-000055", "zh": "你不热吗？", "en": "You're not hot?", "prediction": "Are you not hot?"}
+{"id": "tatoeba-test-000056", "zh": "他怕得到肺癌。", "en": "He is afraid of getting lung cancer.", "prediction": "He's afraid of lung cancer."}
+{"id": "tatoeba-test-000057", "zh": "你最喜欢这部电影的哪一部分呢？", "en": "Which bit of the film did you like most?", "prediction": "What part of this movie do you like most?"}
+{"id": "tatoeba-test-000058", "zh": "你很快就会开始喜欢他的。", "en": "You will soon get to like him.", "prediction": "You will soon start to like him."}
+{"id": "tatoeba-test-000059", "zh": "这只猫比我更喜欢坐在椅子上。", "en": "The cat likes sitting in the chair more than I do.", "prediction": "This cat preferred to sit on a chair than I did."}
+{"id": "tatoeba-test-000060", "zh": "你能让我看看吗？", "en": "Would you like me to take a look?", "prediction": "Can you let me see?"}
+{"id": "tatoeba-test-000061", "zh": "她不总是高兴。", "en": "She is not always happy.", "prediction": "She is not always happy."}
+{"id": "tatoeba-test-000062", "zh": "我不知道是不是所有机器人都这么懒。", "en": "I am not sure if all the robots are so lazy.", "prediction": "I don't know if all robots are so slick."}
+{"id": "tatoeba-test-000063", "zh": "假设得很大。", "en": "That's a pretty big assumption.", "prediction": "Suppose it is big."}
+{"id": "tatoeba-test-000064", "zh": "你不用藏著。", "en": "You don't have to hide.", "prediction": "You need not hide it."}
+{"id": "tatoeba-test-000065", "zh": "看了信之后，她把它撕成碎片。", "en": "After she had read the letter, she tore it to pieces.", "prediction": "After reading the letter, she broke it into pieces."}
+{"id": "tatoeba-test-000066", "zh": "汤姆给玛丽在她桌上留了便条。", "en": "Tom left a note for Mary on her desk.", "prediction": "Tom left a bar on her table to Mary."}
+{"id": "tatoeba-test-000067", "zh": "非洲是转移的大洲。", "en": "Africa is a continent of migration.", "prediction": "Africa is a transit continent."}
+{"id": "tatoeba-test-000068", "zh": "你用什么方式减压？", "en": "How do you relieve stress?", "prediction": "How do you reduce pressure?"}
+{"id": "tatoeba-test-000069", "zh": "你被骗了。", "en": "You've been deceived.", "prediction": "You are deceived."}
+{"id": "tatoeba-test-000070", "zh": "没有人受伤。", "en": "Nobody was injured.", "prediction": "No one was injured."}
+{"id": "tatoeba-test-000071", "zh": "他似乎对自己的状况不满意。", "en": "He does not seem pleased with his condition.", "prediction": "He seems unhappy with his situation."}
+{"id": "tatoeba-test-000072", "zh": "那是无稽之谈。只有傻瓜才会相信。", "en": "That's nonsense. Nobody but a fool would believe it.", "prediction": "It's absurd, but only the fools can believe it."}
+{"id": "tatoeba-test-000073", "zh": "我注意到她戴着新眼镜。", "en": "I noticed that she's wearing new glasses.", "prediction": "I noticed she was wearing new glasses."}
+{"id": "tatoeba-test-000074", "zh": "你需要个假期。", "en": "You need a vacation.", "prediction": "You need a holiday."}
+{"id": "tatoeba-test-000075", "zh": "从根部把植物拔出来。", "en": "Pull the plant up by the roots.", "prediction": "Remove the plants from the roots."}
+{"id": "tatoeba-test-000076", "zh": "别去邮局。", "en": "Don't go to the post office.", "prediction": "Do not go to the post office."}
+{"id": "tatoeba-test-000077", "zh": "我想这取决于天气。", "en": "I guess it depends on the weather.", "prediction": "I think it depends on the weather."}
+{"id": "tatoeba-test-000078", "zh": "仙台地震的结果很恐怖。", "en": "The consequences of Sendai's earthquake were dreadful!", "prediction": "The result of the earthquake in Sendai was terrible."}
+{"id": "tatoeba-test-000079", "zh": "两三年就想掌握法语是很困难的。", "en": "It is very difficult to master French in just two or three years.", "prediction": "It is difficult to learn French in two or three years."}
+{"id": "tatoeba-test-000080", "zh": "我很想流利地说英语。", "en": "I really want to speak English fluently.", "prediction": "I would like to speak English fluently."}
+{"id": "tatoeba-test-000081", "zh": "装病是没用的。", "en": "There is no point in pretending to be sick.", "prediction": "Being ill is useless."}
+{"id": "tatoeba-test-000082", "zh": "一切就绪。", "en": "Everything's ready.", "prediction": "Everything is ready."}
+{"id": "tatoeba-test-000083", "zh": "你想怎么做？", "en": "How do you want to do it?", "prediction": "What do you want to do?"}
+{"id": "tatoeba-test-000084", "zh": "谁先来？", "en": "Whose go is it first?", "prediction": "Who comes first?"}
+{"id": "tatoeba-test-000085", "zh": "罗马尼亚语是罗曼语族。", "en": "The Romanian language is part of the Romance language family.", "prediction": "The Romanian language is the Romanian."}
+{"id": "tatoeba-test-000086", "zh": "跟你没半毛钱关系。", "en": "This is none of your business.", "prediction": "It has nothing to do with half money."}
+{"id": "tatoeba-test-000087", "zh": "汤姆非常性感。", "en": "Tom is so hot.", "prediction": "Tom is very sexy."}
+{"id": "tatoeba-test-000088", "zh": "你应该为你没有及时回家吃晚餐向你父亲道歉。", "en": "You should apologize to your father for not getting home in time for dinner.", "prediction": "You should apologize to your father for not going home at the time to eat dinner."}
+{"id": "tatoeba-test-000089", "zh": "对事不对人。", "en": "Address the matters, and not the people involved.", "prediction": "It is not for people."}
+{"id": "tatoeba-test-000090", "zh": "事实显而易见。", "en": "The facts are clear.", "prediction": "The facts are obvious."}
+{"id": "tatoeba-test-000091", "zh": "十年是一段漫长的岁月。", "en": "Ten years is a really long period of time.", "prediction": "Ten years are a long time."}
+{"id": "tatoeba-test-000092", "zh": "这个沙滩挤满了游客", "en": "The beach was packed with tourists.", "prediction": "The beach is full of tourists."}
+{"id": "tatoeba-test-000093", "zh": "汤姆说他需要钱。", "en": "Tom said he needed money.", "prediction": "Tom said he needed money."}
+{"id": "tatoeba-test-000094", "zh": "我8点开始工作。", "en": "I start work at 8.", "prediction": "I started work at 8 a.m."}
+{"id": "tatoeba-test-000095", "zh": "我喜欢它发声的方式", "en": "I like the way it sounds.", "prediction": "I like how it speaks."}
+{"id": "tatoeba-test-000096", "zh": "我今天受伤了。", "en": "I got hurt today.", "prediction": "I was injured today."}
+{"id": "tatoeba-test-000097", "zh": "她想去哪里?", "en": "Where does she want to go?", "prediction": "Where would she want to go?"}
+{"id": "tatoeba-test-000098", "zh": "未来，机器人会像个人电脑一样普及吗？", "en": "In the future, will robots be as common as personal computers?", "prediction": "Will robots be popular as personal computers in the future?"}
+{"id": "tatoeba-test-000099", "zh": "要得。", "en": "It is feasible.", "prediction": "to have."}
+{"id": "tatoeba-test-000100", "zh": "我随着他对Justin Bieber的兴趣而就不能爱他。", "en": "With his interest in Justin Bieber, I just couldn't love him.", "prediction": "I can't love him because he's interested in Justin Bieber."}
+{"id": "tatoeba-test-000101", "zh": "现在我规律服药。", "en": "Now I take medication regularly.", "prediction": "I take the medication regularly."}
+{"id": "tatoeba-test-000102", "zh": "汤姆不明白。", "en": "Tom doesn't understand.", "prediction": "Tom does not understand."}
+{"id": "tatoeba-test-000103", "zh": "当你出门时，别忘了锁门。", "en": "Don't forget to lock the door when leaving.", "prediction": "When you go out, don't forget to lock the door."}
+{"id": "tatoeba-test-000104", "zh": "汤姆不知所措。", "en": "Tom doesn't know what he should do.", "prediction": "Tom is unknown."}
+{"id": "tatoeba-test-000105", "zh": "美国有些敌人。", "en": "America has enemies.", "prediction": "America has some enemies."}
+{"id": "tatoeba-test-000106", "zh": "在我们公司每月都会举办社团活动。", "en": "Every month at our company, they run a community activity.", "prediction": "We hold community events every month in our company."}
+{"id": "tatoeba-test-000107", "zh": "汤姆在玛丽身上施了咒语。", "en": "Tom cast a spell on Mary.", "prediction": "Tom put a magic on Mary."}
+{"id": "tatoeba-test-000108", "zh": "我的老婆是一个医生。", "en": "My wife is a physician.", "prediction": "My wife is a doctor."}
+{"id": "tatoeba-test-000109", "zh": "他们是外行。", "en": "They are laymen.", "prediction": "They are outside."}
+{"id": "tatoeba-test-000110", "zh": "我住在纽约。", "en": "I live in New York.", "prediction": "I live in New York."}
+{"id": "tatoeba-test-000111", "zh": "她能和她哥哥游得一样快。", "en": "She can swim as quickly as her brother.", "prediction": "She could swim as fast as her brother."}
+{"id": "tatoeba-test-000112", "zh": "他差点在雪中冻死。", "en": "He almost froze to death from the snow.", "prediction": "He almost died in the snow."}
+{"id": "tatoeba-test-000113", "zh": "纸是中国发明的。", "en": "Paper was invented in China.", "prediction": "Paper was invented in China."}
+{"id": "tatoeba-test-000114", "zh": "他可能不会来了。", "en": "He probably won't come.", "prediction": "He may not come."}
+{"id": "tatoeba-test-000115", "zh": "他是个粗鲁的人。", "en": "He is gross, man!", "prediction": "He is a brutal man."}
+{"id": "tatoeba-test-000116", "zh": "我要一只宠老虎。", "en": "I want a pet tiger.", "prediction": "I want a tiger."}
+{"id": "tatoeba-test-000117", "zh": "我找你老板。", "en": "I want to see your boss.", "prediction": "I'm looking for your boss."}
+{"id": "tatoeba-test-000118", "zh": "我们的邻居晚上很吵。", "en": "Our neighbours are really loud in the evening.", "prediction": "Our neighbors were noise at night."}
+{"id": "tatoeba-test-000119", "zh": "不要这样看我。", "en": "Don't look at me like this.", "prediction": "Don't look at me like that."}
+{"id": "tatoeba-test-000120", "zh": "他的衣服总是很臭。", "en": "His clothes always smell bad.", "prediction": "His clothes always smell."}
+{"id": "tatoeba-test-000121", "zh": "冬天已经过去了。", "en": "Winter is over.", "prediction": "The winter has passed."}
+{"id": "tatoeba-test-000122", "zh": "他教了我们英语。", "en": "He taught us English.", "prediction": "He taught us English."}
+{"id": "tatoeba-test-000123", "zh": "这是无可否认的事实。", "en": "There is no denying the fact.", "prediction": "This is an unnecessary fact."}
+{"id": "tatoeba-test-000124", "zh": "我们明天会有客人。", "en": "We'll have guests tomorrow.", "prediction": "We will have guests tomorrow."}
+{"id": "tatoeba-test-000125", "zh": "你学习中国历史。", "en": "You study Chinese history.", "prediction": "You are learning Chinese history."}
+{"id": "tatoeba-test-000126", "zh": "今天很有趣。", "en": "Today was fun.", "prediction": "It was fun today."}
+{"id": "tatoeba-test-000127", "zh": "它是给容易上当受骗的人的。", "en": "That's for suckers.", "prediction": "It is for people who are easily deceived."}
+{"id": "tatoeba-test-000128", "zh": "汤姆认为是酷儿。", "en": "Tom identifies as queer.", "prediction": "Tom thought it was cool."}
+{"id": "tatoeba-test-000129", "zh": "我也能去。", "en": "I can come, too.", "prediction": "I can go too."}
+{"id": "tatoeba-test-000130", "zh": "我们称一斤花枝吧。", "en": "Let us weigh one catty of cuttlefish.", "prediction": "Let's call it a kilogram of flower."}
+{"id": "tatoeba-test-000131", "zh": "我不指望从你身上得到什么。", "en": "I don't expect anything from you.", "prediction": "I don't expect anything from you."}
+{"id": "tatoeba-test-000132", "zh": "印度万岁。", "en": "Long live India!", "prediction": "India is alive."}
+{"id": "tatoeba-test-000133", "zh": "人都是要死的。", "en": "Everyone dies.", "prediction": "People are all to die."}
+{"id": "tatoeba-test-000134", "zh": "我的手冷到没有感觉了。", "en": "My hand is so cold I can't feel it anymore.", "prediction": "My hands were so cold that I didn't feel it."}
+{"id": "tatoeba-test-000135", "zh": "我擅长网球。", "en": "I'm good at tennis.", "prediction": "I am good at tennis."}
+{"id": "tatoeba-test-000136", "zh": "我不是魔女。", "en": "I'm not a witch.", "prediction": "I am not a witch."}
+{"id": "tatoeba-test-000137", "zh": "浓雾使道路很难看清。", "en": "The thick fog made it hard to see the road.", "prediction": "The bull makes it difficult to see the road."}
+{"id": "tatoeba-test-000138", "zh": "我在吃午餐。", "en": "I'm eating lunch.", "prediction": "I'm eating lunch."}
+{"id": "tatoeba-test-000139", "zh": "什么都别问我。", "en": "Don't ask me anything.", "prediction": "Don't ask me anything."}
+{"id": "tatoeba-test-000140", "zh": "你要我帮你吗?", "en": "Would you like me to help you?", "prediction": "Do you want me to help you?"}
+{"id": "tatoeba-test-000141", "zh": "整个世界都需要和平。", "en": "The entire world desires peace.", "prediction": "The whole world needs peace."}
+{"id": "tatoeba-test-000142", "zh": "已经等了半个小时了。", "en": "I have already waited for half an hour.", "prediction": "It has been waiting half an hour."}
+{"id": "tatoeba-test-000143", "zh": "看看那边的考拉。", "en": "Look at that koala over there.", "prediction": "Look at the coola there."}
+{"id": "tatoeba-test-000144", "zh": "一些人批评了我们的决定。", "en": "Some people criticized our decision.", "prediction": "Some have criticized our decision."}
+{"id": "tatoeba-test-000145", "zh": "本月结束之前请等待。", "en": "Please wait until the end of this month.", "prediction": "Please wait until the end of this month."}
+{"id": "tatoeba-test-000146", "zh": "走著瞧", "en": "Wait and see.", "prediction": "Go and see."}
+{"id": "tatoeba-test-000147", "zh": "我什么都不需要。", "en": "I don't need anything.", "prediction": "I don't need anything."}
+{"id": "tatoeba-test-000148", "zh": "汤姆要做个决定。", "en": "Tom had a decision to make.", "prediction": "Tom is making a decision."}
+{"id": "tatoeba-test-000149", "zh": "我的房间就在楼上。", "en": "My room is just above.", "prediction": "My room is on top."}
+{"id": "tatoeba-test-000150", "zh": "汤姆让玛丽幚约翰。", "en": "Tom told Mary to help John.", "prediction": "Tom gave Mary John."}
+{"id": "tatoeba-test-000151", "zh": "纵使没有人陪我，我也要去看这部电影。", "en": "Even if no one goes with me, I still want to see this movie.", "prediction": "Even though no one is with me, I'm going to watch this movie."}
+{"id": "tatoeba-test-000152", "zh": "我们交了朋友。", "en": "We got to be friends.", "prediction": "We made friends."}
+{"id": "tatoeba-test-000153", "zh": "去年他在海上度过了三个月。", "en": "Last year, he spent three months at sea.", "prediction": "Last year he spent three months on the sea."}
+{"id": "tatoeba-test-000154", "zh": "我会买巧克力。", "en": "I will buy chocolate.", "prediction": "I'll buy chocolate."}
+{"id": "tatoeba-test-000155", "zh": "我喜欢外语。", "en": "I like foreign languages.", "prediction": "I like foreign languages."}
+{"id": "tatoeba-test-000156", "zh": "价钱可以打折吗？", "en": "Can the price be discounted?", "prediction": "Can the price be cut?"}
+{"id": "tatoeba-test-000157", "zh": "这对于我来说没任何意义。", "en": "It doesn't make sense to me.", "prediction": "This has no meaning for me."}
+{"id": "tatoeba-test-000158", "zh": "她跟我说她买了唱片。", "en": "She told me that she has bought a record.", "prediction": "She told me she bought the record."}
+{"id": "tatoeba-test-000159", "zh": "收到。", "en": "Roger that.", "prediction": "received ."}
+{"id": "tatoeba-test-000160", "zh": "我有一张地图。", "en": "I have a map.", "prediction": "I have a map."}
+{"id": "tatoeba-test-000161", "zh": "要不是他这么磨磨蹭蹭，现在早做完了。", "en": "If he hadn't wasted time, he'd be finished by now.", "prediction": "If he didn't have so much to throw it out, it's done sooner."}
+{"id": "tatoeba-test-000162", "zh": "我很高兴再次见到你。", "en": "I am very happy to see you again.", "prediction": "I am glad to see you again."}
+{"id": "tatoeba-test-000163", "zh": "你听到新闻了吗？", "en": "Did you hear the news?", "prediction": "Have you heard the news?"}
+{"id": "tatoeba-test-000164", "zh": "还不太确定。", "en": "It's not quite certain.", "prediction": "Not very certain."}
+{"id": "tatoeba-test-000165", "zh": "你想吗?", "en": "Do you want to?", "prediction": "Do you think?"}
+{"id": "tatoeba-test-000166", "zh": "我们现在缺乏库存。", "en": "We're out of stock now.", "prediction": "We lack stocks now."}
+{"id": "tatoeba-test-000167", "zh": "她看完信了。", "en": "She finished reading the letter.", "prediction": "She finished reading the letter."}
+{"id": "tatoeba-test-000168", "zh": "我明天的课很早。", "en": "My class tomorrow is very early in the day.", "prediction": "My lesson is early tomorrow."}
+{"id": "tatoeba-test-000169", "zh": "穿上丝袜！", "en": "Put on your stockings!", "prediction": "Wear a socket!"}
+{"id": "tatoeba-test-000170", "zh": "仅仅听我们说吧。", "en": "Just listen to us.", "prediction": "Just listen to us."}
+{"id": "tatoeba-test-000171", "zh": "你用跑的。", "en": "Run.", "prediction": "You run."}
+{"id": "tatoeba-test-000172", "zh": "汤姆总是迟到。", "en": "Tom is always late.", "prediction": "Tom is always late."}
+{"id": "tatoeba-test-000173", "zh": "这么恶心的！", "en": "How disgusting!", "prediction": "So ugly!"}
+{"id": "tatoeba-test-000174", "zh": "睡好，迪米。", "en": "Sleep well, Timmy.", "prediction": "Sleep well, Dimi."}
+{"id": "tatoeba-test-000175", "zh": "这个规定太不人性化了。", "en": "This rule is so inhumane.", "prediction": "This regulation is too dishuman."}
+{"id": "tatoeba-test-000176", "zh": "改邪归正。", "en": "Straighten up.", "prediction": "Repair the evil."}
+{"id": "tatoeba-test-000177", "zh": "您的工资是每个月打入您的工资卡吗？", "en": "Does your salary get put on your pay card on a monthly basis?", "prediction": "Are your wages included in your pay card every month?"}
+{"id": "tatoeba-test-000178", "zh": "你想吃水果馅饼吗？", "en": "You want to eat fruit pies?", "prediction": "Do you want to eat fruit cakes?"}
+{"id": "tatoeba-test-000179", "zh": "根据我的估计，她现在应该在印度了。", "en": "According to my calculation, she should be in India by now.", "prediction": "According to my estimates, she should be in India now."}
+{"id": "tatoeba-test-000180", "zh": "最好赶紧离开！", "en": "Better run away immediately!", "prediction": "It is best to go quickly!"}
+{"id": "tatoeba-test-000181", "zh": "你必须给汤姆更多时间。", "en": "You have to give Tom more time.", "prediction": "You have to give Tom more time."}
+{"id": "tatoeba-test-000182", "zh": "甚至我们的手指都不相像。", "en": "Not even our fingers look alike.", "prediction": "Even our fingers are not similar."}
+{"id": "tatoeba-test-000183", "zh": "他们总是抱怨。", "en": "They're always complaining.", "prediction": "They always complain."}
+{"id": "tatoeba-test-000184", "zh": "我想离开巴黎。", "en": "I want to leave Paris.", "prediction": "I want to leave Paris."}
+{"id": "tatoeba-test-000185", "zh": "他们住在一栋大房子里。", "en": "They live in a big house.", "prediction": "They live in a large house."}
+{"id": "tatoeba-test-000186", "zh": "希腊语很难。", "en": "Greek is difficult.", "prediction": "Greek is difficult."}
+{"id": "tatoeba-test-000187", "zh": "我在数学上很有天分。", "en": "I am very talented at maths.", "prediction": "I have a talent in mathematics."}
+{"id": "tatoeba-test-000188", "zh": "我和他比赛跑步。", "en": "I ran a race with him.", "prediction": "I ran with him."}
+{"id": "tatoeba-test-000189", "zh": "你怎么这么要紧哪！", "en": "Why are you so anxious!", "prediction": "Why do you matter so much!"}
+{"id": "tatoeba-test-000190", "zh": "汤姆的自行车昨天被偷了。", "en": "Tom's bicycle was stolen yesterday.", "prediction": "Tom's bike was stolen yesterday."}
+{"id": "tatoeba-test-000191", "zh": "我会在两个小时内回来。", "en": "I'll be back within a couple of hours.", "prediction": "I'll come back in two hours."}
+{"id": "tatoeba-test-000192", "zh": "Tom喜欢看恐怖电影吗？", "en": "Does Tom like watching horror movies?", "prediction": "Do you like watching horror movies?"}
+{"id": "tatoeba-test-000193", "zh": "他没反抗。", "en": "He didn't resist.", "prediction": "He did not resist."}
+{"id": "tatoeba-test-000194", "zh": "我的相机坏了。", "en": "Something's wrong with my camera.", "prediction": "My camera was broken."}
+{"id": "tatoeba-test-000195", "zh": "请问他们笑什么？", "en": "What are they laughing at?", "prediction": "What do they laugh?"}
+{"id": "tatoeba-test-000196", "zh": "汤姆并不是玛丽说得那样英俊。", "en": "Tom wasn't as handsome as Mary said he was.", "prediction": "Tom was not so beautiful as Mary said."}
+{"id": "tatoeba-test-000197", "zh": "再来！", "en": "Again!", "prediction": "Come again!"}
+{"id": "tatoeba-test-000198", "zh": "我在剧场。", "en": "I was at the theatre.", "prediction": "I am in the theater."}
+{"id": "tatoeba-test-000199", "zh": "警察把小偷抓住了。", "en": "The policeman caught the thief.", "prediction": "Police have caught the thief."}
+{"id": "tatoeba-test-000200", "zh": "修面吗？", "en": "Did you shave?", "prediction": "Repaired?"}
+{"id": "tatoeba-test-000201", "zh": "萨米准备去机场。", "en": "Sami is ready to leave for the airport.", "prediction": "Samy is ready to go to the airport."}
+{"id": "tatoeba-test-000202", "zh": "汤姆救了玛丽的命。", "en": "Tom saved Mary's life.", "prediction": "Tom saved Mary's life."}
+{"id": "tatoeba-test-000203", "zh": "很明显的，他们房前的树上筑巢。", "en": "Apparently, they nest in a tree in front of the house.", "prediction": "It is clear that the nests were built on the trees in front of their rooms."}
+{"id": "tatoeba-test-000204", "zh": "祝你早日痊愈!", "en": "I wish you a speedy recovery.", "prediction": "I wish you healed soon!"}
+{"id": "tatoeba-test-000205", "zh": "水井是可以取水的地方。", "en": "A well is a place where you can get water.", "prediction": "The waterfalls are places where water can be taken."}
+{"id": "tatoeba-test-000206", "zh": "我在。", "en": "I was here.", "prediction": "I am there."}
+{"id": "tatoeba-test-000207", "zh": "她有一整篮的苹果。", "en": "She had a basket full of apples.", "prediction": "She had a whole basket of apples."}
+{"id": "tatoeba-test-000208", "zh": "我有点紧张。", "en": "I was a little bit nervous.", "prediction": "I am a bit nervous."}
+{"id": "tatoeba-test-000209", "zh": "把灯打开。我什么都看不见了。", "en": "Switch on the light. I can't see anything.", "prediction": "Open the light, I can't see anything."}
+{"id": "tatoeba-test-000210", "zh": "这是什么语言？", "en": "What is this language?", "prediction": "What language is this?"}
+{"id": "tatoeba-test-000211", "zh": "我现在应该做什么呢？", "en": "So what should I do now?", "prediction": "What should I do now?"}
+{"id": "tatoeba-test-000212", "zh": "汤姆以前从不抽烟，不过现在开始抽了。", "en": "Tom never used to smoke, but he does now.", "prediction": "Tom never smoked before, but he has started smoking now."}
+{"id": "tatoeba-test-000213", "zh": "他相当帅。", "en": "He's rather handsome.", "prediction": "He is pretty cute."}
+{"id": "tatoeba-test-000214", "zh": "我以为你要7点半起床。", "en": "I thought you had to get up at 7.30.", "prediction": "I thought you should wake up at 7:30."}
+{"id": "tatoeba-test-000215", "zh": "抓住。", "en": "Grab it.", "prediction": "to catch."}
+{"id": "tatoeba-test-000216", "zh": "她屁股真棒。", "en": "She's got a nice ass.", "prediction": "Her ass is great."}
+{"id": "tatoeba-test-000217", "zh": "汤姆，我不想跟你讲话。", "en": "I don't want to talk to you, Tom.", "prediction": "Tom, I don't want to talk to you."}
+{"id": "tatoeba-test-000218", "zh": "这些杂志对小孩的影响很大。", "en": "Such magazines have a great influence on children.", "prediction": "These magazines have a great impact on children."}
+{"id": "tatoeba-test-000219", "zh": "汤姆知道我们不高兴。", "en": "Tom knows that we aren't happy.", "prediction": "Tom knew we were unhappy."}
+{"id": "tatoeba-test-000220", "zh": "她发现她已经断盐了。", "en": "She discovered that she had run out of salt.", "prediction": "She found her had cut the salt."}
+{"id": "tatoeba-test-000221", "zh": "亚尼跟斯库拉没空。", "en": "Yanni and Skura are not available.", "prediction": "Annie and Scura are free."}
+{"id": "tatoeba-test-000222", "zh": "社会变态者是冷漠的。", "en": "A sociopath is cold.", "prediction": "Social deformers are discretionate."}
+{"id": "tatoeba-test-000223", "zh": "这棵树停止生长了。", "en": "The tree has stopped growing.", "prediction": "The tree stopped growing."}
+{"id": "tatoeba-test-000224", "zh": "我们这里没有任何乘橇的人。", "en": "We don't have any sledders here.", "prediction": "There are no people who travel to the shark here."}
+{"id": "tatoeba-test-000225", "zh": "我们也同意。", "en": "I also agree.", "prediction": "We also agree."}
+{"id": "tatoeba-test-000226", "zh": "我真的应该学英语, 但是我想看电影。", "en": "I should be studying English, but I want to watch a movie.", "prediction": "I really should learn English, but I want to watch movies."}
+{"id": "tatoeba-test-000227", "zh": "报警！", "en": "Call the police.", "prediction": "Call the police!"}
+{"id": "tatoeba-test-000228", "zh": "笔在桌上。", "en": "The pen is on the desk.", "prediction": "Pen on the table."}
+{"id": "tatoeba-test-000229", "zh": "计划行得通。", "en": "The plan is workable.", "prediction": "The plan works."}
+{"id": "tatoeba-test-000230", "zh": "求人不如求己。", "en": "If you want something done right, do it yourself.", "prediction": "It is better to ask for themselves."}
+{"id": "tatoeba-test-000231", "zh": "你应该检查一下。", "en": "You should check it out.", "prediction": "You should check it."}
+{"id": "tatoeba-test-000232", "zh": "他们认为自己是幸运的。", "en": "They consider themselves fortunate.", "prediction": "They think they are lucky."}
+{"id": "tatoeba-test-000233", "zh": "我教历史。", "en": "I teach history.", "prediction": "I teach history."}
+{"id": "tatoeba-test-000234", "zh": "你通常什么时候起床？", "en": "What time do you usually get up?", "prediction": "When do you usually wake up?"}
+{"id": "tatoeba-test-000235", "zh": "汤姆不合作。", "en": "Tom has been uncooperative.", "prediction": "Tom does not work."}
+{"id": "tatoeba-test-000236", "zh": "他告诫他们不要吵闹。", "en": "He admonished them for being noisy.", "prediction": "He warned them not to be noise."}
+{"id": "tatoeba-test-000237", "zh": "那看来很好。", "en": "That feels good.", "prediction": "It looks good."}
+{"id": "tatoeba-test-000238", "zh": "汤姆有残疾。", "en": "Tom is handicapped.", "prediction": "Tom is disabled."}
+{"id": "tatoeba-test-000239", "zh": "她急忙带著好消息跑回家。", "en": "She rushed home with the good news.", "prediction": "She was rushing home with good news."}
+{"id": "tatoeba-test-000240", "zh": "我还年轻。", "en": "I am still young.", "prediction": "I am still young."}
+{"id": "tatoeba-test-000241", "zh": "去看电影怎样？", "en": "How about going to the cinema?", "prediction": "How to watch the movie?"}
+{"id": "tatoeba-test-000242", "zh": "你应该和Tom说。", "en": "You should speak with Tom.", "prediction": "You should talk to Tom."}
+{"id": "tatoeba-test-000243", "zh": "她的母亲敲门。", "en": "Her mother knocked on the door.", "prediction": "Her mother knocked at the door."}
+{"id": "tatoeba-test-000244", "zh": "你每个月洗几次车？", "en": "How often do you wash your car a month?", "prediction": "How many times a month do you wash your car?"}
+{"id": "tatoeba-test-000245", "zh": "铁是种有用的金属。", "en": "Iron is a useful metal.", "prediction": "Iron is a useful metal."}
+{"id": "tatoeba-test-000246", "zh": "不要随便开玩笑。", "en": "Stop fooling around.", "prediction": "Don't jok anyway."}
+{"id": "tatoeba-test-000247", "zh": "我挺喜欢文学史的。", "en": "I enjoy the history of literature.", "prediction": "I love literary history."}
+{"id": "tatoeba-test-000248", "zh": "给我来仨。", "en": "Gimme three.", "prediction": "Give me a twin."}
+{"id": "tatoeba-test-000249", "zh": "进你的车里。", "en": "Get into your car.", "prediction": "Go into your car."}
+{"id": "tatoeba-test-000250", "zh": "此处禁止烤肉。", "en": "Barbecuing is forbidden here.", "prediction": "Cake meat is prohibited."}
+{"id": "tatoeba-test-000251", "zh": "这是一条鱼。", "en": "This is a fish.", "prediction": "It is a fish."}
+{"id": "tatoeba-test-000252", "zh": "网络连不上。", "en": "The internet is not connecting.", "prediction": "The network cannot be connected."}
+{"id": "tatoeba-test-000253", "zh": "这个叫什么？", "en": "What do you call this?", "prediction": "What is this called?"}
+{"id": "tatoeba-test-000254", "zh": "那不是我的本意。", "en": "It wasn't my intention.", "prediction": "It was not my intention."}
+{"id": "tatoeba-test-000255", "zh": "学世界语是浪费时间。", "en": "Esperanto is a waste of time.", "prediction": "Learning world languages is a waste of time."}
+{"id": "tatoeba-test-000256", "zh": "过马路时请小心。", "en": "Please be careful when crossing the street.", "prediction": "Be careful when passing the road."}
+{"id": "tatoeba-test-000257", "zh": "我对这个故事感兴趣。", "en": "I am interested in this story.", "prediction": "I am interested in this story."}
+{"id": "tatoeba-test-000258", "zh": "钱包在包上。", "en": "The wallet is on the bag.", "prediction": "The wallet is on the bag."}
+{"id": "tatoeba-test-000259", "zh": "对一个科学家来说，情绪化是不好的。", "en": "It is not good for a scientist to get emotional.", "prediction": "Emotionalization is bad for a scientist."}
+{"id": "tatoeba-test-000260", "zh": "我在家里。", "en": "I'm home.", "prediction": "I am at home."}
+{"id": "tatoeba-test-000261", "zh": "鸟儿在空中飞翔。", "en": "The birds soar in the air.", "prediction": "Birds fly in the air."}
+{"id": "tatoeba-test-000262", "zh": "汤姆说得多快啊！", "en": "How fast Tom speaks!", "prediction": "How fast it was!"}
+{"id": "tatoeba-test-000263", "zh": "丹甚至不住在伦敦。", "en": "Dan didn't even live in London.", "prediction": "Dan even stayed in London."}
+{"id": "tatoeba-test-000264", "zh": "黄金比铁重。", "en": "Gold's heavier than iron.", "prediction": "Weight of gold than iron."}
+{"id": "tatoeba-test-000265", "zh": "他不爱说话。", "en": "He's not a talkative person.", "prediction": "He doesn't like to speak."}
+{"id": "tatoeba-test-000266", "zh": "我们的妈妈买了一只小狗给我们。", "en": "Our mother bought us a puppy.", "prediction": "Our mom bought a dog for us."}
+{"id": "tatoeba-test-000267", "zh": "他不辞而别。", "en": "He left without saying goodbye.", "prediction": "He did not give up."}
+{"id": "tatoeba-test-000268", "zh": "她没去看电影。", "en": "She didn't go see the movie.", "prediction": "She didn't go to watch the movie."}
+{"id": "tatoeba-test-000269", "zh": "抱歉，我不是本地人。", "en": "I am sorry. I am not from here.", "prediction": "Sorry, I am not a local."}
+{"id": "tatoeba-test-000270", "zh": "每天早上我都要靠闹钟来按时叫醒我。", "en": "I depend on the alarm clock to wake up on time every morning.", "prediction": "I was going to wake me up at time every morning."}
+{"id": "tatoeba-test-000271", "zh": "汤姆准备去工作。", "en": "Tom was ready to work.", "prediction": "Tom is ready to go to work."}
+{"id": "tatoeba-test-000272", "zh": "七夕节快乐！", "en": "Happy Qixi Festival!", "prediction": "Happy Seven Days!"}
+{"id": "tatoeba-test-000273", "zh": "我已经试过那个了。", "en": "I have already tried that.", "prediction": "I've tried that already."}
+{"id": "tatoeba-test-000274", "zh": "我们把屋子漆成绿色。", "en": "We painted the house green.", "prediction": "We painted the house green."}
+{"id": "tatoeba-test-000275", "zh": "他指控了她。", "en": "He laid a charge against her.", "prediction": "He accused her."}
+{"id": "tatoeba-test-000276", "zh": "您使我印象深刻。", "en": "You have left a heavy impression on me.", "prediction": "You impressed me deeply."}
+{"id": "tatoeba-test-000277", "zh": "她吃。", "en": "He ate.", "prediction": "She eats."}
+{"id": "tatoeba-test-000278", "zh": "别碰！", "en": "Hands off!", "prediction": "Don't touch it!"}
+{"id": "tatoeba-test-000279", "zh": "我有时候打破规矩。", "en": "I sometimes break the rules.", "prediction": "Sometimes I break the rules."}
+{"id": "tatoeba-test-000280", "zh": "多少苹果？", "en": "How many apples are there?", "prediction": "How many apples?"}
+{"id": "tatoeba-test-000281", "zh": "谢谢您的指教。", "en": "Thanks for your advice.", "prediction": "Thank you for your teaching."}
+{"id": "tatoeba-test-000282", "zh": "别对著我吼。", "en": "Don't shout at me.", "prediction": "Don't scream against me."}
+{"id": "tatoeba-test-000283", "zh": "早！", "en": "Morning!", "prediction": "It is early!"}
+{"id": "tatoeba-test-000284", "zh": "你的观点是重要的。", "en": "Your opinion matters.", "prediction": "Your views are important."}
+{"id": "tatoeba-test-000285", "zh": "好像很明显。", "en": "It seems pretty obvious.", "prediction": "It seems clear."}
+{"id": "tatoeba-test-000286", "zh": "快点。", "en": "Make it quick.", "prediction": "Fast to."}
+{"id": "tatoeba-test-000287", "zh": "消息给他带来了深深的悲伤。", "en": "The news made him feel deeply sad.", "prediction": "The news brought him deep sadness."}
+{"id": "tatoeba-test-000288", "zh": "他劳无所获。", "en": "He wasn't given any reward for his service.", "prediction": "He did nothing."}
+{"id": "tatoeba-test-000289", "zh": "记账。", "en": "Keep accounts.", "prediction": "and accounting."}
+{"id": "tatoeba-test-000290", "zh": "他侮辱她。", "en": "He insulted her.", "prediction": "He insulted her."}
+{"id": "tatoeba-test-000291", "zh": "我们清理了浴缸。", "en": "We cleaned the bath.", "prediction": "We cleaned the bathroom."}
+{"id": "tatoeba-test-000292", "zh": "他人即地狱。", "en": "Hell is other people.", "prediction": "Others are in Hell."}
+{"id": "tatoeba-test-000293", "zh": "她是我的同学。", "en": "She's my classmate.", "prediction": "She was my colleague."}
+{"id": "tatoeba-test-000294", "zh": "汤姆已经站着。", "en": "Tom is already standing.", "prediction": "Tom is standing."}
+{"id": "tatoeba-test-000295", "zh": "他没要去日本。", "en": "He didn't want to go to Japan.", "prediction": "He didn't want to go to Japan."}
+{"id": "tatoeba-test-000296", "zh": "他们不都是穷人。", "en": "They are not all poor.", "prediction": "They are not all poor."}
+{"id": "tatoeba-test-000297", "zh": "马克是如此的诚实所以每个人都赞扬他。", "en": "Mark is so honest that everybody commends him for it.", "prediction": "Mark was so honest that everyone praised him."}
+{"id": "tatoeba-test-000298", "zh": "差不多是就寝的时间了。", "en": "It's almost time to go to bed.", "prediction": "It is almost time to sleep."}
+{"id": "tatoeba-test-000299", "zh": "写下字母的大写字母。", "en": "Write the alphabet in capitals.", "prediction": "Write the large letters of the letter."}
+{"id": "tatoeba-test-000300", "zh": "汤姆忘了在测卷上写名字。", "en": "Tom forgot to write his name on the test paper.", "prediction": "Tom forgot to write his name on the test."}
+{"id": "tatoeba-test-000301", "zh": "我今晚感觉良好。", "en": "I felt good tonight.", "prediction": "I feel good tonight."}
+{"id": "tatoeba-test-000302", "zh": "你犯得上这样做吗？", "en": "Is there really a need to act like this?", "prediction": "Can you do that?"}
+{"id": "tatoeba-test-000303", "zh": "萨米说蕾拉是他的女朋友。", "en": "Sami said that Layla was his girlfriend.", "prediction": "Samie said Rila was his girlfriend."}
+{"id": "tatoeba-test-000304", "zh": "它超级好玩的", "en": "It was a blast.", "prediction": "It is super fun."}
+{"id": "tatoeba-test-000305", "zh": "玛丽告诉汤姆她想要辞职。", "en": "Mary told Tom she wanted to quit her job.", "prediction": "Mary told Tom she wanted to resign."}
+{"id": "tatoeba-test-000306", "zh": "我是一个认真的文员，在家里，我是一个好妻子兼好母亲。", "en": "I am a serious clerk, and at home, I am a good wife and mother.", "prediction": "I'm a serious writer, and at home I'm a good wife and a good mother."}
+{"id": "tatoeba-test-000307", "zh": "一场毁灭性的地震袭击了这个州的首府。", "en": "A devastating earthquake hit the state capital.", "prediction": "A devastating earthquake hit the state's capital."}
+{"id": "tatoeba-test-000308", "zh": "先到先得。", "en": "First come, first serve.", "prediction": "First to get."}
+{"id": "tatoeba-test-000309", "zh": "我很感激。", "en": "I'm grateful for that.", "prediction": "I am grateful."}
+{"id": "tatoeba-test-000310", "zh": "你真好。", "en": "You're too kind.", "prediction": "You are good."}
+{"id": "tatoeba-test-000311", "zh": "这里只有我一个人。", "en": "There's no one but me here.", "prediction": "Only I am alone here."}
+{"id": "tatoeba-test-000312", "zh": "骄兵必败。", "en": "Pride cometh before a fall.", "prediction": "The army will be defeated."}
+{"id": "tatoeba-test-000313", "zh": "他很有爱心。", "en": "He is very loving.", "prediction": "He was very loving."}
+{"id": "tatoeba-test-000314", "zh": "我们明天回来。", "en": "We'll come back tomorrow.", "prediction": "We will come back tomorrow."}
+{"id": "tatoeba-test-000315", "zh": "我迷上一个女孩。", "en": "He was enamored of the girl.", "prediction": "I am fascinated by a girl."}
+{"id": "tatoeba-test-000316", "zh": "我将在下一站下车。", "en": "I'm getting off at the next stop.", "prediction": "I'll go down the next station."}
+{"id": "tatoeba-test-000317", "zh": "注意。", "en": "Caution.", "prediction": "Attention to."}
+{"id": "tatoeba-test-000318", "zh": "救我！", "en": "Save me!", "prediction": "Save me!"}
+{"id": "tatoeba-test-000319", "zh": "游泳锻炼肌肉。", "en": "Swimming develops your muscles.", "prediction": "Swimming exercises muscles."}
+{"id": "tatoeba-test-000320", "zh": "父父子子。", "en": "Let the fathers be fathers and the sons sons.", "prediction": "Father and son."}
+{"id": "tatoeba-test-000321", "zh": "他越激动就越安静。", "en": "The more excited he gets, the quieter he becomes.", "prediction": "The more exciting he was, the more quiet he was."}
+{"id": "tatoeba-test-000322", "zh": "我希望如此。", "en": "I hope for that.", "prediction": "I hope that."}
+{"id": "tatoeba-test-000323", "zh": "你会开手排车吗?", "en": "Can you drive a manual transmission?", "prediction": "Will you start driving?"}
+{"id": "tatoeba-test-000324", "zh": "不管你去哪里，天空都是同样的颜色。", "en": "No matter where you go, the sky will always be the same color.", "prediction": "Whatever you go, the sky is the same color."}
+{"id": "tatoeba-test-000325", "zh": "汤姆帮玛丽剪头发。", "en": "Tom cut Mary's hair for her.", "prediction": "Tom helped Mary cut her hair."}
+{"id": "tatoeba-test-000326", "zh": "他们不错。", "en": "They were good.", "prediction": "They are good."}
+{"id": "tatoeba-test-000327", "zh": "你咳嗽吗？", "en": "Do you have a cough?", "prediction": "Are you hotting?"}
+{"id": "tatoeba-test-000328", "zh": "你说的完全正确！", "en": "What you said is totally accurate.", "prediction": "You say it is completely right!"}
+{"id": "tatoeba-test-000329", "zh": "他认识市长。", "en": "He knows the mayor.", "prediction": "He knew the mayor."}
+{"id": "tatoeba-test-000330", "zh": "反正一样。", "en": "Makes no difference anyway.", "prediction": "Anyway the same."}
+{"id": "tatoeba-test-000331", "zh": "他可能发生了什么事情。", "en": "Something may have happened to him.", "prediction": "What could have happened to him."}
+{"id": "tatoeba-test-000332", "zh": "我正在读一本关于动物的书。", "en": "I'm reading a book about animals.", "prediction": "I'm reading a book about animals."}
+{"id": "tatoeba-test-000333", "zh": "如果他不来了，我们不会去。", "en": "If he doesn't come, we won't go.", "prediction": "If he doesn't come, we won't go."}
+{"id": "tatoeba-test-000334", "zh": "他不喜欢吃肉。", "en": "He doesn't like meat.", "prediction": "He doesn't like eating meat."}
+{"id": "tatoeba-test-000335", "zh": "他望进门内。", "en": "He looked in at the door.", "prediction": "He looked inside the door."}
+{"id": "tatoeba-test-000336", "zh": "结果并不可观。", "en": "It was a modest outcome.", "prediction": "The results are invisible."}
+{"id": "tatoeba-test-000337", "zh": "我的兄弟住在一个小村庄里。", "en": "My brother lives in a small village.", "prediction": "My brother lives in a small village."}
+{"id": "tatoeba-test-000338", "zh": "好主意！", "en": "Good idea!", "prediction": "Good idea!"}
+{"id": "tatoeba-test-000339", "zh": "我告诉过你不要叫我“汤姆”吧？", "en": "Haven't I told you not to call me \"Tom\"?", "prediction": "I told you not to call me \"Tom\" right?"}
+{"id": "tatoeba-test-000340", "zh": "车站在两米远。", "en": "The station is two meters away.", "prediction": "The car station is two meters away."}
+{"id": "tatoeba-test-000341", "zh": "有一个叫米勒的想见你。", "en": "A Mr. Miller wants to see you.", "prediction": "There was a man named Miller who wanted to see you."}
+{"id": "tatoeba-test-000342", "zh": "你跟你的女朋友见面以来有多久了？", "en": "How long has it been since you saw your girlfriend?", "prediction": "How long have you been with your girlfriend?"}
+{"id": "tatoeba-test-000343", "zh": "他买不起车。", "en": "He cannot afford to buy a car.", "prediction": "He can't buy a car."}
+{"id": "tatoeba-test-000344", "zh": "你有任何话要说吗？", "en": "Do you have anything to say?", "prediction": "Do you have anything to say?"}
+{"id": "tatoeba-test-000345", "zh": "我不会喝咖啡。", "en": "I don't like to drink coffee.", "prediction": "I don't drink coffee."}
+{"id": "tatoeba-test-000346", "zh": "我们没怕。", "en": "We weren't afraid.", "prediction": "We are not afraid."}
+{"id": "tatoeba-test-000347", "zh": "我什么都没看见。", "en": "I did not see anything.", "prediction": "I didn't see anything."}
+{"id": "tatoeba-test-000348", "zh": "快点干你的活。", "en": "Go back to doing your work.", "prediction": "Make your job quickly."}
+{"id": "tatoeba-test-000349", "zh": "你为什么不去上学？", "en": "Why aren't you going to school?", "prediction": "Why don't you go to school?"}
+{"id": "tatoeba-test-000350", "zh": "这些字都是什么意思？它们又有什么区别？", "en": "What do these words mean? What's the difference between them?", "prediction": "What do these words mean? what is the difference between them?"}
+{"id": "tatoeba-test-000351", "zh": "他们取笑玛丽。", "en": "They made fun of Mary.", "prediction": "They laughed Mary."}
+{"id": "tatoeba-test-000352", "zh": "火车要在这里停多久？", "en": "How long will the train stop here?", "prediction": "How long will the train stop here?"}
+{"id": "tatoeba-test-000353", "zh": "春天了", "en": "It is spring.", "prediction": "Spring is."}
+{"id": "tatoeba-test-000354", "zh": "吉姆搭公车去学校。", "en": "Jim goes to school by bus.", "prediction": "Jim went to school by bus."}
+{"id": "tatoeba-test-000355", "zh": "你一直努力工作。", "en": "You always work hard.", "prediction": "You have been working hard."}
+{"id": "tatoeba-test-000356", "zh": "如果细究起来，实则不然。", "en": "If you begin to look at it more closely, actually, it is not.", "prediction": "If it is done in detail, it is true."}
+{"id": "tatoeba-test-000357", "zh": "他的体重超过80公斤。", "en": "He weighs more than 80 kilograms.", "prediction": "He weighs more than 80 kg."}
+{"id": "tatoeba-test-000358", "zh": "你用什么方式释放压力？", "en": "How do you relieve stress?", "prediction": "How do you release pressure?"}
+{"id": "tatoeba-test-000359", "zh": "在宇宙中有很多星系。", "en": "There are many galaxies in the universe.", "prediction": "There are many galaxies in the universe."}
+{"id": "tatoeba-test-000360", "zh": "你是我的阳光。", "en": "You're my sunshine.", "prediction": "You are my sunlight."}
+{"id": "tatoeba-test-000361", "zh": "便利店出兑。", "en": "The convenience store ran out of business.", "prediction": "Facilitating the store."}
+{"id": "tatoeba-test-000362", "zh": "这没什么好担心的。", "en": "There is no cause for worry.", "prediction": "There is nothing to worry about."}
+{"id": "tatoeba-test-000363", "zh": "这是你的打字机马？", "en": "Is this typewriter yours?", "prediction": "Is this your machine writing horse?"}
+{"id": "tatoeba-test-000364", "zh": "他们剧透了结局。", "en": "They gave away the ending.", "prediction": "They had a very close end."}
+{"id": "tatoeba-test-000365", "zh": "他们早晚会发现的。", "en": "They will find out sooner or later.", "prediction": "They will soon find it."}
+{"id": "tatoeba-test-000366", "zh": "瞒著汤姆很难。", "en": "It's hard to keep a secret from Tom.", "prediction": "It's hard to hide Tom."}
+{"id": "tatoeba-test-000367", "zh": "四处看看。", "en": "Look around.", "prediction": "Look around."}
+{"id": "tatoeba-test-000368", "zh": "谁决定了那件事？", "en": "Who decided that?", "prediction": "Who decided that?"}
+{"id": "tatoeba-test-000369", "zh": "汤姆想要呆一会儿。", "en": "Tom wants to stay for a while.", "prediction": "Tom wanted to stay a while."}
+{"id": "tatoeba-test-000370", "zh": "你今天最好随身带把伞。", "en": "You'd better take an umbrella with you today.", "prediction": "You should take a parasol with you today."}
+{"id": "tatoeba-test-000371", "zh": "你的手表在哪儿？", "en": "Where's your watch?", "prediction": "Where is your clock?"}
+{"id": "tatoeba-test-000372", "zh": "夕阳西下。", "en": "The evening sun is sinking in the west.", "prediction": "Sunshine in the west."}
+{"id": "tatoeba-test-000373", "zh": "我没有浴缸。", "en": "I don't have a bathtub.", "prediction": "I have no bathroom."}
+{"id": "tatoeba-test-000374", "zh": "我需要给手机充电。", "en": "I need to charge my mobile phone.", "prediction": "I need to charge my phone."}
+{"id": "tatoeba-test-000375", "zh": "这与你无关。", "en": "This has nothing to do with you.", "prediction": "It doesn't have to do with you."}
+{"id": "tatoeba-test-000376", "zh": "祝你健康！", "en": "I wish you good health!", "prediction": "I wish you healthy!"}
+{"id": "tatoeba-test-000377", "zh": "我是一个大学生。", "en": "I'm at university.", "prediction": "I am a college student."}
+{"id": "tatoeba-test-000378", "zh": "我必须写点什么。", "en": "I have to write a bit.", "prediction": "I have to write something."}
+{"id": "tatoeba-test-000379", "zh": "他遇到了一个优秀的年轻人。", "en": "He came across an outstanding young person.", "prediction": "He met a great young man."}
+{"id": "tatoeba-test-000380", "zh": "我把麦克风递给他。", "en": "I handed the mike to him.", "prediction": "I gave him the microphone."}
+{"id": "tatoeba-test-000381", "zh": "那房子似乎没有人住。", "en": "The house gave no sign of life.", "prediction": "There seems no one to live in that house."}
+{"id": "tatoeba-test-000382", "zh": "别汪汪！", "en": "Stop barking!", "prediction": "Don't be wing!"}
+{"id": "tatoeba-test-000383", "zh": "你哪里痛？", "en": "Where do you have pain?", "prediction": "Where do you hurt?"}
+{"id": "tatoeba-test-000384", "zh": "这房子不出售。", "en": "This house isn't for sale.", "prediction": "This house is not sold."}
+{"id": "tatoeba-test-000385", "zh": "这个男孩子很懒。", "en": "This boy is very lazy.", "prediction": "This boy is slick."}
+{"id": "tatoeba-test-000386", "zh": "好好休息吧！", "en": "Have a good rest!", "prediction": "Go well to rest!"}
+{"id": "tatoeba-test-000387", "zh": "他曾经是一个富有想像力的男孩。", "en": "He used to be an imaginative boy.", "prediction": "He was once a imaginative boy."}
+{"id": "tatoeba-test-000388", "zh": "没有什么比散步更好的了。", "en": "There's nothing better than taking a nice walk.", "prediction": "There is nothing better than walking."}
+{"id": "tatoeba-test-000389", "zh": "这座山完全被雪覆盖了。", "en": "The mountain was completely covered in snow.", "prediction": "The mountain was completely covered by snow."}
+{"id": "tatoeba-test-000390", "zh": "这茶味道不错。", "en": "This tea tastes good.", "prediction": "The tea smells good."}
+{"id": "tatoeba-test-000391", "zh": "我登过三次富士山。", "en": "I have climbed Mt. Fuji three times.", "prediction": "I have climbed the Fuji Mountains three times."}
+{"id": "tatoeba-test-000392", "zh": "我认为汤姆很酷。", "en": "I believe Tom is very cool.", "prediction": "I think Tom was cool."}
+{"id": "tatoeba-test-000393", "zh": "放弃这个想法吧", "en": "Give up such ideas.", "prediction": "Leave this idea."}
+{"id": "tatoeba-test-000394", "zh": "她吃早餐前去了散步。", "en": "She took a walk before breakfast.", "prediction": "She went on a walk before breakfast."}
+{"id": "tatoeba-test-000395", "zh": "汤姆认为玛丽可能有进食障碍。", "en": "Tom thinks that Mary may have an eating disorder.", "prediction": "Tom believes Mary may have eating disorders."}
+{"id": "tatoeba-test-000396", "zh": "汤姆没有抱怨。", "en": "Tom isn't complaining.", "prediction": "Tom did not complain."}
+{"id": "tatoeba-test-000397", "zh": "别用红墨水写。", "en": "Don't write in red ink.", "prediction": "Do not write with red paint."}
+{"id": "tatoeba-test-000398", "zh": "我们这里以耶稣基督和查理斯国王之名。", "en": "We are here in the name of Jesus Christ and King Charles.", "prediction": "We are here in the name of Jesus Christ and King Charles."}
+{"id": "tatoeba-test-000399", "zh": "大雄在哪？", "en": "Where is the hero?", "prediction": "Where is the Grandman?"}
+{"id": "tatoeba-test-000400", "zh": "别说了！", "en": "Don't speak!", "prediction": "Don't say it!"}
+{"id": "tatoeba-test-000401", "zh": "昨天下了一场大暴雨。", "en": "Yesterday it rained heavily.", "prediction": "Yesterday there was a storm."}
+{"id": "tatoeba-test-000402", "zh": "猎人射死了狐狸。", "en": "The hunter shot and killed the fox.", "prediction": "The hunter shot the fox."}
+{"id": "tatoeba-test-000403", "zh": "我们在镇子这片很有名气。", "en": "We're pretty well known around town.", "prediction": "We are very popular in this town."}
+{"id": "tatoeba-test-000404", "zh": "在死球期间，路易斯跑向球，一脚踢上去。", "en": "When the ball was dead, Luis ran up to the ball and booted it.", "prediction": "During the dead ball, Louis ran to the ball and hit him a foot."}
+{"id": "tatoeba-test-000405", "zh": "你不是日本人。", "en": "You're not Japanese.", "prediction": "You are not Japanese."}
+{"id": "tatoeba-test-000406", "zh": "这套西装合适吗？", "en": "Does this suit fit?", "prediction": "Is this dress suitable?"}
+{"id": "tatoeba-test-000407", "zh": "我丈夫是教授。", "en": "My husband is a professor.", "prediction": "My husband was a professor."}
+{"id": "tatoeba-test-000408", "zh": "这个铝铸件需要重刷一遍.", "en": "The aluminum castings must be brushed again.", "prediction": "This aluminium welded piece needs to be re-covered."}
+{"id": "tatoeba-test-000409", "zh": "汤姆每周刮脸三次。", "en": "Tom shaves three times a week.", "prediction": "Tom washes his face three times a week."}
+{"id": "tatoeba-test-000410", "zh": "她捡起了一块鹅卵石。", "en": "She stooped to pick up a pebble.", "prediction": "She picked up a cube egg."}
+{"id": "tatoeba-test-000411", "zh": "如果你做带氧运动的时候没有流汗，那就代表你做得不够剧烈。", "en": "If you're not sweating when you do cardio, then you're not doing it hard enough.", "prediction": "If you don't sweat when doing oxygen exercise, it means you're not doing it hard enough."}
+{"id": "tatoeba-test-000412", "zh": "虽受邀参加今晚一个精彩万分的派对，奈何明日不得不打起精神出席会议，只好推辞了。", "en": "I got an invitation to a party tonight that I know would be a lot of fun but I have to be in my best form for tomorrow's meeting so I had to turn it down.", "prediction": "Although invited to attend a wonderful party tonight, Nao was forced to take a spirit to attend the meeting tomorrow."}
+{"id": "tatoeba-test-000413", "zh": "最近没见到汤姆。", "en": "I haven't seen Tom in a while.", "prediction": "I didn't see Tom recently."}
+{"id": "tatoeba-test-000414", "zh": "他们逆流而上。", "en": "They swam against the current.", "prediction": "They turn back."}
+{"id": "tatoeba-test-000415", "zh": "复制/粘贴是很有用的。", "en": "Copy-and-paste is very useful.", "prediction": "Copying/blading is very useful."}
+{"id": "tatoeba-test-000416", "zh": "他讨厌南希。", "en": "He hates Nancy.", "prediction": "He hates Nancy."}
+{"id": "tatoeba-test-000417", "zh": "汤姆冷静下来了。", "en": "Tom has calmed down.", "prediction": "Tom was calm."}
+{"id": "tatoeba-test-000418", "zh": "史蒂夫和凯特去上学。", "en": "Steve goes to school with Kate.", "prediction": "Steve and Kate go to school."}
+{"id": "tatoeba-test-000419", "zh": "玛丽早已出发旅行去了。", "en": "Mary has already left on her trip.", "prediction": "Mary has already gone on a trip."}
+{"id": "tatoeba-test-000420", "zh": "杯子里面有水。", "en": "There is water in the glass.", "prediction": "There is water inside the cup."}
+{"id": "tatoeba-test-000421", "zh": "你中文真好，都能引用俗语了。", "en": "Your Chinese is so good, you can quote proverbs.", "prediction": "You are very good in Chinese and can cite the vocabulary."}
+{"id": "tatoeba-test-000422", "zh": "有人说新一代的人很冷漠。", "en": "It is said that the younger generation today is apathetic.", "prediction": "Some say the new generation is very discretionate."}
+{"id": "tatoeba-test-000423", "zh": "我们是同学。", "en": "We are classmates.", "prediction": "We are colleagues."}
+{"id": "tatoeba-test-000424", "zh": "她工作了。", "en": "She worked.", "prediction": "She has worked."}
+{"id": "tatoeba-test-000425", "zh": "不，我没去。", "en": "No, I didn't go.", "prediction": "No, I didn't go."}
+{"id": "tatoeba-test-000426", "zh": "你也许会染上疾病。", "en": "You may get a serious disease.", "prediction": "You may have a disease."}
+{"id": "tatoeba-test-000427", "zh": "后退！", "en": "Back off!", "prediction": "Back to back!"}
+{"id": "tatoeba-test-000428", "zh": "我认为那是个好日子。", "en": "I think it was a good day.", "prediction": "I think it was a good day."}
+{"id": "tatoeba-test-000429", "zh": "只要我们彼此相爱，我们会没事的。", "en": "As long as we love each other, we'll be all right.", "prediction": "As long as we love each other, we're okay."}
+{"id": "tatoeba-test-000430", "zh": "这样做会让汤姆生气。", "en": "Doing that would make Tom angry.", "prediction": "That would make Tom angry."}
+{"id": "tatoeba-test-000431", "zh": "火车站在哪里?", "en": "Where's the train station?", "prediction": "Where is the train station?"}
+{"id": "tatoeba-test-000432", "zh": "我弟弟总是比我早起床。", "en": "My brother always gets up earlier than I.", "prediction": "My brother is always waking up earlier than I was."}
+{"id": "tatoeba-test-000433", "zh": "请马上离开。", "en": "Please leave right away.", "prediction": "Please leave immediately."}
+{"id": "tatoeba-test-000434", "zh": "那太糟糕了。", "en": "That's too bad.", "prediction": "It is too bad."}
+{"id": "tatoeba-test-000435", "zh": "我在听他说日语。", "en": "I was listening to him speak Japanese.", "prediction": "I heard him speak Japanese."}
+{"id": "tatoeba-test-000436", "zh": "糟糕啊！", "en": "Terrible!", "prediction": "It is bad!"}
+{"id": "tatoeba-test-000437", "zh": "我建议他保密。", "en": "I advised him to keep the secret.", "prediction": "I recommend him to be secret."}
+{"id": "tatoeba-test-000438", "zh": "他们在说法语。", "en": "They're speaking French.", "prediction": "They speak French."}
+{"id": "tatoeba-test-000439", "zh": "我们小时候，所有的一切对我们来说都显得那么大。。。", "en": "When we're children, everything around us looks so big.", "prediction": "As a child, everything seemed so big to us."}
+{"id": "tatoeba-test-000440", "zh": "她昨天去那里。", "en": "She went there yesterday.", "prediction": "She went there yesterday."}
+{"id": "tatoeba-test-000441", "zh": "我等待她对我的答复", "en": "I'm waiting for her to answer me.", "prediction": "I'm waiting for her answer to me."}
+{"id": "tatoeba-test-000442", "zh": "我们在学校穿制服。", "en": "We wear a uniform at school.", "prediction": "We dressed uniforms at school."}
+{"id": "tatoeba-test-000443", "zh": "他在自然地理科学界取得了突破性的成果。", "en": "He did pioneering work in the field of physical geography.", "prediction": "He has achieved innovative achievements in the geographical science community."}
+{"id": "tatoeba-test-000444", "zh": "有火吗？", "en": "Have you got a light?", "prediction": "Is there fire?"}
+{"id": "tatoeba-test-000445", "zh": "如果有钱的话，我要环游世界。", "en": "If I had money, I would travel around the world.", "prediction": "If we were rich, I would travel around the world."}
+{"id": "tatoeba-test-000446", "zh": "这个旅馆的房间不像那个旅馆的房间那么干净。", "en": "The rooms in this hotel are not as clean as the rooms in that hotel.", "prediction": "The room in this hotel was not as clean as the room in that hotel."}
+{"id": "tatoeba-test-000447", "zh": "菠萝一公斤多少钱？", "en": "How much does a kilogram of pineapples cost?", "prediction": "How much does an ananas cost?"}
+{"id": "tatoeba-test-000448", "zh": "我们促膝谈心。", "en": "We had a heart-to-heart talk with each other.", "prediction": "We call on our knees to talk."}
+{"id": "tatoeba-test-000449", "zh": "我完全地筋疲力尽了。", "en": "I am completely exhausted.", "prediction": "I was completely tired."}
+{"id": "tatoeba-test-000450", "zh": "我一定是打错号码了。", "en": "I must've mistyped the number.", "prediction": "I've probably made the wrong number."}
+{"id": "tatoeba-test-000451", "zh": "你应该知道不要问小姐的年龄。", "en": "You should know better than to ask a lady her age.", "prediction": "You should know not ask her age."}
+{"id": "tatoeba-test-000452", "zh": "他的懒惰是他未来不好的预兆。", "en": "His laziness was a bad omen for the future.", "prediction": "His lazyness was a bad prediction for his future."}
+{"id": "tatoeba-test-000453", "zh": "意大利电视毫无用处。", "en": "Italian television is useless.", "prediction": "Italian television is useless."}
+{"id": "tatoeba-test-000454", "zh": "马力欧在五天内走完万里长城。", "en": "Mario finished walking along the Great Wall of China in five days.", "prediction": "Malio has completed the Millimeter City in five days."}
+{"id": "tatoeba-test-000455", "zh": "直接回家。", "en": "Go straight home.", "prediction": "Go home directly."}
+{"id": "tatoeba-test-000456", "zh": "她很尊重她的导师。", "en": "She respects her homeroom teacher a lot.", "prediction": "She respected her tutor."}
+{"id": "tatoeba-test-000457", "zh": "我要给朋友打电话。", "en": "I want to call my friend.", "prediction": "I want to call my friend."}
+{"id": "tatoeba-test-000458", "zh": "萨米动弹不得。", "en": "Sami can't move anymore.", "prediction": "Samy could not be shot."}
+{"id": "tatoeba-test-000459", "zh": "这是免费的吗？", "en": "Is it free?", "prediction": "Is it free?"}
+{"id": "tatoeba-test-000460", "zh": "你应该留在澳洲。", "en": "You should've stayed in Australia.", "prediction": "You should stay in Australia."}
+{"id": "tatoeba-test-000461", "zh": "我不挑剔。", "en": "I'm not fussy.", "prediction": "I am not selective."}
+{"id": "tatoeba-test-000462", "zh": "汤姆说他不想退休。", "en": "Tom said that he doesn't want to retire.", "prediction": "Tom said he didn't want to retire."}
+{"id": "tatoeba-test-000463", "zh": "他永远不会打败我的。", "en": "He'll never beat me.", "prediction": "He will never defeat me."}
+{"id": "tatoeba-test-000464", "zh": "他们在家里喝咖啡。", "en": "They drink coffee at home.", "prediction": "They drink coffee at home."}
+{"id": "tatoeba-test-000465", "zh": "萨米很快喝醉。", "en": "Sami got drunk very fast.", "prediction": "Samy was drunk soon."}
+{"id": "tatoeba-test-000466", "zh": "我和露西不是同事，是同学。", "en": "Lucy and I are not colleagues, we are classmates.", "prediction": "I and Lucy are not colleagues, but colleagues."}
+{"id": "tatoeba-test-000467", "zh": "祝顺风。", "en": "Have a nice trip.", "prediction": "Congratulations on the wind."}
+{"id": "tatoeba-test-000468", "zh": "云越来越黑。", "en": "The clouds are getting darker.", "prediction": "The clouds are getting dark."}
