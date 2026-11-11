@@ -110,7 +110,12 @@ while IFS=$'\t' read -r name model; do
     if [ "$DRY_RUN" = "1" ]; then
         echo "dry     $name ($todo to do): ${cmd[*]}"
     else
-        job_id="$("${cmd[@]}")"
+        if ! job_id="$("${cmd[@]}" 2>&1)"; then
+            echo "stop    $name: sbatch refused it (usually the per-user job limit):"
+            echo "        $job_id"
+            echo "        Re-run this same command once some jobs have finished; it continues from here."
+            break
+        fi
         echo "submit  $name ($todo to do)  job $job_id"
         printf '%s\t%s\t%s\t%s\n' "$job_id" "$MODE" "$name" "$(date -Is)" >> logs/evaluation_submitted.tsv
     fi

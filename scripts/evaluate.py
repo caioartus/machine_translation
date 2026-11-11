@@ -123,13 +123,13 @@ def main():
     parser.add_argument("--data", type=Path, default=Path("data/processed/alma_dev.jsonl"))
     parser.add_argument("--out_dir", type=Path, required=True, help="New directory; never overwritten")
     parser.add_argument("--limit", type=positive_int, help="First N rows for debugging only")
-    parser.add_argument("--batch_size", type=positive_int, default=32)
+    parser.add_argument("--batch_size", type=positive_int, default=16)
     parser.add_argument("--num_beams", type=positive_int, default=1)
     parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto")
     parser.add_argument("--save_nbest", action="store_true",
                         help="Also write nbest.jsonl.gz: all beam candidates with log-probabilities")
-    parser.add_argument("--nbest_batch_size", type=positive_int, default=8,
-                        help="Smaller than --batch_size: storing scores needs more memory")
+    parser.add_argument("--nbest_batch_size", type=positive_int, default=16,
+                        help="Keep equal to --batch_size so padding, and so outputs, are identical")
     args = parser.parse_args()
     rows, total_rows = load_examples(args.data, args.limit)
     if args.out_dir.exists():
@@ -150,6 +150,11 @@ def main():
     tokenizer = M2M100Tokenizer.from_pretrained(args.model)
     tokenizer.src_lang, tokenizer.tgt_lang = "zh", "en"
     model = M2M100ForConditionalGeneration.from_pretrained(args.model).to(device)
+    # Fix the beam-search settings explicitly instead of inheriting them from the checkpoint's
+    # generation_config (M2M-100 ships early_stopping=True). Same values as compare_decoding.py.
+    model.generation_config.early_stopping = False
+    model.generation_config.length_penalty = 1.0
+    model.generation_config.do_sample = False
 
     # Report input truncation without filtering or reordering any test examples.
     too_long = sum(len(tokenizer(r["zh"], truncation=False)["input_ids"]) > MAX_LEN for r in rows)
@@ -161,6 +166,8 @@ def main():
         "n_total": total_rows, "n_evaluated": len(rows), "limit": args.limit,
         "partial_dataset": len(rows) < total_rows, "reference_field": "en",
         "batch_size": args.batch_size, "num_beams": args.num_beams,
+        "early_stopping": model.generation_config.early_stopping,
+        "length_penalty": model.generation_config.length_penalty,
         "max_length": MAX_LEN, "source_truncation_count": too_long,
         "device": device, "autocast": "bfloat16" if bf16 else "disabled",
         "packages": versions(),

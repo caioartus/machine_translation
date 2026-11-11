@@ -256,6 +256,28 @@ sbatch jobs/eval_baseline.sbatch --model runs/joint_n1000_seed0/best      # scor
 It reports `dev_loss` and `dev_bleu_greedy`, computed the same way as in `run_info.json`.
 Pretrained model on `alma_dev`: dev loss 2.315, BLEU 14.1.
 
+## Evaluation (test sets)
+
+All test-set results are committed in `outputs/eval/final/<run>/<test_set>_beam<k>/`
+(`beam1` = greedy, `beam4` = beam search): `predictions.jsonl`, `metrics.json` (BLEU, chrF),
+`comet.json` and `nbest.jsonl.gz` (all beam candidates with log-probabilities).
+**You only need the steps below to recompute them.** Run on the cluster, from the repository root.
+
+1. Train the runs (see [Training](#training)), or point `RUNS_DIR` at a folder that has them.
+2. Translate and score BLEU/chrF (one job per checkpoint: WMT22 and Tatoeba, greedy and beam 4):
+   ```bash
+   RUNS_DIR=runs bash jobs/run_evaluation.sh
+   ```
+3. When those jobs are done, score COMET (one-off setup of `COMET_PYTHON` and `HF_HOME`: `EVALUATION.md`):
+   ```bash
+   MODE=comet bash jobs/run_evaluation.sh
+   ```
+
+Re-running a command is always safe: finished results and queued jobs are skipped. If it stops at the
+cluster's job limit, re-run it later and it continues where it stopped. Add `DRY_RUN=1` to preview,
+and `CONDITIONS=...`, `SIZES=...`, `SEEDS=...` or `BASELINE=0` (skip the pretrained model) to run a subset.
+All options and more detail: `EVALUATION.md`.
+
 ## Hyperparameter tuning
 
 ### Final settings
