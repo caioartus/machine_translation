@@ -11,6 +11,31 @@ Final-checkpoint evaluation and comparisons across conditions are still pending.
 - jobs/evaluate.sbatch: GPU job for translation.
 - jobs/score_comet.sbatch: GPU job for COMET.
 - tests/test_evaluation_io.py: lightweight input/output checks.
+- jobs/run_evaluation.sh: batch launcher for all final checkpoints (below).
+
+## Evaluate all final checkpoints
+
+`jobs/run_evaluation.sh` submits one job per checkpoint (48 runs + the pretrained baseline).
+Each job runs every test set (default WMT22, Tatoeba) with greedy and beam 4 decoding
+(`jobs/evaluate_run.sbatch`). A second pass scores COMET (`jobs/comet_run.sbatch`).
+Finished outputs are skipped, so it is safe to re-run. Always preview with `DRY_RUN=1`.
+
+```bash
+DRY_RUN=1 RUNS_DIR=/path/to/runs bash jobs/run_evaluation.sh     # preview
+RUNS_DIR=/path/to/runs bash jobs/run_evaluation.sh               # translations, BLEU, chrF
+MODE=comet bash jobs/run_evaluation.sh                           # COMET (export COMET_PYTHON, HF_HOME first)
+```
+
+Results: `outputs/eval/final/<run>/<test_set>_beam<k>/` (`metrics.json`, `comet.json`).
+
+Each folder also has `nbest.jsonl.gz` (`evaluate.py --save_nbest`; turn off with `SAVE_NBEST=0`):
+per sentence, all k final beam candidates, best first, each with `logprob` (sum of token
+log-probabilities), `n_tokens` and `score` (what beam search ranks by, `logprob / n_tokens`).
+Greedy folders store their single output the same way, so for one checkpoint the greedy and beam
+outputs can be compared on the same scale: if beam's output has a higher `logprob` than greedy's
+but is worse, the model itself prefers the worse translation (a model error, not a search error).
+Options (`RUNS_DIR`, `OUT_ROOT`, `CONDITIONS`, `SIZES`, `SEEDS`, `TEST_SETS`, `BEAMS`,
+`BASELINE`, `TIME`) are listed at the top of the script.
 
 Run commands from the repository root. Prepared data, model checkpoints,
 Python environments, and downloaded model files must be available separately.

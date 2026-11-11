@@ -15,6 +15,7 @@ Run from the repository root, for example:
     python scripts/train.py --condition uniform --size 1000 --seed 0
     python scripts/train.py --condition length  --size 1000 --seed 0
     python scripts/train.py --condition joint   --size 1000 --seed 0
+    python scripts/train.py --condition loss    --size 1000 --seed 0   # needs data/features/<stem>_loss.csv
 
 Quick smoke test (about a minute):
     python scripts/train.py --condition joint --size 1000 --steps 20 --eval_every 10 --out_dir runs_test
@@ -41,13 +42,21 @@ from transformers import (
     set_seed,
 )
 
-from data_utils import MAX_LEN, MODEL_NAME, assign_bins, get_tokenizer, read_jsonl
+from data_utils import (
+    LOSS_HARD_MAX,
+    LOSS_HARD_MIN,
+    MAX_LEN,
+    MODEL_NAME,
+    assign_bins,
+    get_tokenizer,
+    read_jsonl,
+)
 
 
 # --- Settings -------------------------------------------------------------------
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--condition", choices=["uniform", "length", "joint"], required=True)
+    p.add_argument("--condition", choices=["uniform", "length", "joint", "loss"], required=True)
     p.add_argument(
         "--dataset",
         choices=["alma", "alma_news"],
@@ -89,10 +98,28 @@ def make_weights(train, condition, cap):
         return balanced_weights(train["length_bin"], cap)
     if condition == "joint":
         return balanced_weights(train["cell"], cap)
+    if condition == "loss":
+        return balanced_weights(train["loss_group"], cap)
     raise ValueError(condition)
 
 
 # --- Data -----------------------------------------------------------------------
+def add_loss_groups(train, dataset):
+    """Add loss_mean (from compute_loss.py) and loss_group: "hard" if
+    LOSS_HARD_MIN < loss_mean <= LOSS_HARD_MAX, else "other" (the top 1% stays in "other")."""
+    stem = "alma_train" if dataset == "alma" else "alma_news_train"
+    path = Path("data/features") / f"{stem}_loss.csv"
+    if not path.is_file():
+        raise SystemExit(f"Missing {path}: run scripts/compute_loss.py (jobs/compute_loss.sbatch) first")
+    loss = pd.read_csv(path, usecols=["id", "loss_mean"])
+    train = train.merge(loss, on="id", how="left", validate="one_to_one")
+    if train["loss_mean"].isna().any():
+        raise SystemExit(f"{path} has no loss for {train['loss_mean'].isna().sum()} training ids")
+    hard = (train["loss_mean"] > LOSS_HARD_MIN) & (train["loss_mean"] <= LOSS_HARD_MAX)
+    train["loss_group"] = hard.map({True: "hard", False: "other"})
+    return train
+
+
 def load_train(dataset, size, seed):
     """Training subset as a DataFrame with columns id, zh, en, ..., length_bin, rarity_bin, cell."""
     stem = "alma_train" if dataset == "alma" else "alma_news_train"
@@ -214,6 +241,9 @@ def main():
 
     # Data and sampler.
     train = load_train(args.dataset, args.size, args.seed)
+    if args.condition == "loss":
+        train = add_loss_groups(train, args.dataset)
+        print(f"loss groups: {train['loss_group'].value_counts().to_dict()}")
     dev = read_jsonl("data/processed/alma_dev.jsonl")
     weights = make_weights(train, args.condition, args.cap)
     print(

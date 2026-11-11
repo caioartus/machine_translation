@@ -1,13 +1,23 @@
 __pycache__/
 .DS_Store
 .mypy_cache/
-outputs/
+# outputs/ is scratch space, except the final test-set evaluations (translations, metrics,
+# COMET, n-best lists), which are committed so nobody has to re-run them.
+outputs/*
+!outputs/eval/
+outputs/eval/*
+!outputs/eval/final/
+outputs/eval/final/**/*.incomplete-*/
 logs/
 # Generated data is rebuilt by the scripts in scripts/ and never committed.
 # Exception: data/raw/ holds the original input files (Canvas test sets, pinned
 # Tatoeba Challenge downloads), committed so every machine has the same inputs.
 data/*
 !data/raw/
+# Exception: loss-based difficulty scores need a GPU run, so they are committed.
+!data/features/
+data/features/*
+!data/features/*_loss.csv
 # Run outputs: the small result files (run_info.json, dev_curve.csv) are committed so the
 # whole team can see them; model checkpoints (~2 GB each) and smoke tests are not.
 runs*/**/best/
