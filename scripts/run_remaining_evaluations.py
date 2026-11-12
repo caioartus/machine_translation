@@ -1,4 +1,12 @@
-"""Plan, execute and audit the ALMA official-test evaluation matrix."""
+"""Plan, execute and audit the ALMA official-test evaluation matrix.
+
+    python scripts/run_remaining_evaluations.py plan --runs_dir /path/to/runs
+    sbatch --array=$(cat results/_evaluation_workflow/pending.txt) jobs/remaining_evaluations.sbatch
+    python scripts/run_remaining_evaluations.py audit
+
+--runs_dir: folder(s) holding <condition>_n<size>_seed<seed>/{best/,run_info.json}.
+--work_dir: where the plan, frozen code and summary go (default results/_evaluation_workflow).
+"""
 import argparse
 import csv
 import hashlib
@@ -132,10 +140,20 @@ def validate(task, need_comet=False):
     return record
 
 
-def make_plan():
-    require(not PLAN.exists(), "Plan already exists; do not recreate it.")
-    require(os.access(os.environ["COMET_PYTHON"], os.X_OK), "COMET Python unavailable")
-    require(Path(os.environ["HF_HOME"]).is_dir(), "COMET cache unavailable")
+def find_run(runs_dirs, run):
+    for base in runs_dirs:
+        if (base / run / "run_info.json").exists():
+            return base
+    raise ValueError(f"{run}: not found in any --runs_dir ({', '.join(map(str, runs_dirs))})")
+
+
+def make_plan(runs_dirs):
+    require(not PLAN.exists(), f"{PLAN} already exists; pass a new --work_dir.")
+    require(os.access(os.environ.get("COMET_PYTHON", ""), os.X_OK),
+            "Set COMET_PYTHON to the python of your COMET environment")
+    require(Path(os.environ.get("HF_HOME", "")).is_dir(),
+            "Set HF_HOME to the Hugging Face cache holding the COMET model")
+    runs_dirs = [Path(d).resolve() for d in runs_dirs]
 
     tasks = []
     training_records = {}
@@ -147,11 +165,10 @@ def make_plan():
     }
 
     for condition in ("uniform", "length", "joint", "loss"):
-        owner = "c/caioart" if condition == "loss" else "s/simonwim"
-        base = Path(f"/mnt/scratch/{owner}/shared/runs")
         for size, (lr, steps, warmup, every) in settings.items():
             for seed in range(3):
                 run = f"{condition}_n{size}_seed{seed}"
+                base = find_run(runs_dirs, run)
                 info_path = base / run / "run_info.json"
                 info = read(info_path)
                 expected = {
@@ -294,9 +311,17 @@ def audit():
 parser = argparse.ArgumentParser()
 parser.add_argument("mode", choices=("plan", "task", "audit"))
 parser.add_argument("index", nargs="?", type=int)
+parser.add_argument("--runs_dir", nargs="+",
+                    help="plan only: folder(s) with the trained runs (checkpoints in <run>/best/)")
+parser.add_argument("--work_dir", default=str(WORK),
+                    help="plan/task/audit: workflow folder (default results/_evaluation_workflow)")
 args = parser.parse_args()
+WORK = Path(args.work_dir).resolve()
+PLAN = WORK / "plan.json"
 if args.mode == "plan":
-    make_plan()
+    if not args.runs_dir:
+        parser.error("plan needs --runs_dir /path/to/runs")
+    make_plan(args.runs_dir)
 elif args.mode == "task":
     require(args.index is not None, "Task index required")
     execute(args.index)

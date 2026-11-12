@@ -1,7 +1,7 @@
 """Export zh->en translations and BLEU/chrF scores. Run from the repo root.
 
 Uses the existing train.translate function for matching generation settings.
-Defaults to development data. See EVALUATION.md for Slurm and COMET usage.
+Defaults to development data. See explanations/EVALUATION.md for Slurm and COMET usage.
 
 --save_nbest also writes nbest.jsonl.gz (gzipped to keep it small enough for git; pandas reads
 it directly with pd.read_json(path, lines=True)): for every sentence, all `num_beams` final beam candidates

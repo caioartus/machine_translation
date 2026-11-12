@@ -27,7 +27,7 @@ def main():
     try:
         from comet import download_model, load_from_checkpoint
     except ImportError as exc:
-        raise SystemExit("COMET is not available. See EVALUATION.md for a separate scoring environment.") from exc
+        raise SystemExit("COMET is not available. See explanations/EVALUATION.md for a separate scoring environment.") from exc
 
     model_name = "Unbabel/wmt22-comet-da"
     model = load_from_checkpoint(download_model(model_name))

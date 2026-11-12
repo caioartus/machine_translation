@@ -1,5 +1,5 @@
 #!/bin/bash
-# Submit the final experiments: 3 conditions x 4 sizes x 3 seeds (36 runs, see README).
+# Submit the final experiments: 3 conditions x 4 sizes x 3 seeds (see README).
 # Run from anywhere; it changes to the repository root itself.
 #
 #   bash jobs/run_experiments.sh                    # submit everything that is not done yet
@@ -12,7 +12,7 @@
 # then overwrites best/. Always combine with SIZES/CONDITIONS/SEEDS and preview with DRY_RUN=1:
 #   DRY_RUN=1 FORCE=1 SIZES="1000" SEEDS="0" bash jobs/run_experiments.sh
 # Each run is its own Slurm job (jobs/train1.sbatch), so runs are independent and a failure
-# only affects that run. Settings per size are the "Final settings" table in the README.
+# only affects that run. Settings per size are the "Final settings" table in explanations/EXPERIMENTS.md.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."

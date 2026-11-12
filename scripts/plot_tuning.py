@@ -1,4 +1,4 @@
-"""Plot the dev-loss curves of the learning-rate tuning runs, for the README.
+"""Plot the dev-loss curves of the learning-rate tuning runs, for explanations/EXPERIMENTS.md.
 
 Reads the committed tuning results (runs_tune2/, runs_tune_5000/, runs_tune_full/, runs_tune_full2/)
 and writes two figures to figures/:

@@ -56,7 +56,9 @@ from data_utils import (
 # --- Settings -------------------------------------------------------------------
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--condition", choices=["uniform", "length", "joint", "loss"], required=True)
+    p.add_argument(
+        "--condition", choices=["uniform", "length", "joint", "loss"], required=True
+    )
     p.add_argument(
         "--dataset",
         choices=["alma", "alma_news"],
@@ -86,7 +88,7 @@ def balanced_weights(groups, cap=3.0):
     Note: after clipping the weights no longer sum to n, and the sampler renormalises them,
     so the effective cap is slightly above `cap` (and clipped groups are slightly under-balanced)."""
     n_groups = groups.nunique()
-    group_size = groups.map(groups.value_counts())      # per example: size of its own group
+    group_size = groups.map(groups.value_counts())  # per example: size of its own group
     ratio = (len(groups) / n_groups) / group_size
     return ratio.clip(upper=cap)
 
@@ -110,11 +112,15 @@ def add_loss_groups(train, dataset):
     stem = "alma_train" if dataset == "alma" else "alma_news_train"
     path = Path("data/features") / f"{stem}_loss.csv"
     if not path.is_file():
-        raise SystemExit(f"Missing {path}: run scripts/compute_loss.py (jobs/compute_loss.sbatch) first")
+        raise SystemExit(
+            f"Missing {path}: run scripts/compute_loss.py (jobs/compute_loss.sbatch) first"
+        )
     loss = pd.read_csv(path, usecols=["id", "loss_mean"])
     train = train.merge(loss, on="id", how="left", validate="one_to_one")
     if train["loss_mean"].isna().any():
-        raise SystemExit(f"{path} has no loss for {train['loss_mean'].isna().sum()} training ids")
+        raise SystemExit(
+            f"{path} has no loss for {train['loss_mean'].isna().sum()} training ids"
+        )
     hard = (train["loss_mean"] > LOSS_HARD_MIN) & (train["loss_mean"] <= LOSS_HARD_MAX)
     train["loss_group"] = hard.map({True: "hard", False: "other"})
     return train
@@ -127,7 +133,9 @@ def load_train(dataset, size, seed):
     feature_path = Path("data/features") / f"{stem}.csv"
     missing = [path for path in (text_path, feature_path) if not path.is_file()]
     if missing:
-        raise SystemExit("Missing training input(s):\n  " + "\n  ".join(map(str, missing)))
+        raise SystemExit(
+            "Missing training input(s):\n  " + "\n  ".join(map(str, missing))
+        )
 
     text = pd.DataFrame(read_jsonl(text_path))
     feats = assign_bins(pd.read_csv(feature_path))
@@ -152,7 +160,9 @@ def load_train(dataset, size, seed):
     try:
         return train.set_index("id").loc[ids].reset_index()
     except KeyError as error:
-        raise SystemExit(f"ALMA subset contains IDs absent from text/features: {error}") from error
+        raise SystemExit(
+            f"ALMA subset contains IDs absent from text/features: {error}"
+        ) from error
 
 
 def make_collate(tokenizer):
